@@ -98,16 +98,31 @@ def expire_round(c,room):
     return room
 
 def tiles_for(code,round_index,child,word):
-    """Fixed unique tile order for each child for the whole round."""
+    """Reproducible per-child shuffled tile bank, including 2–4 distractors.
+
+    None of the extra letters occurs anywhere in the answer. Multiple copies
+    of a true letter are kept intact (APPLE retains both Ps). The server
+    never hands out the solved word order.
+    """
     from backend.friends_server import SECRET
     text=f"{code}:{round_index}:{child}:picture-race".encode()
     digest=hmac.new(SECRET.encode(),text,hashlib.sha256).digest()
-    tiles=list(word)
-    random.Random(int.from_bytes(digest[:16],"big")).shuffle(tiles)
-    if tiles==list(word) and len(set(word))>1:
-        tiles=list(reversed(tiles))
-        if tiles==list(word):
-            tiles=tiles[1:]+tiles[:1]
+    rng=random.Random(int.from_bytes(digest[:16],"big"))
+    answer=list(word.upper())
+    count=2 if len(answer)<=3 else 3 if len(answer)<=6 else 4
+    candidates=[letter for letter in "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+                if letter not in answer]
+    extras=rng.sample(candidates,count)
+    tiles=answer+extras
+    rng.shuffle(tiles)
+    # The initial tiles must not spell the solution straight from left to right.
+    # A deliberately repeated random shuffle is safe for unusual words too.
+    for _ in range(12):
+        if tiles[:len(answer)]!=answer:
+            break
+        rng.shuffle(tiles)
+    if tiles[:len(answer)]==answer:
+        tiles=tiles[1:]+tiles[:1]
     return tiles
 
 @router.post("/rooms")
