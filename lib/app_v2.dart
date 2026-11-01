@@ -8,6 +8,7 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'curriculum.dart';
 import 'content_store.dart';
+import 'older/older_home.dart';
 
 const forest = Color(0xFF24582E);
 const leaf = Color(0xFF77B932);
@@ -399,12 +400,23 @@ class _HomeState extends State<Home> {
           Padding(padding:const EdgeInsets.all(22),
             child:Text('Unable to open the word pack:\n'+loadError!,textAlign:TextAlign.center)))
       : Column(children:[
-        if (step < 0) const Padding(
-          padding:EdgeInsets.only(top:15),
+        if (step < 0) Padding(
+          padding:const EdgeInsets.fromLTRB(12,12,12,0),
           child:Row(mainAxisAlignment:MainAxisAlignment.center,children:[
-            Icon(Icons.spa_rounded,color:leaf,size:29),SizedBox(width:6),
-            Text('WordSprout',style:TextStyle(color:forest,
-              fontSize:28,fontWeight:FontWeight.w900,letterSpacing:-1)),
+            const Icon(Icons.spa_rounded,color:leaf,size:27),
+            const SizedBox(width:5),
+            const Text('WordSprout',style:TextStyle(color:forest,
+              fontSize:26,fontWeight:FontWeight.w900,letterSpacing:-1)),
+            const Spacer(),
+            TextButton.icon(
+              key:const ValueKey('older_entry'),
+              onPressed:()=>Navigator.push(context,MaterialPageRoute(
+                builder:(context)=>const OlderHome())),
+              icon:const Icon(Icons.auto_stories_rounded,size:17),
+              label:const Text('Ages 6–12'),
+              style:TextButton.styleFrom(
+                foregroundColor:forest,
+                padding:const EdgeInsets.symmetric(horizontal:6))),
           ])),
         if (step >= 0) Padding(padding:const EdgeInsets.all(11),
           child:Row(children:[
