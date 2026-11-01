@@ -1,0 +1,44 @@
+name: Actual preschool word screens — G K L M W P
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'test/real_random_alphabet_screenshot_test.dart'
+      - '.github/workflows/capture-real-words.yml'
+  workflow_dispatch:
+jobs:
+  screenshot-original-word-lessons:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Generate exact SVGs used by the installed app
+        run: python3 scripts/build_assets.py
+      - name: Install Flutter dependencies
+        run: flutter pub get
+      - name: Render actual Word Discovery pages (390 by 844)
+        run: flutter test --update-goldens test/real_random_alphabet_screenshot_test.dart
+      - name: Verify six separate screenshot files were produced
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in \
+            17-G-2-GRAPES.png \
+            18-K-4-KANGAROO.png \
+            19-L-5-LOBSTER.png \
+            20-M-4-MANGO.png \
+            21-W-5-WATERMELON.png \
+            22-P-4-PENCIL.png
+          do
+            test -s "test/screenshots/$name" || exit 1
+          done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: actual-word-discovery-screenshots-6-samples
+          path: test/screenshots/*.png
+          if-no-files-found: error
+          retention-days: 14
