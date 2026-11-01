@@ -21,6 +21,19 @@ void main(){
       loader.addFont(Future.value(ByteData.sublistView(bytes)));
       await loader.load();
     }
+    final command=await Process.run('which',['flutter']);
+    final executable=command.stdout.toString().trim();
+    if(executable.isNotEmpty){
+      final sdk=File(executable).resolveSymbolicLinksSync();
+      final file=File(sdk.parent.parent.path+
+        '/bin/cache/artifacts/material_fonts/MaterialIcons-Regular.otf');
+      if(await file.exists()){
+        final loader=FontLoader('MaterialIcons');
+        loader.addFont(Future.value(ByteData.sublistView(
+          await file.readAsBytes())));
+        await loader.load();
+      }
+    }
   });
   setUp((){
     SharedPreferences.setMockInitialValues({});
