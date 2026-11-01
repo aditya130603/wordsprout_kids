@@ -1,0 +1,48 @@
+name: Ages 6-12 playable preview APK
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'lib/older/**'
+      - 'lib/app_v2.dart'
+      - 'assets/content/older_missions_v1.json'
+      - 'test/older_*'
+      - '.github/workflows/older-preview.yml'
+  workflow_dispatch:
+jobs:
+  older-preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Prepare existing A–Z SVG artwork
+        run: python3 scripts/build_assets.py
+      - name: Generate Android scaffold
+        run: flutter create --platforms=android --project-name wordsprout_kids .
+      - name: Install dependencies
+        run: flutter pub get
+      - name: Analyze Flutter app
+        run: flutter analyze --no-fatal-infos
+      - name: Render preschool screenshot baselines
+        run: flutter test --update-goldens test/screenshot_test.dart
+      - name: Render ages 6-12 screens
+        run: flutter test --update-goldens test/older_screenshot_test.dart
+      - name: Run all tests
+        run: flutter test
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: older-adventure-preview-screenshots
+          path: test/screenshots/0[5-9]-*.png
+          if-no-files-found: warn
+      - name: Build installable older-track APK
+        run: flutter build apk --release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wordsprout-ages-6-12-preview-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+          retention-days: 14
