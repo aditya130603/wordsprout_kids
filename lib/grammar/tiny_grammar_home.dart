@@ -179,7 +179,7 @@ class _TinyGrammarPlayState extends State<TinyGrammarPlay>{
   void initState(){
     super.initState();
     tiles=List.of(item.sentenceTokens)
-      ..shuffle(math.Random(item.id.codeUnits.fold(0,(a,b)=>a+b)));
+      ..shuffle(math.Random(item.id.codeUnits.fold<int>(0,(a,b)=>a+b)));
     if(tiles.join(' ')==item.sentenceTokens.join(' ')&&tiles.length>1){
       tiles.add(tiles.removeAt(0));
     }
@@ -275,7 +275,7 @@ class _TinyGrammarPlayState extends State<TinyGrammarPlay>{
         child:Row(children:List.generate(5,(i)=>Expanded(child:
           Container(height:7,margin:const EdgeInsets.symmetric(horizontal:3),
             decoration:BoxDecoration(color:i<=stage?green:
-              const Color(0xFFE6EDDC),borderRadius:BorderRadius.circular(7)))))),
+              const Color(0xFFE6EDDC),borderRadius:BorderRadius.circular(7))))))),
       Expanded(child:ListView(
         padding:const EdgeInsets.fromLTRB(19,12,19,15),
         children:[
@@ -308,7 +308,7 @@ class _TinyGrammarPlayState extends State<TinyGrammarPlay>{
             ...List.generate(4,(i){
               final q=stage==1?item.challenge:item.transfer;
               return Padding(padding:const EdgeInsets.only(bottom:9),
-                child:InkWell(key:ValueKey('grammar_answer_'+i),
+                child:InkWell(key:ValueKey('grammar_answer_'+i.toString()),
                   onTap:correct?null:()=>choose(q,i),
                   borderRadius:BorderRadius.circular(15),
                   child:Container(padding:const EdgeInsets.symmetric(
@@ -358,7 +358,7 @@ class _TinyGrammarPlayState extends State<TinyGrammarPlay>{
             Wrap(spacing:7,runSpacing:8,
               children:List.generate(tiles.length,(i){
                 if(chosen.contains(i))return const SizedBox.shrink();
-                return ActionChip(key:ValueKey('grammar_tile_'+i),
+                return ActionChip(key:ValueKey('grammar_tile_'+i.toString()),
                   onPressed:correct?null:()=>setState((){
                     chosen.add(i);explanation='';
                   }),
