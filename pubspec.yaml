@@ -19,3 +19,4 @@ flutter:
   assets:
     - assets/words/
     - assets/scene/
+    - assets/content/
