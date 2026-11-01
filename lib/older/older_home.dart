@@ -237,7 +237,7 @@ class _OlderHomeState extends State<OlderHome> {
   Widget _missionCard(StoryMission m,int i,bool locked){
     final color=trackColor(m.level);
     final earned=stars[m.id]??0;
-    return Opacity(opacity:locked?.62:1,child:InkWell(
+    return Opacity(opacity:locked ? 0.62 : 1.0,child:InkWell(
       key:ValueKey('older_mission_'+m.id),
       onTap:locked?null:()=>_begin(m),
       borderRadius:BorderRadius.circular(20),
@@ -271,7 +271,7 @@ class _OlderHomeState extends State<OlderHome> {
           ])),
           Icon(locked?Icons.lock_rounded:Icons.chevron_right_rounded,color:color),
         ]),
-      ))));
+      )));
   }
 
   Future<void> _placement() async {
