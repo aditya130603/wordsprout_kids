@@ -91,12 +91,15 @@ class _OlderHomeState extends State<OlderHome> {
     _save();
   }
   Future<void> _review() async {
-    final done=await Navigator.of(context).push<List<String>>(MaterialPageRoute(
+    final done=await Navigator.of(context).push<Map<String,bool>>(MaterialPageRoute(
       builder:(context)=>OlderReview(words:reviewWords)));
     if(done==null||!mounted)return;
     setState((){
-      final next=DateTime.now().add(const Duration(days:3)).millisecondsSinceEpoch;
-      for(final term in done)dueDates[term]=next;
+      for(final result in done.entries) {
+        final days=result.value?3:1;
+        dueDates[result.key]=DateTime.now()
+          .add(Duration(days:days)).millisecondsSinceEpoch;
+      }
     });
     _save();
   }
@@ -373,7 +376,7 @@ class OlderReview extends StatefulWidget {
 class _OlderReviewState extends State<OlderReview>{
   int at=0;
   int? choice;
-  final reviewed=<String>[];
+  final reviewed=<String,bool>{};
   bool checked=false;
   @override
   Widget build(BuildContext context){
@@ -413,7 +416,7 @@ class _OlderReviewState extends State<OlderReview>{
           const Spacer(),
           _primary(choice==null?null:(){
             if(!checked){setState(()=>checked=true);return;}
-            reviewed.add(w.term);
+            reviewed[w.term]=shuffled[choice??0]==w.meaning;
             if(at==widget.words.length-1){
               Navigator.pop(context,reviewed);return;
             }
