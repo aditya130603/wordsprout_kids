@@ -52,6 +52,7 @@ class _HomeState extends State<Home> {
   List<Word> get entries => catalog!.words;
   Word get current => entries[wordIndex];
   String nameOf(int letterIndex) => String.fromCharCode(65 + letterIndex);
+  bool get graduated => tested.length == 26 && checkpoints.contains(25);
   int get dueCheckpoint {
     for (final end in [4, 9, 14, 19, 24, 25]) {
       final begin = end == 25 ? 20 : end - 4;
@@ -157,6 +158,10 @@ class _HomeState extends State<Home> {
     say(current.pronunciation);
   }
   void continueLearning() {
+    if (graduated) {
+      setState(() { step = -1; tab = 3; });
+      return;
+    }
     if (dueCheckpoint >= 0) {
       beginTest(checkpoint: true);
       return;
@@ -416,7 +421,8 @@ class _HomeState extends State<Home> {
               ))),
         ])))),
       const SizedBox(height:10),
-      button(dueCheckpoint>=0?'Play checkpoint ➜':'Continue Learning  ➜',
+      button(graduated?'View My Progress ➜':
+        dueCheckpoint>=0?'Play checkpoint ➜':'Continue Learning  ➜',
         continueLearning,color:coral),
       const SizedBox(height:11),
       card(InkWell(onTap:()=>setState(()=>tab=2),
