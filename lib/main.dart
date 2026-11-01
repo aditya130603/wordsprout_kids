@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_tts/flutter_tts.dart';
@@ -36,7 +37,7 @@ class _HomeState extends State<Home>{
  Future<void> speak(String s) async {await tts.stop();await tts.speak(s);}
  @override void dispose(){tts.stop();super.dispose();}
  void start(int i){if(i>=unlocked)return;setState((){word=i;step=0;feedback='';});speak(words[i].name);}
- void spelling(){tiles=[...current.name.split(''),...['B','O']]..shuffle();setState((){chosen=[];step=1;feedback='';});}
+ void spelling(){tiles=[...current.name.split(''),...['B','O']]..shuffle(math.Random(word * 41 + done.length * 13 + 17));setState((){chosen=[];step=1;feedback='';});}
  void check(){
   if(chosen.length!=current.name.length){setState(()=>feedback='Fill all the boxes!');return;}
   if(chosen.map((i)=>tiles[i]).join()==current.name){setState((){step=2;feedback='';});speak('Great! Find the picture.');}
