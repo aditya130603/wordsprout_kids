@@ -7,6 +7,7 @@ import 'older_course.dart';
 import 'older_scene.dart';
 import 'rewards.dart';
 import 'rewards_hub.dart';
+import 'friends_api.dart';
 
 const midnight=Color(0xFF203D3D);
 const mist=Color(0xFFF4F6EF);
@@ -474,6 +475,7 @@ class OlderMissionScreen extends StatefulWidget {
 
 class _OlderMissionScreenState extends State<OlderMissionScreen>{
   final FlutterTts tts=FlutterTts();
+  final FriendsApi league=const FriendsApi();
   OlderStep step=OlderStep.story;
   int at=0,attempts=0,correct=0,errors=0;
   int wrongForQuestion=0;
@@ -560,8 +562,11 @@ class _OlderMissionScreenState extends State<OlderMissionScreen>{
       selection=null;
     });
   }
-  void _chooseAnswer(int i,int answer,String explanation,String hint){
+  void _chooseAnswer(int i,int answer,String explanation,String hint,
+    {required String response}){
     if(approved)return;
+    league.submitAnswer(missionId:m.id,stage:step.name,index:at,
+      response:response);
     setState(()=>selection=i);
     if(i==answer)_right(explanation);
     else _wrong(hint);
@@ -583,6 +588,8 @@ class _OlderMissionScreenState extends State<OlderMissionScreen>{
   }
   void _sentenceCheck(){
     final response=chosen.map((i)=>shuffledTokens[i]).join(' ');
+    league.submitAnswer(missionId:m.id,stage:'sentence',index:0,
+      response:response);
     if(m.acceptsSentence(response)){
       final missed=wrongForQuestion;
       setState((){approved=true;sceneResult=true;
@@ -738,7 +745,8 @@ class _OlderMissionScreenState extends State<OlderMissionScreen>{
         child:_option(e.value.toLowerCase(),selected:selection==e.key,
           onTap:()=>_chooseAnswer(e.key,answer,
             word.term.toLowerCase()+' means '+word.meaning.toLowerCase(),
-            'Think about the clue. '+word.context)))),
+            'Think about the clue. '+word.context,
+            response:e.value)))),
       _feedback(),
     ]);
   }
@@ -774,7 +782,8 @@ class _OlderMissionScreenState extends State<OlderMissionScreen>{
             opposite?key+' has an opposite meaning.':
               key+' expresses a similar idea.',
             opposite?'Look for a word with the reverse meaning.':
-              'Look for the nearest meaning, not just a related topic.')))),
+              'Look for the nearest meaning, not just a related topic.',
+            response:e.value)))),
       _feedback(),
     ]);
   }
@@ -879,7 +888,8 @@ class _OlderMissionScreenState extends State<OlderMissionScreen>{
         padding:const EdgeInsets.only(bottom:11),
         child:_option(c.options[e.value],selected:selection==e.key,
           onTap:()=>_chooseAnswer(e.key,answer,c.explain,
-            'Read carefully, then try a different answer.')))),
+            'Read carefully, then try a different answer.',
+            response:c.options[e.value])))),
       _feedback(),
     ]);
   }
