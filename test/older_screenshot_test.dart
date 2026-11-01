@@ -7,6 +7,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wordsprout_kids/older/older_course.dart';
 import 'package:wordsprout_kids/older/older_home.dart';
+import 'package:wordsprout_kids/older/rewards.dart';
+import 'package:wordsprout_kids/older/rewards_hub.dart';
 
 void main(){
   TestWidgetsFlutterBinding.ensureInitialized();
@@ -101,6 +103,26 @@ void main(){
     expect(find.text('Parent setup required'),findsOneWidget);
     await expectLater(find.byType(Scaffold).last,
       matchesGoldenFile('screenshots/09-friends-league.png'));
+  });
+
+  testWidgets('capture earned achievement badges and XP', (tester) async {
+    SharedPreferences.setMockInitialValues({});
+    final ledger=await RewardLedger.load();
+    await ledger.answer(missionId:'ex_lantern',
+      stage:'detective',index:0,wrongAttempts:0);
+    await ledger.finish('ex_lantern');
+    await ledger.perfect('ex_lantern');
+    tester.view.physicalSize=const Size(390,844);
+    tester.view.devicePixelRatio=1;
+    addTearDown((){
+      tester.view.resetPhysicalSize();tester.view.resetDevicePixelRatio();
+    });
+    await tester.pumpWidget(MaterialApp(home:RewardsHub(
+      ledger:ledger,missionStars:const {'ex_lantern':3})));
+    await tester.pumpAndSettle();
+    expect(find.text('40 XP'),findsOneWidget);
+    await expectLater(find.byType(Scaffold),
+      matchesGoldenFile('screenshots/10-earned-badges.png'));
   });
 
 }
