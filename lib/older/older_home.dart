@@ -8,6 +8,7 @@ import 'older_scene.dart';
 import 'rewards.dart';
 import 'rewards_hub.dart';
 import 'friends_api.dart';
+import '../family_settings.dart';
 
 const midnight=Color(0xFF203D3D);
 const mist=Color(0xFFF4F6EF);
@@ -141,6 +142,12 @@ class _OlderHomeState extends State<OlderHome> {
             ]),
             const SizedBox(width:5),
             const Icon(Icons.auto_stories_rounded,color:jade,size:29),
+            IconButton(
+              key:const ValueKey('older_family_settings'),
+              tooltip:'Family settings',
+              onPressed:()=>Navigator.push(context,MaterialPageRoute(
+                builder:(context)=>const FamilySettings())),
+              icon:const Icon(Icons.settings_outlined,color:midnight)),
           ]),
         )),
         SliverToBoxAdapter(child:Padding(
