@@ -403,12 +403,16 @@ class _HomeState extends State<Home> {
         if (step < 0) Padding(
           padding:const EdgeInsets.fromLTRB(12,12,12,0),
           child:Row(mainAxisAlignment:MainAxisAlignment.center,children:[
-            const Icon(Icons.spa_rounded,color:leaf,size:27),
-            const SizedBox(width:5),
-            const Text('WordSprout',style:TextStyle(color:forest,
-              fontSize:26,fontWeight:FontWeight.w900,letterSpacing:-1)),
-            const Spacer(),
-            TextButton.icon(
+            const Expanded(child:FittedBox(
+              fit:BoxFit.scaleDown,alignment:Alignment.centerLeft,
+              child:Row(mainAxisSize:MainAxisSize.min,children:[
+                Icon(Icons.spa_rounded,color:leaf,size:27),
+                SizedBox(width:5),
+                Text('WordSprout',style:TextStyle(color:forest,
+                  fontSize:26,fontWeight:FontWeight.w900,letterSpacing:-1)),
+              ]))),
+            const SizedBox(width:8),
+            SizedBox(width:124,child:TextButton.icon(
               key:const ValueKey('older_entry'),
               onPressed:()=>Navigator.push(context,MaterialPageRoute(
                 builder:(context)=>const OlderHome())),
@@ -416,7 +420,7 @@ class _HomeState extends State<Home> {
               label:const Text('Ages 6–12'),
               style:TextButton.styleFrom(
                 foregroundColor:forest,
-                padding:const EdgeInsets.symmetric(horizontal:6))),
+                padding:EdgeInsets.zero))),
           ])),
         if (step >= 0) Padding(padding:const EdgeInsets.all(11),
           child:Row(children:[
