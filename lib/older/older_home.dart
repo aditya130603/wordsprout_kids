@@ -217,10 +217,10 @@ class _OlderHomeState extends State<OlderHome> {
                 Icons.psychology_alt_rounded,color:color,size:28)),
             const SizedBox(width:13),
             Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
-              Row(children:[
+              Wrap(spacing:8,runSpacing:3,
+                crossAxisAlignment:WrapCrossAlignment.center,children:[
                 Text(track.title,style:const TextStyle(color:midnight,
-                  fontSize:17,fontWeight:FontWeight.w900)),
-                const SizedBox(width:8),
+                  fontSize:16,fontWeight:FontWeight.w900)),
                 Text('AGES '+track.ageHint,style:TextStyle(color:color,
                   fontSize:10,fontWeight:FontWeight.w900)),
               ]),
