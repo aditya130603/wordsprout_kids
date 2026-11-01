@@ -5,6 +5,8 @@ import 'package:flutter_tts/flutter_tts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'older_course.dart';
 import 'older_scene.dart';
+import 'rewards.dart';
+import 'rewards_hub.dart';
 
 const midnight=Color(0xFF203D3D);
 const mist=Color(0xFFF4F6EF);
@@ -27,6 +29,7 @@ class _OlderHomeState extends State<OlderHome> {
   String selected='explorer';
   final Map<String,int> stars={};
   final Map<String,int> dueDates={};
+  RewardLedger? ledger;
   bool busy=false;
 
   @override
@@ -39,7 +42,9 @@ class _OlderHomeState extends State<OlderHome> {
     try {
       final loaded=widget.initialCourse??await OlderCourse.load();
       final prefs=await SharedPreferences.getInstance();
+      final loadedRewards=await RewardLedger.load();
       if(!mounted)return;
+      ledger=loadedRewards;
       setState((){
         course=loaded;
         selected=prefs.getString('older_selected_track')??'explorer';
@@ -80,19 +85,30 @@ class _OlderHomeState extends State<OlderHome> {
     _save();
   }
   Future<void> _begin(StoryMission mission) async {
+    final oldBadges=ledger?.badges(highestMissionStars:
+      stars.values.fold<int>(0,(a,b)=>a>b?a:b))
+      .where((b)=>b.unlocked).map((b)=>b.id).toSet()??<String>{};
     final result=await Navigator.of(context).push<MissionScore>(MaterialPageRoute(
-      builder:(context)=>OlderMissionScreen(mission:mission)));
+      builder:(context)=>OlderMissionScreen(mission:mission,ledger:ledger)));
     if(result==null||!mounted)return;
     setState((){
       stars[mission.id]=math.max(result.stars,stars[mission.id]??0);
       final tomorrow=DateTime.now().add(const Duration(days:1)).millisecondsSinceEpoch;
       for(final word in mission.words) dueDates[word.term]=tomorrow;
     });
-    _save();
+    await _save();
+    if(!mounted)return;
+    final newBadges=ledger?.badges(highestMissionStars:
+      stars.values.fold<int>(0,(a,b)=>a>b?a:b))
+      .where((b)=>b.unlocked&&!oldBadges.contains(b.id)).toList()??[];
+    if(newBadges.isNotEmpty) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content:Text('Achievement unlocked: '+newBadges.first.title+'!')));
+    }
   }
   Future<void> _review() async {
     final done=await Navigator.of(context).push<Map<String,bool>>(MaterialPageRoute(
-      builder:(context)=>OlderReview(words:reviewWords)));
+      builder:(context)=>OlderReview(words:reviewWords,ledger:ledger)));
     if(done==null||!mounted)return;
     setState((){
       for(final result in done.entries) {
@@ -140,7 +156,17 @@ class _OlderHomeState extends State<OlderHome> {
               selected=='adventurer'?'cave':'forest',height:166),
             const SizedBox(height:19),
             _summary(),
-            const SizedBox(height:23),
+            const SizedBox(height:10),
+            OutlinedButton.icon(
+              key:const ValueKey('older_rewards_entry'),
+              onPressed:ledger==null?null:()=>Navigator.push(context,
+                MaterialPageRoute(builder:(context)=>RewardsHub(
+                  ledger:ledger!,missionStars:stars))).then((_)=>setState((){})),
+              icon:const Icon(Icons.military_tech_rounded),
+              label:const Text('XP • Achievements • Friends League'),
+              style:OutlinedButton.styleFrom(foregroundColor:midnight,
+                minimumSize:const Size(double.infinity,45))),
+            const SizedBox(height:17),
             Row(children:[
               const Expanded(child:Text('Choose your quest',style:TextStyle(
                 fontSize:22,color:midnight,fontWeight:FontWeight.w900))),
@@ -186,7 +212,8 @@ class _OlderHomeState extends State<OlderHome> {
           Text(totalCompleted.toString()+' / '+course!.missions.length.toString()+' missions',
             style:const TextStyle(color:midnight,fontSize:19,fontWeight:FontWeight.w900)),
           const SizedBox(height:3),
-          Text(stars.values.fold<int>(0,(a,b)=>a+b).toString()+' stars earned',
+          Text(stars.values.fold<int>(0,(a,b)=>a+b).toString()+' mission stars • '+
+            (ledger?.totalXp??0).toString()+' XP',
             style:const TextStyle(color:Color(0xFF6D8077),fontSize:12)),
         ])),
         const SizedBox(width:8),
