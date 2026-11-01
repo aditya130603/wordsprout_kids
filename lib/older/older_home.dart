@@ -395,8 +395,9 @@ Widget _primary(VoidCallback? action,String text)=>SizedBox(
     child:Text(text,style:const TextStyle(fontSize:17,fontWeight:FontWeight.w900))));
 
 class OlderReview extends StatefulWidget {
-  const OlderReview({super.key,required this.words});
+  const OlderReview({super.key,required this.words,this.ledger});
   final List<StoryWord> words;
+  final RewardLedger? ledger;
   @override
   State<OlderReview> createState()=>_OlderReviewState();
 }
@@ -405,6 +406,7 @@ class _OlderReviewState extends State<OlderReview>{
   int? choice;
   final reviewed=<String,bool>{};
   bool checked=false;
+  int recallXp=0;
   @override
   Widget build(BuildContext context){
     if(widget.words.isEmpty)return const Scaffold(body:Center(
@@ -437,25 +439,35 @@ class _OlderReviewState extends State<OlderReview>{
               onTap:checked?(){}:()=>setState(()=>choice=e.key)))),
           if(checked)Padding(padding:const EdgeInsets.all(8),
             child:Text(shuffled[choice??0]==w.meaning
-              ?'Correct! '+w.context
+              ?'Correct! '+(recallXp>0?'+5 XP • ':'')+w.context
               :'Try again tomorrow. '+w.meaning,
               style:const TextStyle(color:midnight,fontWeight:FontWeight.w700))),
           const Spacer(),
           _primary(choice==null?null:(){
-            if(!checked){setState(()=>checked=true);return;}
+            if(!checked){
+              final isRight=shuffled[choice??0]==w.meaning;
+              setState(()=>checked=true);
+              if(isRight&&widget.ledger!=null){
+                widget.ledger!.review(w.term).then((earned){
+                  if(mounted)setState(()=>recallXp=earned.points);
+                });
+              }
+              return;
+            }
             reviewed[w.term]=shuffled[choice??0]==w.meaning;
             if(at==widget.words.length-1){
               Navigator.pop(context,reviewed);return;
             }
-            setState((){at++;choice=null;checked=false;});
+            setState((){at++;choice=null;checked=false;recallXp=0;});
           },checked?'Next word':'Check answer'),
         ]))));
   }
 }
 
 class OlderMissionScreen extends StatefulWidget {
-  const OlderMissionScreen({super.key,required this.mission});
+  const OlderMissionScreen({super.key,required this.mission,this.ledger});
   final StoryMission mission;
+  final RewardLedger? ledger;
   @override
   State<OlderMissionScreen> createState()=>_OlderMissionScreenState();
 }
@@ -464,6 +476,10 @@ class _OlderMissionScreenState extends State<OlderMissionScreen>{
   final FlutterTts tts=FlutterTts();
   OlderStep step=OlderStep.story;
   int at=0,attempts=0,correct=0,errors=0;
+  int wrongForQuestion=0;
+  int earnedNow=0;
+  int lessonXp=0;
+  int finishBonusXp=0;
   int? selection;
   bool approved=false;
   String feedback='';
@@ -492,18 +508,53 @@ class _OlderMissionScreenState extends State<OlderMissionScreen>{
     setState((){
       step=next;at=0;selection=null;approved=false;
       feedback='';sceneResult=null;
+      wrongForQuestion=0;earnedNow=0;
     });
+    if(next==OlderStep.finish)_awardCompletion();
+  }
+  Future<void> _awardQuestion(OlderStep stage,int questionIndex,int wrongCount) async {
+    final ledger=widget.ledger;
+    if(ledger==null)return;
+    try {
+      final result=await ledger.answer(
+        missionId:m.id,stage:stage.name,index:questionIndex,
+        wrongAttempts:wrongCount);
+      if(mounted&&step==stage&&at==questionIndex){
+        setState((){earnedNow=result.points;lessonXp+=result.points;});
+      }
+    } catch (_) { /* Offline rewards must never interrupt a lesson. */ }
+  }
+  Future<void> _awardCompletion() async {
+    final ledger=widget.ledger;
+    if(ledger==null)return;
+    try {
+      final bonus=await ledger.finish(m.id);
+      final perfect=errors==0?await ledger.perfect(m.id):
+        const RewardGrant(0,alreadyClaimed:false);
+      if(mounted&&step==OlderStep.finish){
+        setState((){
+          finishBonusXp=bonus.points+perfect.points;
+          lessonXp+=finishBonusXp;
+        });
+      }
+    } catch (_) { /* Score persistence must not block graduation. */ }
   }
   void _right(String explanation){
+    if(approved)return;
+    final earnedStage=step;
+    final questionIndex=at;
+    final missed=wrongForQuestion;
     HapticFeedback.selectionClick();
     setState((){
-      approved=true;feedback=explanation;attempts++;correct++;
+      approved=true;feedback=explanation;attempts++;correct++;earnedNow=0;
     });
+    _awardQuestion(earnedStage,questionIndex,missed);
   }
   void _wrong(String hint){
     HapticFeedback.lightImpact();
     setState((){
-      attempts++;errors++;
+      attempts++;errors++;wrongForQuestion++;
+      earnedNow=0;
       feedback=hint;
       approved=false;
       selection=null;
@@ -518,7 +569,8 @@ class _OlderMissionScreenState extends State<OlderMissionScreen>{
   void _advanceQuestion(){
     if(step==OlderStep.detective){
       if(at==m.words.length-1){_move(OlderStep.relation);return;}
-      setState((){at++;approved=false;selection=null;feedback='';});
+      setState((){at++;approved=false;selection=null;
+        feedback='';earnedNow=0;wrongForQuestion=0;});
     }else if(step==OlderStep.relation){
       if(at==m.words.length-1){_move(OlderStep.sentence);return;}
       setState((){at++;approved=false;selection=null;feedback='';});
@@ -532,12 +584,14 @@ class _OlderMissionScreenState extends State<OlderMissionScreen>{
   void _sentenceCheck(){
     final response=chosen.map((i)=>shuffledTokens[i]).join(' ');
     if(m.acceptsSentence(response)){
+      final missed=wrongForQuestion;
       setState((){approved=true;sceneResult=true;
-        feedback=m.consequence;correct++;attempts++;});
-      speak(m.consequence);
+        feedback=m.consequence;correct++;attempts++;earnedNow=0;});
+      _awardQuestion(OlderStep.sentence,0,missed);
     } else {
       setState((){approved=false;sceneResult=false;
-        feedback='The word order changes the meaning. Try again!';attempts++;errors++;});
+        feedback='The word order changes the meaning. Try again!';
+        attempts++;errors++;wrongForQuestion++;earnedNow=0;});
     }
   }
   String get stageName{
