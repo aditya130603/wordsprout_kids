@@ -268,6 +268,26 @@ def accept(body:FriendAccept,authorization:str|None=Header(None)):
         c.execute("INSERT OR IGNORE INTO friendships VALUES (?,?)",edge)
     return {"status":"friends_approved"}
 
+@app.get("/v1/parent/friends/{child_id}")
+def parent_friends(child_id:str,authorization:str|None=Header(None)):
+    parent=bearer(authorization,"parent")
+    owned_child(parent,child_id)
+    with db() as c:
+        rows=c.execute("""SELECT c.id,c.alias FROM friendships f
+          JOIN children c ON c.id=CASE WHEN f.a=? THEN f.b ELSE f.a END
+          WHERE f.a=? OR f.b=? ORDER BY c.alias""",
+          (child_id,child_id,child_id)).fetchall()
+    return {"friends":[dict(row) for row in rows]}
+
+@app.delete("/v1/parent/friends/{child_id}/{friend_id}")
+def remove_friend(child_id:str,friend_id:str,authorization:str|None=Header(None)):
+    parent=bearer(authorization,"parent")
+    owned_child(parent,child_id)
+    a,b=sorted((child_id,friend_id))
+    with db() as c:
+        c.execute("DELETE FROM friendships WHERE a=? AND b=?",(a,b))
+    return {"status":"friend_removed"}
+
 @app.delete("/v1/parent/children/{child_id}")
 def delete_child(child_id:str,authorization:str|None=Header(None)):
     parent=bearer(authorization,"parent")
