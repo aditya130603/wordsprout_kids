@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import '../curriculum.dart';
@@ -62,10 +63,12 @@ class RacePlayer {
 /// this widget; installed builds use HTTP polling to the authoritative room.
 class PictureRaceScreen extends StatefulWidget {
   const PictureRaceScreen({super.key,required this.catalog,
-    required this.furthestLetter,this.imageDirectory,this.preview});
+    required this.furthestLetter,this.imageDirectory,
+    this.learnedWordIndices=const [],this.preview});
   final Curriculum catalog;
   final int furthestLetter;
   final Directory? imageDirectory;
+  final List<int> learnedWordIndices;
   @visibleForTesting
   final RaceSnapshot? preview;
   @override
@@ -78,6 +81,9 @@ class _PictureRaceScreenState extends State<PictureRaceScreen> {
   Timer? ticker;
   RaceSnapshot? room;
   bool busy=false,paired=false,allowed=true,submitting=false;
+  bool practice=false;
+  int practiceScore=0;
+  final math.Random rng=math.Random();
   String feedback='';
   final List<int> picked=[];
   bool get preview=>widget.preview!=null;
@@ -99,7 +105,7 @@ class _PictureRaceScreenState extends State<PictureRaceScreen> {
     if(mounted)setState((){allowed=enabled;paired=isPaired;});
   }
   Future<void> _refresh()async{
-    if(room==null||busy||preview)return;
+    if(room==null||busy||preview||practice)return;
     try{
       final next=RaceSnapshot.fromJson(await api.raceGet(room!.code));
       if(!mounted)return;
@@ -147,7 +153,74 @@ class _PictureRaceScreenState extends State<PictureRaceScreen> {
       (room!.state=='lobby'?'start':'next'),{});
     await _refresh();
   });
+  /// An honest offline practice path, so a phone without an active game
+  /// server can still test the exact same picture and red/green letter UI.
+  /// Real leaderboard scores are never awarded from this mode.
+  void _practiceRound({bool nextRound=false}){
+    final oldRound=room?.round??0;
+    if(nextRound&&oldRound>=5){
+      setState((){
+        room=RaceSnapshot(code:'OFFLINE',state:'finished',
+          round:5,total:5,ceiling:String.fromCharCode(
+            65+widget.furthestLetter.clamp(0,25)),
+          host:true,seconds:0,
+          players:[RacePlayer('You',practiceScore,
+            String.fromCharCode(65+widget.furthestLetter.clamp(0,25)),
+            true,true)]);
+        picked.clear();
+        feedback='';
+      });
+      return;
+    }
+    final unlocked=widget.learnedWordIndices.where((i)=>
+      i>=0&&i<widget.catalog.words.length).toList();
+    // The Apple example is available only as an explicitly labeled demo
+    // if no real words have yet been marked as learned on this device.
+    final possibilities=unlocked.isEmpty?<int>[1]:unlocked;
+    final wordIndex=possibilities[rng.nextInt(possibilities.length)];
+    final word=widget.catalog.words[wordIndex].spelling;
+    final choices=List<String>.of(word.split(''));
+    final extras='ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('')
+      .where((ch)=>!word.contains(ch)).toList()..shuffle(rng);
+    choices.addAll(extras.take(word.length<=3?2:word.length<=6?3:4));
+    choices.shuffle(rng);
+    if(choices.take(word.length).join()==word){
+      choices.insert(0,choices.removeLast());
+    }
+    setState((){
+      practice=true;
+      picked.clear();
+      feedback=unlocked.isEmpty?
+        'Demo word only — finish vocabulary lessons for personal practice.':'';
+      room=RaceSnapshot(code:'OFFLINE',state:'playing',
+        round:nextRound?oldRound+1:1,total:5,
+        ceiling:String.fromCharCode(65+widget.furthestLetter.clamp(0,25)),
+        host:true,seconds:45,wordIndex:wordIndex,tiles:choices,
+        players:[RacePlayer('You',practiceScore,
+          String.fromCharCode(65+widget.furthestLetter.clamp(0,25)),
+          true,false)]);
+    });
+  }
+  void _submitPractice(){
+    final r=room;
+    if(r==null||r.wordIndex==null)return;
+    final expected=widget.catalog.words[r.wordIndex!].spelling;
+    if(picked.map((i)=>r.tiles[i]).join()!=expected)return;
+    practiceScore+=100;
+    setState((){
+      feedback='Correct! +100 practice points (not online XP)';
+      room=RaceSnapshot(code:'OFFLINE',state:'round_complete',
+        round:r.round,total:5,ceiling:r.ceiling,host:true,seconds:0,
+        wordIndex:r.wordIndex,tiles:r.tiles,
+        answer:widget.catalog.words[r.wordIndex!].name,winner:'You',
+        players:[RacePlayer('You',practiceScore,
+          r.ceiling,true,true)]);
+      picked.clear();
+    });
+  }
+
   Future<void> _submit()async{
+    if(practice){_submitPractice();return;}
     if(submitting||preview||room==null)return;
     final word=picked.map((i)=>room!.tiles[i]).join();
     setState(()=>submitting=true);
@@ -267,6 +340,11 @@ class _PictureRaceScreenState extends State<PictureRaceScreen> {
         _button('Join my friends',busy?null:_join),
       ],
     ])),
+    const SizedBox(height:14),
+    _button('Try spelling practice offline',preview?null:()=>_practiceRound()),
+    const SizedBox(height:8),
+    const Text('Practice uses your completed vocabulary. Without completed words, it shows an Apple demo. Practice scores do not enter the friends leaderboard.',
+      style:TextStyle(color:Color(0xFF63796C),fontSize:12,height:1.5)),
     const SizedBox(height:18),
     const Text('Five quick rounds • 2–6 approved friends',
       style:TextStyle(color:raceInk,fontSize:16,fontWeight:FontWeight.w900)),
@@ -425,7 +503,7 @@ class _PictureRaceScreenState extends State<PictureRaceScreen> {
         }),child:const Text('Clear')),
       ]),
       _button('Submit spelling',
-        done&&!hasWrong&&!submitting&&!preview?_submit:null),
+        done&&!hasWrong&&!submitting&&(!preview||practice)?_submit:null),
       const SizedBox(height:13),
       _panel(Column(children:[
         const Text('Round scoreboard',style:TextStyle(
@@ -466,7 +544,8 @@ class _PictureRaceScreenState extends State<PictureRaceScreen> {
     const SizedBox(height:15),
     if(r.host&&r.state!='finished')
       _button(r.round>=r.total?'See final scores':'Next picture',
-        preview?null:_advance)
+        practice?()=>_practiceRound(nextRound:true):
+          preview?null:_advance)
     else if(r.state!='finished')
       const Text('Waiting for the next round.',
         style:TextStyle(color:Color(0xFF63796C))),
