@@ -1,4 +1,7 @@
+import 'dart:io';
+import 'dart:typed_data';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wordsprout_kids/family_settings.dart';
@@ -9,6 +12,17 @@ import 'package:wordsprout_kids/older/rewards_hub.dart';
 void main(){
   TestWidgetsFlutterBinding.ensureInitialized();
   setUp(()=>SharedPreferences.setMockInitialValues({}));
+  setUpAll(() async {
+    // The default Ahem test font is intentionally extra wide and can cause
+    // false layout-overflow failures in a real-world 390px screen.
+    final font=File('/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf');
+    if(await font.exists()){
+      final loader=FontLoader('Roboto');
+      loader.addFont(Future.value(ByteData.sublistView(
+        await font.readAsBytes())));
+      await loader.load();
+    }
+  });
 
   testWidgets('Friends League starts visible and parents can turn it off',
     (tester) async {
