@@ -1,7 +1,7 @@
 name: wordsprout_kids
 description: WordSprout - playful offline English learning for ages 4-12
 publish_to: none
-version: 0.3.0+3
+version: 0.4.0+4
 environment:
   sdk: '>=3.3.0 <4.0.0'
 dependencies:
@@ -10,6 +10,7 @@ dependencies:
   shared_preferences: ^2.3.2
   flutter_tts: ^4.2.2
   flutter_svg: ^2.0.17
+  flutter_secure_storage: ^9.2.4
   archive: ^4.0.9
   crypto: ^3.0.6
   path_provider: ^2.1.5
