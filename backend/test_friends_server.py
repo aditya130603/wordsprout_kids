@@ -87,3 +87,29 @@ def test_parent_gated_private_league():
     assert client.delete("/v1/parent/children/"+cid,headers=a).status_code==200
     assert client.get("/v1/leaderboard",headers=child).status_code==401
     assert client.get("/v1/leaderboard",headers=friend).status_code==200
+
+
+def test_complete_mission_is_authoritatively_scored_once():
+    family=parent("guardian-complete@example.test")
+    ident=child_profile(family,"Clever Turtle")
+    child=pair(family,ident)
+    mission=server.MISSIONS["ex_rain"]
+    def send(stage,index,answer):
+        result=client.post("/v1/answer",json={
+            "mission_id":mission["id"],"stage":stage,
+            "index":index,"response":answer},headers=child)
+        assert result.status_code==200,result.text
+        return result.json()
+    for i,word in enumerate(mission["words"]):
+        assert send("detective",i,word["term"])["xp_awarded"]==10
+    for i,word in enumerate(mission["words"]):
+        relation=word["synonym"] if i%2==0 else word["antonym"]
+        assert send("relation",i,relation)["xp_awarded"]==10
+    assert send("sentence",0,mission["sentence"])["xp_awarded"]==15
+    for stage in ("pattern","transfer"):
+        detail=mission[stage]
+        assert send(stage,0,detail["options"][detail["answer"]])["xp_awarded"]==10
+    board=client.get("/v1/leaderboard",headers=child).json()["friends"]
+    assert board[0]["weekly_xp"]==145  # 115 answers +20 finish +10 perfect
+    assert send("sentence",0,mission["sentence"])["xp_awarded"]==0
+    assert client.get("/v1/leaderboard",headers=child).json()["friends"][0]["weekly_xp"]==145
