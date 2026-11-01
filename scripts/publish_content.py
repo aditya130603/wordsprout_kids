@@ -11,7 +11,7 @@ from pathlib import Path
 import re
 from zipfile import ZipFile, ZIP_DEFLATED
 
-SAFE = re.compile(r"^(words[.]json|older_missions[.]json|media/[a-z0-9_-]+/(still|frame_[0-9]{5})[.]png)$")
+SAFE = re.compile(r"^(words[.]json|older_missions[.]json|grammar_4_6[.]json|media/[a-z0-9_-]+/(still|frame_[0-9]{5})[.]png)$")
 ID = re.compile(r"^[a-z0-9_]+$")
 
 def publish(source: Path, output: Path):
