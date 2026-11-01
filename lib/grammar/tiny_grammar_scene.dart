@@ -125,6 +125,78 @@ class _GrammarPainter extends CustomPainter {
     c.drawPath(string,Paint()..color=const Color(0xFFAD8565)
       ..style=PaintingStyle.stroke..strokeWidth=2);
   }
+  void apple(Canvas c,double x,double y,double r){
+    // Round apple silhouette with a recognisable stem and green leaf.
+    circle(c,Offset(x-r*.30,y+r*.12),r*.68,const Color(0xFFE65B51));
+    circle(c,Offset(x+r*.30,y+r*.12),r*.68,const Color(0xFFEA705B));
+    c.drawOval(Rect.fromLTWH(x-r*.60,y-r*.24,r*.35,r*.49),
+      Paint()..color=const Color(0x55FFE9D7));
+    line(c,Offset(x,y-r*.54),Offset(x+r*.08,y-r*1.02),
+      const Color(0xFF855A38),4);
+    c.drawOval(Rect.fromCenter(
+      center:Offset(x+r*.36,y-r*.91),width:r*.64,height:r*.32),
+      Paint()..color=const Color(0xFF57A55F));
+  }
+  void lunchPlate(Canvas c,double x,double y,double r){
+    c.drawOval(Rect.fromCenter(center:Offset(x,y),width:r*2.5,height:r*1.25),
+      Paint()..color=const Color(0xFFFAF6ED));
+    c.drawOval(Rect.fromCenter(center:Offset(x,y),width:r*1.8,height:r*.75),
+      Paint()..color=const Color(0xFFF0C584));
+    circle(c,Offset(x-r*.32,y),r*.28,const Color(0xFF7CBA5F));
+    circle(c,Offset(x+r*.34,y-r*.06),r*.24,const Color(0xFFE98A59));
+    line(c,Offset(x-r*1.55,y-r*.43),Offset(x-r*1.55,y+r*.40),
+      const Color(0xFF819C8D),3.2);
+  }
+  void washHands(Canvas c,double x,double y,double r){
+    rect(c,Rect.fromLTWH(x-r*.34,y-r*.10,r*.67,r*.85),
+      const Color(0xFFF0B68E),radius:13);
+    for(var i=0;i<4;i++){
+      rect(c,Rect.fromLTWH(x-r*.34+i*r*.17,y-r*.55,r*.14,r*.57),
+        const Color(0xFFF0B68E),radius:8);
+    }
+    for(var i=0;i<4;i++){
+      final dx=(i-1.5)*r*.3;
+      c.drawPath(Path()..moveTo(x+dx,y-r*.85)
+        ..quadraticBezierTo(x+dx-r*.16,y-r*.60,x+dx,y-r*.54),
+        Paint()..color=const Color(0xFF6FB9D4));
+    }
+  }
+  void twoPanel(Canvas c,double w,double h,{required bool after}){
+    rect(c,Rect.fromLTWH(w*.09,h*.30,w*.33,h*.49),
+      const Color(0xDFFFFFFF),radius:17);
+    rect(c,Rect.fromLTWH(w*.58,h*.30,w*.33,h*.49),
+      const Color(0xDFFFFFFF),radius:17);
+    if(after){
+      lunchPlate(c,w*.255,h*.55,22);
+      ball(c,w*.745,h*.54,25);
+    }else{
+      washHands(c,w*.255,h*.51,29);
+      lunchPlate(c,w*.745,h*.55,22);
+    }
+    final p=Path()..moveTo(w*.44,h*.50)
+      ..lineTo(w*.53,h*.50)
+      ..lineTo(w*.50,h*.46)
+      ..moveTo(w*.53,h*.50)
+      ..lineTo(w*.50,h*.54);
+    c.drawPath(p,Paint()..color=dark..strokeWidth=3
+      ..strokeCap=StrokeCap.round..style=PaintingStyle.stroke);
+  }
+  void book(Canvas c,double x,double y){
+    final p=Path()..moveTo(x,y)
+      ..quadraticBezierTo(x-23,y-10,x-56,y-4)
+      ..lineTo(x-56,y+33)..quadraticBezierTo(x-27,y+25,x,y+37)
+      ..quadraticBezierTo(x+27,y+25,x+56,y+33)
+      ..lineTo(x+56,y-4)..quadraticBezierTo(x+23,y-10,x,y)
+      ..close();
+    c.drawPath(p,Paint()..color=const Color(0xFFFAF9E8));
+    line(c,Offset(x,y),Offset(x,y+37),brown,2);
+    for(var i=0;i<3;i++) {
+      line(c,Offset(x-48,y+9+i*8),Offset(x-13,y+12+i*8),
+        const Color(0xFFACC8AE),1.5);
+      line(c,Offset(x+13,y+12+i*8),Offset(x+48,y+9+i*8),
+        const Color(0xFFACC8AE),1.5);
+    }
+  }
   void clock(Canvas c,double x,double y,double r){
     circle(c,Offset(x,y),r,const Color(0xFFEEB969));
     circle(c,Offset(x,y),r*.79,cream);
@@ -210,14 +282,32 @@ class _GrammarPainter extends CustomPainter {
       case 'kite':
         kite(c,mid,h*.32,38);break;
       case 'house':
-      case 'at':
         house(c,mid-60,h*.39,120,91);break;
+      case 'at':
+        house(c,mid-60,h*.39,120,91);
+        rect(c,Rect.fromLTWH(mid-51,h*.48,102,20),
+          const Color(0xFFF6EFDA),radius:4);
+        final school=TextPainter(text:const TextSpan(
+          text:'SCHOOL',style:TextStyle(color:dark,fontSize:14,
+            fontWeight:FontWeight.w900)),textDirection:TextDirection.ltr)
+          ..layout();
+        school.paint(c,Offset(mid-school.width/2,h*.48+2));
+        break;
       case 'child':
         child(c,mid,h*.38,39);break;
       case 'bag':
         bag(c,mid,h*.48,103);break;
-      case 'apple':
+      case 'ball':
         ball(c,mid,h*.58,35);break;
+      case 'apple':
+        apple(c,mid,h*.58,42);break;
+      case 'before':
+        twoPanel(c,w,h,after:false);break;
+      case 'after':
+        twoPanel(c,w,h,after:true);break;
+      case 'now':
+        child(c,mid,h*.34,32);
+        book(c,mid,h*.76);break;
       default:
         ball(c,mid,h*.62,31);break;
     }
