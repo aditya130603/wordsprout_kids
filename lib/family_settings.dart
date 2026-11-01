@@ -40,9 +40,11 @@ class _FamilySettingsState extends State<FamilySettings>{
           style:TextStyle(fontSize:24,color:Color(0xFF24582E),
             fontWeight:FontWeight.w900)),
         const SizedBox(height:18),
-        Container(decoration:BoxDecoration(color:Colors.white,
-          borderRadius:BorderRadius.circular(20),
-          border:Border.all(color:const Color(0xFFE4ECDD))),
+        Material(color:Colors.white,
+          clipBehavior:Clip.antiAlias,
+          shape:RoundedRectangleBorder(
+            borderRadius:BorderRadius.circular(20),
+            side:const BorderSide(color:Color(0xFFE4ECDD))),
           child:SwitchListTile.adaptive(
             key:const ValueKey('family_friends_toggle'),
             value:league,
