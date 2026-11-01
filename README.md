@@ -15,6 +15,22 @@ An offline-first Flutter English-learning app for **ages 4–6**. The first comp
 
 Letter **X** includes X-RAY and XYLOPHONE and also familiar words **FOX**, **BOX**, and **TAXI** that contain the letter X. It does not misrepresent these as X-initial words.
 
+## Online content packs (no store update for words)
+
+WordSprout now supports **HTTPS word/artwork packs**: corrections, extra
+vocabulary, pronunciation text, and appearance PNG sequences can be published
+independently of app releases. A downloaded update is checked by SHA-256,
+saved for offline use, and loaded without changing the 130 fixed starter IDs.
+
+The supplied PNG-sequence archive has been converted into a ready-to-host pack:
+**52 eight-frame animations**, with frame `00007` used as the still, plus
+**7 bonus words**. The hosting URL must first be configured on the initial
+app release. See [online publishing instructions](docs/ONLINE_CONTENT_UPDATES.md).
+
+Important: the app does **not** auto-connect to the user's private GitHub
+repository. A publicly accessible HTTPS content host is required. New Flutter
+code or game mechanics still need a Play Store update.
+
 ## Run and build
 
 Use a current stable Flutter SDK and Python 3:
@@ -26,7 +42,7 @@ flutter pub get
 flutter test --update-goldens test/screenshot_test.dart
 flutter test
 flutter run
-flutter build apk --release
+flutter build apk --release --dart-define=WORDSPROUT_CONTENT_URL=https://YOUR_HOST/wordsprout/manifest.json
 ```
 
 The first asset-build run needs an internet connection to fetch illustration sources. The build bundles all 130 illustrations into the APK; **children do not need an internet connection to learn or replay content**.
