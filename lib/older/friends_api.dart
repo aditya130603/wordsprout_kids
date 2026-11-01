@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import '../family_settings.dart';
 
 class LeagueEntry {
   const LeagueEntry({required this.alias,required this.weekXp,required this.isMe});
@@ -74,6 +75,9 @@ class FriendsApi {
   }
 
   Future<void> connect(String code) async {
+    if(!await FamilySettings.leagueEnabled()) {
+      throw StateError('Friends League is disabled in Family Settings');
+    }
     if(!RegExp(r'^[A-Fa-f0-9]{10}$').hasMatch(code.trim())) {
       throw const FormatException('Enter the ten-character parent pairing code');
     }
@@ -89,6 +93,9 @@ class FriendsApi {
   Future<void> disconnect() async => _vault.delete(key:tokenKey);
 
   Future<LeagueBoard> leaderboard() async {
+    if(!await FamilySettings.leagueEnabled()) {
+      throw StateError('Friends League is disabled in Family Settings');
+    }
     final data=await _request('GET','/v1/leaderboard');
     final entries=(data['friends'] as List).map((v){
       final e=v as Map<String,dynamic>;
@@ -112,6 +119,7 @@ class FriendsApi {
     // child may tap again before the first HTTP request has completed.
     _answerQueue=_answerQueue.then((_) async {
       try {
+        if(!await FamilySettings.leagueEnabled())return;
         if(!await paired)return;
         await _request('POST','/v1/answer',payload:{
           'mission_id':missionId,'stage':stage,
