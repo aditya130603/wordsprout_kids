@@ -21,4 +21,4 @@ jobs:
       - name: Compile backend Python
         run: python -m compileall -q backend
       - name: Verify parent approval and scoring
-        run: python -m pytest -q backend/test_friends_server.py
+        run: python -m pytest -q backend/test_friends_server.py backend/test_picture_race.py
