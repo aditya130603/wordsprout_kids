@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:wordsprout_kids/main.dart';
@@ -19,6 +20,12 @@ void main() {
   });
 
   testWidgets('all picture choices have individual vector illustrations', (tester) async {
+    tester.view.physicalSize = const Size(390, 844);
+    tester.view.devicePixelRatio = 1;
+    addTearDown(() {
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
     await tester.pumpWidget(const WordSprout());
     await tester.pumpAndSettle();
     await tester.tap(find.text('Continue Learning  ➜'));
