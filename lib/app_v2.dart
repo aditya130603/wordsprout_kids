@@ -10,6 +10,7 @@ import 'curriculum.dart';
 import 'content_store.dart';
 import 'older/older_home.dart';
 import 'grammar/tiny_grammar_home.dart';
+import 'family_settings.dart';
 
 const forest = Color(0xFF24582E);
 const leaf = Color(0xFF77B932);
@@ -422,6 +423,12 @@ class _HomeState extends State<Home> {
               style:TextButton.styleFrom(
                 foregroundColor:forest,
                 padding:EdgeInsets.zero))),
+            IconButton(
+              tooltip:'Family settings',
+              key:const ValueKey('family_settings_entry'),
+              onPressed:()=>Navigator.push(context,MaterialPageRoute(
+                builder:(context)=>const FamilySettings())),
+              icon:const Icon(Icons.settings_outlined,color:forest,size:22)),
           ])),
         if (step >= 0) Padding(padding:const EdgeInsets.all(11),
           child:Row(children:[
