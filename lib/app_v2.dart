@@ -641,6 +641,7 @@ class _HomeState extends State<Home> {
       onTap:()=>Navigator.push(context,MaterialPageRoute(
         builder:(context)=>PictureRaceScreen(
           catalog:catalog!,furthestLetter:activeLetter,
+          learnedWordIndices:completed.toList(),
           imageDirectory:imageDirectory))),
       child:const ListTile(
         leading:Icon(Icons.bolt_rounded,color:coral,size:33),
