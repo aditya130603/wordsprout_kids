@@ -110,7 +110,6 @@ void main(){
     expect(find.text('SENTENCE BUILDER'),findsOneWidget);
     final play=grammar.lessons.first;
     for(final term in play.sentenceTokens){
-      final label=play.sentenceTokens;
       final tileIndex=play.sentenceTokens.indexOf(term);
       // Tile positions use a fixed word shuffle. Locate a visible tile by label.
       final option=find.widgetWithText(ActionChip,term);
