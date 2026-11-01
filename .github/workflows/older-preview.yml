@@ -37,7 +37,7 @@ jobs:
         if: always()
         with:
           name: older-adventure-preview-screenshots
-          path: test/screenshots/0[5-9]-*.png
+          path: test/screenshots/*.png
           if-no-files-found: warn
       - name: Build installable older-track APK
         run: flutter build apk --release --dart-define=WORDSPROUT_CONTENT_URL="${{ vars.WORDSPROUT_CONTENT_URL }}" --dart-define=WORDSPROUT_FRIENDS_API_URL="${{ vars.WORDSPROUT_FRIENDS_API_URL }}"
