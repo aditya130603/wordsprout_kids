@@ -11,6 +11,7 @@ import 'content_store.dart';
 import 'older/older_home.dart';
 import 'grammar/tiny_grammar_home.dart';
 import 'family_settings.dart';
+import 'games/picture_race_screen.dart';
 
 const forest = Color(0xFF24582E);
 const leaf = Color(0xFF77B932);
@@ -635,7 +636,20 @@ class _HomeState extends State<Home> {
         subtitle:Text('26 offline mini lessons • Ages 4–6'),
         trailing:Icon(Icons.chevron_right_rounded,color:forest)))),
     const SizedBox(height:12),
-    for(final game in ['Spelling Race','Guess in 5','Word Detective','WordMayhem'])
+    card(InkWell(
+      key:const ValueKey('picture_race_entry'),
+      onTap:()=>Navigator.push(context,MaterialPageRoute(
+        builder:(context)=>PictureRaceScreen(
+          catalog:catalog!,furthestLetter:activeLetter,
+          imageDirectory:imageDirectory))),
+      child:const ListTile(
+        leading:Icon(Icons.bolt_rounded,color:coral,size:33),
+        title:Text('Picture Race',style:TextStyle(
+          fontSize:18,fontWeight:FontWeight.w900,color:forest)),
+        subtitle:Text('See the picture • race to spell it first'),
+        trailing:Icon(Icons.chevron_right_rounded,color:forest)))),
+    const SizedBox(height:12),
+    for(final game in ['Guess in 5','Word Detective','WordMayhem'])
       Padding(padding:const EdgeInsets.only(bottom:12),
         child:card(ListTile(
           leading:const Icon(Icons.sports_esports_rounded,color:coral,size:30),
@@ -643,8 +657,8 @@ class _HomeState extends State<Home> {
             fontSize:18,fontWeight:FontWeight.bold,color:forest)),
           trailing:const Icon(Icons.lock_outline)))),
     const SizedBox(height:10),
-    const Text('Online games need parent-approved friends and a secure server. '
-      'Solo lessons work offline.',textAlign:TextAlign.center),
+    const Text('Picture Race uses private rooms with approved friends. '
+      'A live HTTPS game server is needed to connect real players.',textAlign:TextAlign.center),
   ]);
   Widget progressPage()=>ListView(children:[
     title('My Growing Garden'),const SizedBox(height:15),
