@@ -77,6 +77,12 @@ def test_parent_gated_private_league():
     denied=client.post("/v1/parent/device-code",
       json={"child_id":cid},headers=b)
     assert denied.status_code==403
+    # Parent can remove one friendship without deleting either account.
+    found=client.get("/v1/parent/friends/"+cid,headers=a).json()["friends"]
+    assert len(found)==1 and found[0]["alias"]=="Golden Otter"
+    removed=client.delete("/v1/parent/friends/"+cid+"/"+fid,headers=a)
+    assert removed.status_code==200
+    assert len(client.get("/v1/leaderboard",headers=friend).json()["friends"])==1
     # Parent can revoke a child's social account and all sessions.
     assert client.delete("/v1/parent/children/"+cid,headers=a).status_code==200
     assert client.get("/v1/leaderboard",headers=child).status_code==401
