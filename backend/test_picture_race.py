@@ -19,10 +19,19 @@ def make_friends():
 
 def test_random_letters_keep_repeats_and_do_not_present_solution_in_order():
     letters=tiles_for("ABC123",3,"left-kid","APPLE")
-    assert sorted(letters)==sorted("APPLE")
-    assert letters!=list("APPLE")
+    assert len(letters)==8 # 5 word letters + 3 distinct distractors
+    assert all(letters.count(ch)=="APPLE".count(ch) for ch in set("APPLE"))
+    assert sorted(letter for letter in letters if letter not in word)==sorted(
+        letter for letter in set(letters) if letter not in word)
+    assert len([x for x in letters if x not in "APPLE"])==3
+    assert letters[:5]!=list("APPLE")
     assert letters==tiles_for("ABC123",3,"left-kid","APPLE")
-    assert sorted(tiles_for("ABCF34",1,"another","BALLOON"))==sorted("BALLOON")
+    large=tiles_for("ABCF34",1,"another","BALLOON")
+    assert len(large)==11
+    assert sorted(ch for ch in large if ch in "BALLOON")==sorted("BALLOON")
+    assert len([x for x in large if x not in "BALLOON"])==4
+    short=tiles_for("ABCF35",1,"another","ANT")
+    assert len(short)==5
 
 def test_approved_friends_share_a_round_and_first_answer_wins():
     host,guest=make_friends()
@@ -44,7 +53,11 @@ def test_approved_friends_share_a_round_and_first_answer_wins():
     assert state["word_index"]==other["word_index"]
     assert state["word_index"] < 18*5
     expected=WORDS[state["word_index"]]["word"]
-    assert sorted(state["tiles"])==sorted(expected.replace(" ","").replace("-",""))
+    spelling=expected.replace(" ","").replace("-","")
+    assert len(state["tiles"])>len(spelling)
+    assert all(state["tiles"].count(ch)==spelling.count(ch) for ch in set(spelling))
+    assert len([ch for ch in state["tiles"] if ch not in spelling])>=2
+    assert state["tiles"][:len(spelling)]!=list(spelling)
     assert "answer" not in state
     win=client.post("/v1/race/rooms/"+code+"/answer",headers=guest,
         json={"round_index":1,"word":expected})
