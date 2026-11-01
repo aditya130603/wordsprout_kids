@@ -120,7 +120,9 @@ class ContentStore {
         if (size > maxUncompressedBytes) throw const FormatException('Pack is too large');
         final target = File(staging.path + '/' + path);
         await target.parent.create(recursive:true);
-        await target.writeAsBytes(entry.readBytes(), flush:true);
+        final bytes = entry.readBytes();
+        if (bytes == null) throw const FormatException('Corrupt ZIP entry');
+        await target.writeAsBytes(bytes, flush:true);
       }
       final jsonFile = File(staging.path + '/words.json');
       if (!await jsonFile.exists()) throw const FormatException('Pack has no words.json');
