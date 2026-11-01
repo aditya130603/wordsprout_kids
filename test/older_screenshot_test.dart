@@ -125,4 +125,25 @@ void main(){
       matchesGoldenFile('screenshots/10-earned-badges.png'));
   });
 
+
+  testWidgets('capture instant static congratulation after a correct answer',(tester) async{
+    await openHome(tester);
+    final mission=find.byKey(const ValueKey('older_mission_ex_lantern'));
+    await tester.scrollUntilVisible(mission,180,
+      scrollable:find.byType(Scrollable).first,maxScrolls:20);
+    await tester.pumpAndSettle();
+    await tester.tap(mission);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Start the adventure'));
+    await tester.pumpAndSettle();
+    await tester.drag(find.byType(SingleChildScrollView).last,
+      const Offset(0,-240));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('curious'));
+    await tester.pumpAndSettle();
+    expect(find.text('Well done! +10 XP earned'),findsOneWidget);
+    await expectLater(find.byType(Scaffold).last,
+      matchesGoldenFile('screenshots/12-correct-plus-xp.png'));
+  });
+
 }
