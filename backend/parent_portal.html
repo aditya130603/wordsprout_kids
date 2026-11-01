@@ -66,6 +66,10 @@ fieldset input{width:auto;margin-top:4px}
 <input id="acceptCode" maxlength="10" autocapitalize="characters" placeholder="Ten-character invite code">
 <button class="secondary" id="accept">Approve this friendship</button>
 <hr>
+<label for="friends">Approved friends</label>
+<select id="friends"></select>
+<button class="secondary" id="removeFriend">Remove selected friendship</button>
+<hr>
 <button class="secondary" id="delete">Delete this child profile and revoke access</button>
 <p class="tip">Deleting removes this child's points, invitations, friendships and device access. Offline learning on their own device is not deleted.</p>
 </section>
@@ -106,7 +110,30 @@ async function refresh(){
   opt.value=c.id;opt.textContent=c.alias;
   el("child").append(opt);
  }
+ await refreshFriends();
 }
+async function refreshFriends(){
+ el("friends").replaceChildren();
+ const child=el("child").value;
+ if(!child)return;
+ const result=await request("GET","/v1/parent/friends/"+
+   encodeURIComponent(child));
+ for(const friend of result.friends){
+   const opt=document.createElement("option");
+   opt.value=friend.id;opt.textContent=friend.alias;
+   el("friends").append(opt);
+ }
+}
+el("child").addEventListener("change",()=>act(refreshFriends));
+el("removeFriend").onclick=()=>act(async()=>{
+ const child=el("child").value,friend=el("friends").value;
+ if(!child||!friend)throw Error("Choose a friendship to remove");
+ if(!confirm("Remove this friend from the private league?"))return;
+ await request("DELETE","/v1/parent/friends/"+
+   encodeURIComponent(child)+"/"+encodeURIComponent(friend));
+ await refreshFriends();
+ status("Friend removed from both children's leagues.",true);
+});
 el("create").onclick=()=>act(async()=>{
  if(!el("consent").checked)throw Error("Parent approval is required");
  await request("POST","/v1/parent/children",{
@@ -132,7 +159,7 @@ el("accept").onclick=()=>act(async()=>{
  if(!el("child").value)throw Error("Create a child profile first");
  await request("POST","/v1/parent/friend-accept",{
   child_id:el("child").value,code:el("acceptCode").value.trim().toUpperCase()});
- el("acceptCode").value="";status("Friendship approved for both children.",true);
+ el("acceptCode").value="";await refreshFriends();status("Friendship approved for both children.",true);
 });
 el("delete").onclick=()=>act(async()=>{
  const child=el("child").value;
