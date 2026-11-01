@@ -18,6 +18,7 @@ from email.message import EmailMessage
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException, Header
+from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 
 DB_PATH = os.environ.get("WORDSPROUT_LEAGUE_DB", "wordsprout_league.sqlite")
@@ -140,6 +141,13 @@ class Answer(BaseModel):
     stage: str = Field(pattern="^(detective|relation|sentence|pattern|transfer)$")
     index: int = Field(ge=0,le=30)
     response: str = Field(min_length=1,max_length=300)
+
+@app.get("/parents",include_in_schema=False)
+def parent_portal():
+    return FileResponse(Path(__file__).with_name("parent_portal.html"),
+                        media_type="text/html",
+                        headers={"Cache-Control":"no-store",
+                                 "Content-Security-Policy":"default-src 'self'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'"})
 
 @app.get("/health")
 def health(): return {"status":"ready"}
