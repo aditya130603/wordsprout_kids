@@ -79,4 +79,28 @@ void main(){
     await expectLater(find.byType(Scaffold).last,
       matchesGoldenFile('screenshots/07-word-detective.png'));
   });
+  testWidgets('capture XP and achievement badges', (tester) async {
+    await openHome(tester);
+    final button=find.byKey(const ValueKey('older_rewards_entry'));
+    await tester.ensureVisible(button);
+    await tester.tap(button);
+    await tester.pumpAndSettle();
+    expect(find.text('My Rewards'),findsOneWidget);
+    await expectLater(find.byType(Scaffold).last,
+      matchesGoldenFile('screenshots/08-achievements.png'));
+  });
+
+  testWidgets('capture private friends league without fake users',(tester) async{
+    await openHome(tester);
+    final button=find.byKey(const ValueKey('older_rewards_entry'));
+    await tester.ensureVisible(button);
+    await tester.tap(button);
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Friends League'));
+    await tester.pumpAndSettle();
+    expect(find.text('Parent setup required'),findsOneWidget);
+    await expectLater(find.byType(Scaffold).last,
+      matchesGoldenFile('screenshots/09-friends-league.png'));
+  });
+
 }
