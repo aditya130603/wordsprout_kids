@@ -52,7 +52,7 @@ class _HomeState extends State<Home>{
  @override Widget build(BuildContext context)=>Scaffold(
   body:SafeArea(child:Column(children:[
    if(step<0)...[const SizedBox(height:17),heading('🌱 WordSprout')],
-   if(step>=0)Padding(padding:const EdgeInsets.all(12),child:Row(children:[IconButton.filledTonal(onPressed:()=>setState(()=>step=-1),icon:const Icon(Icons.arrow_back)),const Spacer(),...List.generate(5,(i)=>Container(width:30,height:10,margin:const EdgeInsets.all(3),decoration:BoxDecoration(color:i<=step?lime:const Color(0xffe2dfd5),borderRadius:BorderRadius.circular(12)))),const Spacer())),
+   if(step>=0)Padding(padding:const EdgeInsets.all(12),child:Row(children:[IconButton.filledTonal(onPressed:()=>setState(()=>step=-1),icon:const Icon(Icons.arrow_back)),const Spacer(),...List.generate(5,(i)=>Container(width:30,height:10,margin:const EdgeInsets.all(3),decoration:BoxDecoration(color:i<=step?lime:const Color(0xffe2dfd5),borderRadius:BorderRadius.circular(12)))),const Spacer()])),
    Expanded(child:Padding(padding:const EdgeInsets.all(18),child:step>=0?lesson():page())),
   ])),
   bottomNavigationBar:step<0?NavigationBar(selectedIndex:tab,onDestinationSelected:(i)=>setState(()=>tab=i),destinations:const [
