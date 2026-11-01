@@ -56,14 +56,14 @@ void main() {
 
   testWidgets('capture actual Flutter word discovery screen', (tester) async {
     await openApp(tester);
-    await tester.tap(find.text('Continue ➜'));
+    await tester.tap(find.text('Continue Learning  ➜'));
     await tester.pumpAndSettle();
     await expectLater(find.byType(Scaffold), matchesGoldenFile('screenshots/02-word.png'));
   });
 
   testWidgets('capture actual Flutter spelling screen', (tester) async {
     await openApp(tester);
-    await tester.tap(find.text('Continue ➜'));
+    await tester.tap(find.text('Continue Learning  ➜'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Next ➜'));
     await tester.pumpAndSettle();
@@ -72,7 +72,7 @@ void main() {
 
   testWidgets('capture actual Flutter picture selection screen', (tester) async {
     await openApp(tester);
-    await tester.tap(find.text('Continue ➜'));
+    await tester.tap(find.text('Continue Learning  ➜'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('Next ➜'));
     await tester.pumpAndSettle();
