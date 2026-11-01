@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WordSprout · Parent Friends League</title>
+<style>
+:root{font:16px system-ui,-apple-system,sans-serif;color:#253e39;background:#f7faf4}
+*{box-sizing:border-box}main{max-width:790px;margin:auto;padding:26px 16px 70px}
+h1{font-size:2.15rem;letter-spacing:-.04em}h2{font-size:1.25rem}
+header{display:flex;gap:12px;align-items:center}header b{color:#287e62}
+.card{padding:22px;background:#fff;border:1px solid #dfe8df;border-radius:20px;margin:14px 0}
+label{font-size:.9rem;font-weight:700;display:block;margin:12px 0 5px}
+input,select,button{font:inherit;padding:12px 14px;border-radius:12px;max-width:100%;width:100%;border:1px solid #c5d6c8}
+button{margin-top:11px;background:#2d866c;color:#fff;border:0;font-weight:800;cursor:pointer}
+button:disabled{opacity:.5}button.secondary{background:#e5f0e5;color:#235a48}
+.tip{color:#597368;line-height:1.5;font-size:.9rem}
+.code{font:800 1.3rem ui-monospace,monospace;letter-spacing:.07em;background:#f0f8ef;padding:12px;border-radius:12px;word-break:break-all}
+.bad{color:#9b412a}.good{color:#287a57}#status{min-height:2em}
+fieldset{border:0;padding:0}fieldset>label{display:flex;gap:10px;align-items:flex-start;font-weight:500}
+fieldset input{width:auto;margin-top:4px}
+[hidden]{display:none!important}
+</style>
+</head>
+<body><main>
+<header><span style="font-size:36px" aria-hidden="true">🌱</span><div><b>WordSprout</b><div>Parent-controlled Friends League</div></div></header>
+<h1>Friends are better together.</h1>
+<p class="tip">This portal is for parents and guardians, not children. Verify your email, explicitly approve the private Friends League, and decide exactly who your child competes with. No child chat, public profiles, contact lists, or automatic friend suggestions.</p>
+<div id="status" role="status" aria-live="polite"></div>
+
+<section class="card" id="login">
+<h2>1. Parent verification</h2>
+<label for="email">Parent email</label><input id="email" type="email" autocomplete="email" maxlength="254" required>
+<button id="send">Email my verification code</button>
+<label for="otp">Six-digit code from email</label>
+<input id="otp" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="000000">
+<button id="verify" class="secondary">Verify and continue</button>
+</section>
+
+<div id="after" hidden>
+<section class="card">
+<h2>2. Create a private child profile</h2>
+<label for="alias">Choose a playful nickname (no real names)</label>
+<select id="alias">
+<option>Sunny Comet</option><option>Blue Fox</option><option>Golden Otter</option>
+<option>Brave Sparrow</option><option>Little Meteor</option><option>Silver Kite</option>
+<option>Clever Turtle</option><option>Happy Willow</option><option>Bright Moon</option>
+<option>Green Falcon</option><option>Starry Panda</option><option>Quiet Rocket</option>
+</select>
+<fieldset><label>
+<input type="checkbox" id="consent">
+<span>I am the parent/guardian responsible for this child. I choose to enable a private, nickname-only friends ranking. I understand that validated learning scores and approved friend connections will be stored on the WordSprout server until I remove this profile. I can revoke access and delete the profile at any time.</span>
+</label></fieldset>
+<button id="create">Create private profile</button>
+</section>
+
+<section class="card">
+<h2>3. Manage the child profile</h2>
+<label for="child">Child profile</label><select id="child"></select>
+<button id="device">Create one-time device pairing code</button>
+<div id="deviceResult" hidden><p class="tip">Enter this code in the child's WordSprout app → Rewards → Friends League. Expires in 15 minutes.</p><p class="code" id="deviceCode"></p></div>
+<hr>
+<button id="invite">Generate friend invite code</button>
+<div id="inviteResult" hidden><p class="tip">Share this code privately with the other child's parent. Expires after 24 hours.</p><p class="code" id="inviteCode"></p></div>
+<label for="acceptCode">Accept another family's invite</label>
+<input id="acceptCode" maxlength="10" autocapitalize="characters" placeholder="Ten-character invite code">
+<button class="secondary" id="accept">Approve this friendship</button>
+<hr>
+<button class="secondary" id="delete">Delete this child profile and revoke access</button>
+<p class="tip">Deleting removes this child's points, invitations, friendships and device access. Offline learning on their own device is not deleted.</p>
+</section>
+<button id="logout" class="secondary">End parent session</button>
+</div>
+<footer class="tip"><p>Only reviewed accounts should be enabled for children. Email verification alone does not establish legal age or complete every jurisdiction's parental-consent requirements. WordSprout operators must review their privacy notice, consent process and data-security measures before public launch.</p></footer>
+<script>
+(()=>{"use strict";
+let token=null;
+const el=id=>document.getElementById(id);
+const status=(message,ok=false)=>{el("status").textContent=message;el("status").className=ok?"good":"bad";};
+async function request(method,path,data){
+ const headers={"Content-Type":"application/json"};
+ if(token)headers.Authorization="Bearer "+token;
+ const response=await fetch(path,{method,headers,body:data?JSON.stringify(data):undefined,
+   redirect:"error",credentials:"omit",cache:"no-store"});
+ let json={};try{json=await response.json()}catch{}
+ if(!response.ok)throw Error(json.detail||"Unable to complete request");
+ return json;
+}
+async function act(fn){try{status("");await fn();}catch(e){status(e.message)}}
+el("send").onclick=()=>act(async()=>{
+ await request("POST","/v1/parent/request-code",{email:el("email").value});
+ status("Verification code requested. Check your inbox.",true);
+});
+el("verify").onclick=()=>act(async()=>{
+ const data=await request("POST","/v1/parent/verify-code",{
+  email:el("email").value,code:el("otp").value});
+ token=data.parent_token;
+ el("login").hidden=true;el("after").hidden=false;
+ await refresh();status("Parent email verified. You control each child profile.",true);
+});
+async function refresh(){
+ const data=await request("GET","/v1/parent/children");
+ el("child").replaceChildren();
+ for(const c of data.children){
+  const opt=document.createElement("option");
+  opt.value=c.id;opt.textContent=c.alias;
+  el("child").append(opt);
+ }
+}
+el("create").onclick=()=>act(async()=>{
+ if(!el("consent").checked)throw Error("Parent approval is required");
+ await request("POST","/v1/parent/children",{
+  alias:el("alias").value,consent:true});
+ await refresh();el("consent").checked=false;
+ status("Child profile created. Next, create a device pairing code.",true);
+});
+el("device").onclick=()=>act(async()=>{
+ if(!el("child").value)throw Error("Create a child profile first");
+ const data=await request("POST","/v1/parent/device-code",{
+  child_id:el("child").value});
+ el("deviceCode").textContent=data.code;el("deviceResult").hidden=false;
+ status("Pairing code created. It can only be used once.",true);
+});
+el("invite").onclick=()=>act(async()=>{
+ if(!el("child").value)throw Error("Create a child profile first");
+ const data=await request("POST","/v1/parent/friend-invite",{
+  child_id:el("child").value});
+ el("inviteCode").textContent=data.code;el("inviteResult").hidden=false;
+ status("Share this invitation only with another parent.",true);
+});
+el("accept").onclick=()=>act(async()=>{
+ if(!el("child").value)throw Error("Create a child profile first");
+ await request("POST","/v1/parent/friend-accept",{
+  child_id:el("child").value,code:el("acceptCode").value.trim().toUpperCase()});
+ el("acceptCode").value="";status("Friendship approved for both children.",true);
+});
+el("delete").onclick=()=>act(async()=>{
+ const child=el("child").value;
+ if(!child)throw Error("No child selected");
+ if(!confirm("Permanently delete this child's private league account?"))return;
+ await request("DELETE","/v1/parent/children/"+encodeURIComponent(child));
+ await refresh();status("Child profile deleted and sessions revoked.",true);
+});
+el("logout").onclick=()=>{
+ token=null;el("login").hidden=false;el("after").hidden=true;
+ el("otp").value="";status("Parent session closed.",true);
+};
+})();
+</script>
+</main></body></html>
