@@ -251,7 +251,7 @@ class _FriendsLeagueState extends State<_FriendsLeague> {
                     fontSize:15,fontWeight:FontWeight.w800))),
                 Text(child.weekXp.toString()+' XP',style:const TextStyle(
                   color:mint,fontSize:15,fontWeight:FontWeight.w900)),
-              ]))),
+              ])));
         }),
         if(entries.length==1)const Padding(
           padding:EdgeInsets.only(top:11),
