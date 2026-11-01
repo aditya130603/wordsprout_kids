@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(const WordSprout());
 const green=Color(0xff24582e), lime=Color(0xff77b932), cream=Color(0xfffff8eb), yellow=Color(0xffffdf7c);
 class Word {
- final String name, picture;
+ final String name;
  final List<String> facts;
- const Word(this.name,this.picture,this.facts);
+ const Word(this.name,this.facts);
 }
 const words=[
- Word('ANT','🐜',['An ant is tiny.','Some ants can bite.','Ants live together in colonies.']),
- Word('APPLE','🍎',['Apples grow on trees.','Apples can be red, green or yellow.','You can eat an apple’s skin.']),
- Word('ARM','💪',['Most people have two arms.','Arms help you lift things.','Your elbow helps your arm bend.']),
- Word('AXE','🪓',['An axe is a tool.','People use axes to chop wood.','An axe has a sharp blade.']),
- Word('ARROW','➡️',['An arrow has a pointed tip.','An arrow can be shot from a bow.','Arrows on signs can show directions.']),
+ Word('ANT',['An ant is tiny.','Some ants can bite.','Ants live together in colonies.']),
+ Word('APPLE',['Apples grow on trees.','Apples can be red, green or yellow.','You can eat an apple’s skin.']),
+ Word('ARM',['Most people have two arms.','Arms help you lift things.','Your elbow helps your arm bend.']),
+ Word('AXE',['An axe is a tool.','People use axes to chop wood.','An axe has a sharp blade.']),
+ Word('ARROW',['An arrow has a pointed tip.','An arrow can be shot from a bow.','Arrows on signs can show directions.']),
 ];
 class WordSprout extends StatelessWidget {
  const WordSprout({super.key});
@@ -46,12 +47,17 @@ class _HomeState extends State<Home>{
  void next(){final remaining=List.generate(unlocked,(i)=>i).where((i)=>!done.contains(i));if(remaining.isEmpty){setState((){step=-1;tab=1;});}else{start(remaining.first);}}
  Widget card(Widget child)=>Container(padding:const EdgeInsets.all(15),decoration:BoxDecoration(color:Colors.white.withValues(alpha:.89),borderRadius:BorderRadius.circular(28),boxShadow:const [BoxShadow(color:Color(0x180a3619),blurRadius:12,offset:Offset(0,5))]),child:child);
  Widget button(String label,VoidCallback press,{Color color=lime})=>SizedBox(height:56,width:double.infinity,child:FilledButton(onPressed:press,style:FilledButton.styleFrom(backgroundColor:color,shape:RoundedRectangleBorder(borderRadius:BorderRadius.circular(30))),child:Text(label,style:const TextStyle(fontSize:19,fontWeight:FontWeight.w900))));
- Widget art(int i,{double size=155})=>i==0?SizedBox(width:size,height:size,child:CustomPaint(painter:AntPainter())):Text(words[i].picture,style:TextStyle(fontSize:size*.7));
+ Widget art(int i,{double size=155})=>SvgPicture.asset('assets/words/'+words[i].name.toLowerCase()+'.svg',width:size,height:size,fit:BoxFit.contain,semanticsLabel:words[i].name);
  Widget heading(String text)=>Text(text,textAlign:TextAlign.center,style:const TextStyle(fontSize:27,color:green,fontWeight:FontWeight.w900));
  Widget listen(String text)=>IconButton.filled(onPressed:()=>speak(text),style:IconButton.styleFrom(backgroundColor:lime,foregroundColor:Colors.white),icon:const Icon(Icons.volume_up_rounded,size:28));
  @override Widget build(BuildContext context)=>Scaffold(
   body:SafeArea(child:Column(children:[
-   if(step<0)...[const SizedBox(height:17),heading('🌱 WordSprout')],
+   if(step<0)...[const SizedBox(height:15),const Row(
+     mainAxisAlignment:MainAxisAlignment.center, children:[
+      Icon(Icons.spa_rounded,size:28,color:lime),
+      SizedBox(width:6),
+      Text('WordSprout',style:TextStyle(fontSize:28,fontWeight:FontWeight.w900,color:green,letterSpacing:-1)),
+     ])],
    if(step>=0)Padding(padding:const EdgeInsets.all(12),child:Row(children:[IconButton.filledTonal(onPressed:()=>setState(()=>step=-1),icon:const Icon(Icons.arrow_back)),const Spacer(),...List.generate(5,(i)=>Container(width:30,height:10,margin:const EdgeInsets.all(3),decoration:BoxDecoration(color:i<=step?lime:const Color(0xffe2dfd5),borderRadius:BorderRadius.circular(12)))),const Spacer()])),
    Expanded(child:Padding(padding:const EdgeInsets.all(18),child:step>=0?lesson():page())),
   ])),
@@ -67,16 +73,74 @@ class _HomeState extends State<Home>{
   if(tab==2)return Column(children:[heading('Games & Friends'),const SizedBox(height:25),...['🏁  Spelling Race','❓  Guess in 5','🔍  Word Detective','🎭  WordMayhem'].map((s)=>Padding(padding:const EdgeInsets.only(bottom:15),child:card(ListTile(title:Text(s,style:const TextStyle(fontSize:19,fontWeight:FontWeight.bold,color:green)),trailing:const Icon(Icons.lock_outline))))),const SizedBox(height:18),const Text('Online games require parent-approved friends and a secure game server. Coming later.',textAlign:TextAlign.center)]);
   if(tab==3)return Column(children:[heading('My growing garden 🌿'),const SizedBox(height:35),card(Column(children:[Text(done.length.toString()+' / 5',style:const TextStyle(fontSize:44,fontWeight:FontWeight.w900,color:green)),const Text('Words learned'),const SizedBox(height:16),LinearProgressIndicator(value:done.length/5,minHeight:16,borderRadius:BorderRadius.circular(20))]))]);
   return Column(children:[
-   card(const Row(children:[Text('🌼',style:TextStyle(fontSize:45)),SizedBox(width:12),Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[Text('Hello, explorer!',style:TextStyle(fontSize:23,fontWeight:FontWeight.w900,color:green)),Text("Let's learn some new words!")]))])),
-   const SizedBox(height:18),
-   Expanded(child:Container(width:double.infinity,padding:const EdgeInsets.all(20),decoration:BoxDecoration(gradient:const LinearGradient(begin:Alignment.topCenter,end:Alignment.bottomCenter,colors:[Color(0xffdcf2c1),Color(0xff9ed568)]),borderRadius:BorderRadius.circular(32)),child:Column(children:[
-    heading('Alphabet Adventure'),const SizedBox(height:15),
-    Expanded(child:LayoutBuilder(builder:(context,c)=>Stack(children:[
-      for(int i=0;i<5;i++)Positioned(left:i.isEven?c.maxWidth*.09:c.maxWidth*.62,top:i*(c.maxHeight-67)/4,child:GestureDetector(onTap:()=>start(i),child:Container(width:63,height:63,alignment:Alignment.center,decoration:BoxDecoration(shape:BoxShape.circle,color:i==0?yellow:i<unlocked?Colors.white:Colors.white54,border:Border.all(color:Colors.white,width:5)),child:Text(String.fromCharCode(65+i),style:TextStyle(fontSize:29,fontWeight:FontWeight.w900,color:i<unlocked?green:Colors.grey))))),
+    card(Row(children:[
+      const CircleAvatar(radius:26,backgroundColor:Color(0xFFFFE29A),
+        child:Icon(Icons.wb_sunny_rounded,color:Color(0xFFEFAE32),size:34)),
+      const SizedBox(width:12),
+      const Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
+        Text('Hello, explorer!',style:TextStyle(fontSize:22,fontWeight:FontWeight.w900,color:green)),
+        Text("Ready for a word adventure?",style:TextStyle(fontSize:12,color:Color(0xFF65715B))),
+      ])),
+      Container(padding:const EdgeInsets.symmetric(vertical:7,horizontal:9),
+       decoration:BoxDecoration(color:const Color(0xFFE7F5CC),borderRadius:BorderRadius.circular(14)),
+       child:Text(done.length.toString()+'/5',style:const TextStyle(color:green,fontWeight:FontWeight.w900))),
+    ])),
+    const SizedBox(height:13),
+    Expanded(child:ClipRRect(
+      borderRadius:BorderRadius.circular(30),
+      child:LayoutBuilder(builder:(context,layout)=>Stack(children:[
+        Positioned.fill(child:SvgPicture.asset('assets/scene/alphabet_garden.svg',fit:BoxFit.fill)),
+        Positioned(top:12,left:14,right:14,child:Container(
+          padding:const EdgeInsets.symmetric(vertical:9,horizontal:12),
+          decoration:BoxDecoration(color:const Color(0xF7FFFAE9),borderRadius:BorderRadius.circular(19)),
+          child:Column(children:[
+            const Text('Your Alphabet Trail',style:TextStyle(fontSize:19,fontWeight:FontWeight.w900,color:green)),
+            Text('Letter A • '+done.length.toString()+' of 5 words learned',
+              style:const TextStyle(fontSize:12,fontWeight:FontWeight.w700,color:Color(0xFF577F4A))),
+          ]),
+        )),
+        for(int i=0;i<5;i++) Positioned(
+          left:layout.maxWidth*[.24,.75,.26,.73,.29][i]-34,
+          top:layout.maxHeight*[.23,.41,.54,.67,.78][i]-34,
+          child:Semantics(label:'Letter '+String.fromCharCode(65+i)+(i==0?' ready':' locked'),
+            child:GestureDetector(onTap:i==0?()=>start(
+              List.generate(unlocked,(x)=>x).where((x)=>!done.contains(x)).firstOrNull??0):null,
+              child:Container(width:68,height:68,
+                decoration:BoxDecoration(shape:BoxShape.circle,
+                  color:i==0?const Color(0xFFFFDB75):const Color(0xFFFFFDF2),
+                  border:Border.all(color:Colors.white,width:5),
+                  boxShadow:const [BoxShadow(color:Color(0x3B416932),blurRadius:9,offset:Offset(0,4))]),
+                child:Stack(alignment:Alignment.center,children:[
+                  Text(String.fromCharCode(65+i),style:TextStyle(
+                    fontSize:31,fontWeight:FontWeight.w900,
+                    color:i==0?const Color(0xFFA85B27):const Color(0xFF797A70))),
+                  if(i>0)const Positioned(right:3,bottom:3,
+                    child:Icon(Icons.lock_rounded,size:13,color:Color(0xFF9E9E8D))),
+                  if(i==0)const Positioned(right:0,top:0,
+                    child:Icon(Icons.auto_awesome_rounded,size:17,color:Color(0xFFED9B36))),
+                ]),
+              ),
+            ),
+          ),
+        ),
+      ])),
+    )),
+    const SizedBox(height:10),
+    button('Continue Learning  ➜',()=>start(
+      List.generate(unlocked,(i)=>i).where((i)=>!done.contains(i)).firstOrNull??0),
+      color:const Color(0xFFEF856C)),
+    const SizedBox(height:11),
+    card(InkWell(onTap:()=>setState(()=>tab=2),child:const Row(children:[
+      Container(width:52,height:52,
+        decoration:BoxDecoration(color:Color(0xFFFFE6B0),borderRadius:BorderRadius.all(Radius.circular(16))),
+        child:Icon(Icons.sports_esports_rounded,size:35,color:Color(0xFFED9B35))),
+      SizedBox(width:12),
+      Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
+        Text('Games & Friends',style:TextStyle(fontSize:17,fontWeight:FontWeight.w900,color:green)),
+        Text('Play with words you know!',style:TextStyle(fontSize:12,color:Color(0xFF65715B))),
+      ])),
+      Icon(Icons.chevron_right_rounded,color:green),
     ]))),
-    button('Continue ➜',()=>start(List.generate(unlocked,(i)=>i).where((i)=>!done.contains(i)).firstOrNull??0),color:const Color(0xffef856c)),
-   ]))),
-   const SizedBox(height:12),card(InkWell(onTap:()=>setState(()=>tab=2),child:const Row(children:[Text('🎮',style:TextStyle(fontSize:34)),SizedBox(width:12),Expanded(child:Text('Games\nPlay and practice!',style:TextStyle(fontSize:16,fontWeight:FontWeight.bold,color:green))),Icon(Icons.chevron_right)]))),
   ]);
  }
  Widget lesson()=>switch(step){
@@ -107,19 +171,4 @@ class _HomeState extends State<Home>{
   ]),
   _=>Column(mainAxisAlignment:MainAxisAlignment.center,children:[const Text('⭐ ⭐ ⭐',style:TextStyle(fontSize:44)),const SizedBox(height:18),heading('Great job!'),const SizedBox(height:20),art(word,size:180),const SizedBox(height:25),Text('You learned '+current.name+'!',style:const TextStyle(fontSize:20,color:green)),const SizedBox(height:40),button('Next word ➜',next)]),
  };
-}
-class AntPainter extends CustomPainter{
- @override void paint(Canvas c,Size size){
-  c.save();c.scale(size.width/200,size.height/200);
-  final line=Paint()..color=const Color(0xff96341f)..strokeWidth=4..style=PaintingStyle.stroke..strokeCap=StrokeCap.round;
-  for(final x in [98.0,126.0,157.0]){c.drawLine(Offset(x,118),Offset(x-21,169),line);c.drawLine(Offset(x+3,118),Offset(x+22,169),line);}
-  c.drawOval(const Rect.fromLTWH(95,80,87,72),Paint()..color=const Color(0xffd35233));
-  c.drawLine(const Offset(72,70),const Offset(61,30),line);c.drawLine(const Offset(108,70),const Offset(125,28),line);
-  c.drawCircle(const Offset(61,30),6,Paint()..color=const Color(0xffe86b48));c.drawCircle(const Offset(125,28),6,Paint()..color=const Color(0xffe86b48));
-  c.drawCircle(const Offset(85,105),51,Paint()..color=const Color(0xfff37f50));
-  for(final x in [61.0,101.0]){c.drawOval(Rect.fromLTWH(x,83,24,34),Paint()..color=Colors.white);c.drawCircle(Offset(x+14,100),9,Paint()..color=const Color(0xff36221b));}
-  final smile=Path()..moveTo(75,131)..quadraticBezierTo(88,149,103,131);c.drawPath(smile,line);
-  c.restore();
- }
- @override bool shouldRepaint(covariant CustomPainter oldDelegate)=>false;
 }
