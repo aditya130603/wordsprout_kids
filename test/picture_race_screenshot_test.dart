@@ -131,6 +131,38 @@ void main(){
       findsNothing);
   });
 
+  testWidgets('offline practice actually opens game without live server',
+    (tester)async{
+    tester.view.physicalSize=const Size(390,844);
+    tester.view.devicePixelRatio=1;
+    addTearDown((){
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
+    });
+    await tester.pumpWidget(MaterialApp(home:PictureRaceScreen(
+      catalog:catalog,furthestLetter:0,learnedWordIndices:const [1])));
+    await tester.pumpAndSettle();
+    final start=find.text('Try spelling practice offline');
+    await tester.ensureVisible(start);
+    await tester.tap(start);
+    await tester.pumpAndSettle();
+    expect(find.text('WHAT’S THIS PICTURE?'),findsOneWidget);
+    expect(find.text('Make the word • 5 letters'),findsOneWidget);
+    // Locate one genuine extra tile, not a required spelling letter.
+    var extraIndex=-1;
+    for(var i=0;i<8;i++){
+      final key=find.byKey(ValueKey('race_tile_'+i.toString()));
+      final value=tester.widget<Text>(
+        find.descendant(of:key,matching:find.byType(Text)).first).data!;
+      if(!'APPLE'.contains(value)){extraIndex=i;break;}
+    }
+    expect(extraIndex,isNot(-1));
+    await tester.tap(find.byKey(ValueKey('race_tile_'+extraIndex.toString())));
+    await tester.pumpAndSettle();
+    expect(find.text('Red letter? It does not fit here! Tap it to change.'),
+      findsOneWidget);
+  });
+
   testWidgets('real Flutter winner and 100 point scoreboard',(tester)async{
     await render(tester,const RaceSnapshot(
       code:'H8Q3KT',state:'round_complete',round:3,total:5,
