@@ -1,0 +1,867 @@
+{
+  "schema_version": 1,
+  "content_version": "2026.11.02.grammar.1",
+  "age_range": "4-6",
+  "lesson_count": 26,
+  "groups": [
+    {
+      "id": "questions",
+      "title": "Question Detectives",
+      "description": "Ask what, who, where, when, why and how"
+    },
+    {
+      "id": "positions",
+      "title": "Where Is It?",
+      "description": "Find things around, above, and below"
+    },
+    {
+      "id": "pointing",
+      "title": "Here & There",
+      "description": "Talk about things close and far"
+    },
+    {
+      "id": "time_places",
+      "title": "Time & Places",
+      "description": "Learn at, before, after and now"
+    },
+    {
+      "id": "little_words",
+      "title": "Little Words",
+      "description": "Choose a or an"
+    }
+  ],
+  "lessons": [
+    {
+      "id": "what",
+      "group": "questions",
+      "title": "What",
+      "visual": "bag",
+      "teach": "We use WHAT to ask about a thing.",
+      "example": "What is in the bag?",
+      "challenge": {
+        "prompt": "You see a surprise in a bag. Which word asks about the thing?",
+        "options": [
+          "What",
+          "When",
+          "Where",
+          "Why"
+        ],
+        "answer": 0,
+        "explain": "WHAT asks about things."
+      },
+      "transfer": {
+        "prompt": "___ is your favourite toy?",
+        "options": [
+          "Where",
+          "What",
+          "Who",
+          "When"
+        ],
+        "answer": 1,
+        "explain": "Ask WHAT to name a thing."
+      },
+      "sentence": "What is in the bag?",
+      "hint": "Put the words in order to make: What is …"
+    },
+    {
+      "id": "who",
+      "group": "questions",
+      "title": "Who",
+      "visual": "child",
+      "teach": "We use WHO to ask about a person.",
+      "example": "Who is at the door?",
+      "challenge": {
+        "prompt": "A friend is at the door. Which word asks about the person?",
+        "options": [
+          "When",
+          "Who",
+          "How",
+          "What"
+        ],
+        "answer": 1,
+        "explain": "WHO asks about people."
+      },
+      "transfer": {
+        "prompt": "___ is singing the song?",
+        "options": [
+          "Who",
+          "What",
+          "Where",
+          "Why"
+        ],
+        "answer": 0,
+        "explain": "WHO asks which person is singing."
+      },
+      "sentence": "Who is at the door?",
+      "hint": "Put the words in order to make: Who is …"
+    },
+    {
+      "id": "where",
+      "group": "questions",
+      "title": "Where",
+      "visual": "house",
+      "teach": "We use WHERE to ask about a place.",
+      "example": "Where is my ball?",
+      "challenge": {
+        "prompt": "Your ball is missing. Which word asks about its place?",
+        "options": [
+          "Why",
+          "Where",
+          "Who",
+          "When"
+        ],
+        "answer": 1,
+        "explain": "WHERE asks about places."
+      },
+      "transfer": {
+        "prompt": "___ do you live?",
+        "options": [
+          "What",
+          "How",
+          "Where",
+          "Who"
+        ],
+        "answer": 2,
+        "explain": "WHERE asks about the place you live."
+      },
+      "sentence": "Where is my ball?",
+      "hint": "Put the words in order to make: Where is …"
+    },
+    {
+      "id": "when",
+      "group": "questions",
+      "title": "When",
+      "visual": "clock",
+      "teach": "We use WHEN to ask about time.",
+      "example": "When do we eat lunch?",
+      "challenge": {
+        "prompt": "You want to know the time of lunch. What do you ask?",
+        "options": [
+          "Where",
+          "Who",
+          "When",
+          "What"
+        ],
+        "answer": 2,
+        "explain": "WHEN asks about time."
+      },
+      "transfer": {
+        "prompt": "___ does school start?",
+        "options": [
+          "Why",
+          "What",
+          "Who",
+          "When"
+        ],
+        "answer": 3,
+        "explain": "WHEN is used for a time question."
+      },
+      "sentence": "When do we eat lunch?",
+      "hint": "Put the words in order to make: When do …"
+    },
+    {
+      "id": "why",
+      "group": "questions",
+      "title": "Why",
+      "visual": "rain",
+      "teach": "We use WHY to ask for a reason.",
+      "example": "Why is the ground wet?",
+      "challenge": {
+        "prompt": "You want to know the reason the ground is wet.",
+        "options": [
+          "What",
+          "When",
+          "Why",
+          "Where"
+        ],
+        "answer": 2,
+        "explain": "WHY asks for a reason."
+      },
+      "transfer": {
+        "prompt": "___ are you wearing a raincoat?",
+        "options": [
+          "Who",
+          "Where",
+          "Why",
+          "When"
+        ],
+        "answer": 2,
+        "explain": "WHY asks for the reason."
+      },
+      "sentence": "Why is the ground wet?",
+      "hint": "Put the words in order to make: Why is …"
+    },
+    {
+      "id": "how",
+      "group": "questions",
+      "title": "How",
+      "visual": "kite",
+      "teach": "We use HOW to ask about the way to do something.",
+      "example": "How do I fly a kite?",
+      "challenge": {
+        "prompt": "You want to learn the way to fly a kite.",
+        "options": [
+          "How",
+          "Who",
+          "When",
+          "Where"
+        ],
+        "answer": 0,
+        "explain": "HOW asks about the way something happens."
+      },
+      "transfer": {
+        "prompt": "___ do we make a paper boat?",
+        "options": [
+          "When",
+          "How",
+          "What",
+          "Who"
+        ],
+        "answer": 1,
+        "explain": "HOW asks how to make something."
+      },
+      "sentence": "How do I fly a kite?",
+      "hint": "Put the words in order to make: How do …"
+    },
+    {
+      "id": "in",
+      "group": "positions",
+      "title": "In",
+      "visual": "in",
+      "teach": "IN means inside something.",
+      "example": "The ball is in the box.",
+      "challenge": {
+        "prompt": "Look at the ball. Where is it?",
+        "options": [
+          "On the box",
+          "In the box",
+          "Behind the box",
+          "Near the box"
+        ],
+        "answer": 1,
+        "explain": "The ball is inside the box."
+      },
+      "transfer": {
+        "prompt": "The teddy is ___ the bag.",
+        "options": [
+          "on",
+          "above",
+          "in",
+          "under"
+        ],
+        "answer": 2,
+        "explain": "IN means inside."
+      },
+      "sentence": "The ball is in the box.",
+      "hint": "Put the words in order to make: The ball …"
+    },
+    {
+      "id": "on",
+      "group": "positions",
+      "title": "On",
+      "visual": "on",
+      "teach": "ON means touching the top of something.",
+      "example": "The ball is on the box.",
+      "challenge": {
+        "prompt": "Look at the ball. Where is it?",
+        "options": [
+          "Under the box",
+          "In the box",
+          "On the box",
+          "Behind the box"
+        ],
+        "answer": 2,
+        "explain": "The ball touches the top."
+      },
+      "transfer": {
+        "prompt": "The book is ___ the table.",
+        "options": [
+          "on",
+          "between",
+          "below",
+          "behind"
+        ],
+        "answer": 0,
+        "explain": "The book touches the table."
+      },
+      "sentence": "The ball is on the box.",
+      "hint": "Put the words in order to make: The ball …"
+    },
+    {
+      "id": "under",
+      "group": "positions",
+      "title": "Under",
+      "visual": "under",
+      "teach": "UNDER means beneath something.",
+      "example": "The ball is under the table.",
+      "challenge": {
+        "prompt": "Look at the ball. Where is it?",
+        "options": [
+          "On the table",
+          "Under the table",
+          "In the table",
+          "Above the table"
+        ],
+        "answer": 1,
+        "explain": "The ball is directly beneath the table."
+      },
+      "transfer": {
+        "prompt": "The puppy sleeps ___ the chair.",
+        "options": [
+          "near",
+          "on",
+          "under",
+          "above"
+        ],
+        "answer": 2,
+        "explain": "UNDER means beneath."
+      },
+      "sentence": "The ball is under the table.",
+      "hint": "Put the words in order to make: The ball …"
+    },
+    {
+      "id": "above",
+      "group": "positions",
+      "title": "Above",
+      "visual": "above",
+      "teach": "ABOVE means higher than something.",
+      "example": "The bird is above the tree.",
+      "challenge": {
+        "prompt": "Where is the bird in the picture?",
+        "options": [
+          "Below the tree",
+          "In the tree",
+          "Behind the tree",
+          "Above the tree"
+        ],
+        "answer": 3,
+        "explain": "The bird flies higher than the tree."
+      },
+      "transfer": {
+        "prompt": "The cloud is ___ the house.",
+        "options": [
+          "under",
+          "above",
+          "in",
+          "on"
+        ],
+        "answer": 1,
+        "explain": "ABOVE means higher than."
+      },
+      "sentence": "The bird is above the tree.",
+      "hint": "Put the words in order to make: The bird …"
+    },
+    {
+      "id": "below",
+      "group": "positions",
+      "title": "Below",
+      "visual": "below",
+      "teach": "BELOW means lower than something.",
+      "example": "The toy is below the shelf.",
+      "challenge": {
+        "prompt": "Where is the toy?",
+        "options": [
+          "Above the shelf",
+          "Below the shelf",
+          "On the shelf",
+          "In the shelf"
+        ],
+        "answer": 1,
+        "explain": "The toy is lower than the shelf."
+      },
+      "transfer": {
+        "prompt": "The shoes are ___ the hanging coats.",
+        "options": [
+          "below",
+          "above",
+          "between",
+          "on"
+        ],
+        "answer": 0,
+        "explain": "BELOW means lower than."
+      },
+      "sentence": "The toy is below the shelf.",
+      "hint": "Put the words in order to make: The toy …"
+    },
+    {
+      "id": "next_to",
+      "group": "positions",
+      "title": "Next to",
+      "visual": "next_to",
+      "teach": "NEXT TO means right beside something.",
+      "example": "The cat is next to the box.",
+      "challenge": {
+        "prompt": "Where is the cat?",
+        "options": [
+          "Next to the box",
+          "Inside the box",
+          "Above the box",
+          "Behind the box"
+        ],
+        "answer": 0,
+        "explain": "The cat is beside the box."
+      },
+      "transfer": {
+        "prompt": "Sit ___ your friend.",
+        "options": [
+          "above",
+          "below",
+          "next to",
+          "behind"
+        ],
+        "answer": 2,
+        "explain": "NEXT TO means beside."
+      },
+      "sentence": "The cat is next to the box.",
+      "hint": "Put the words in order to make: The cat …"
+    },
+    {
+      "id": "between",
+      "group": "positions",
+      "title": "Between",
+      "visual": "between",
+      "teach": "BETWEEN means in the middle of two things.",
+      "example": "The ball is between two boxes.",
+      "challenge": {
+        "prompt": "Where is the ball?",
+        "options": [
+          "Behind both boxes",
+          "In the middle of two boxes",
+          "Above both boxes",
+          "Inside one box"
+        ],
+        "answer": 1,
+        "explain": "BETWEEN means in the middle."
+      },
+      "transfer": {
+        "prompt": "The girl stands ___ her two friends.",
+        "options": [
+          "on",
+          "under",
+          "between",
+          "above"
+        ],
+        "answer": 2,
+        "explain": "BETWEEN is used with two sides."
+      },
+      "sentence": "The ball is between two boxes.",
+      "hint": "Put the words in order to make: The ball …"
+    },
+    {
+      "id": "behind",
+      "group": "positions",
+      "title": "Behind",
+      "visual": "behind",
+      "teach": "BEHIND means at the back of something.",
+      "example": "The cat is behind the tree.",
+      "challenge": {
+        "prompt": "Where is the cat?",
+        "options": [
+          "In front of the tree",
+          "On the tree",
+          "Behind the tree",
+          "Above the tree"
+        ],
+        "answer": 2,
+        "explain": "The tree is in front of the cat."
+      },
+      "transfer": {
+        "prompt": "The child hides ___ the curtain.",
+        "options": [
+          "behind",
+          "above",
+          "on",
+          "in front of"
+        ],
+        "answer": 0,
+        "explain": "BEHIND means at the back."
+      },
+      "sentence": "The cat is behind the tree.",
+      "hint": "Put the words in order to make: The cat …"
+    },
+    {
+      "id": "in_front",
+      "group": "positions",
+      "title": "In front of",
+      "visual": "in_front",
+      "teach": "IN FRONT OF means on the forward side of something.",
+      "example": "The cat is in front of the tree.",
+      "challenge": {
+        "prompt": "Where is the cat?",
+        "options": [
+          "Behind the tree",
+          "In front of the tree",
+          "Above the tree",
+          "In the tree"
+        ],
+        "answer": 1,
+        "explain": "The cat can be seen before the tree."
+      },
+      "transfer": {
+        "prompt": "Stand ___ the class.",
+        "options": [
+          "in front of",
+          "behind",
+          "below",
+          "between"
+        ],
+        "answer": 0,
+        "explain": "IN FRONT OF means ahead of."
+      },
+      "sentence": "The cat is in front of the tree.",
+      "hint": "Put the words in order to make: The cat …"
+    },
+    {
+      "id": "near",
+      "group": "positions",
+      "title": "Near",
+      "visual": "near",
+      "teach": "NEAR means not far away.",
+      "example": "The tree is near the house.",
+      "challenge": {
+        "prompt": "Where is the tree?",
+        "options": [
+          "Far from the house",
+          "Near the house",
+          "Inside the house",
+          "Above the house"
+        ],
+        "answer": 1,
+        "explain": "The tree is close to the house."
+      },
+      "transfer": {
+        "prompt": "My school is ___ my home.",
+        "options": [
+          "far",
+          "behind",
+          "near",
+          "above"
+        ],
+        "answer": 2,
+        "explain": "NEAR means close."
+      },
+      "sentence": "The tree is near the house.",
+      "hint": "Put the words in order to make: The tree …"
+    },
+    {
+      "id": "here",
+      "group": "pointing",
+      "title": "Here",
+      "visual": "here",
+      "teach": "HERE means this place, close to me.",
+      "example": "My book is here.",
+      "challenge": {
+        "prompt": "A toy is beside you. What can you say?",
+        "options": [
+          "It is here",
+          "It is tomorrow",
+          "It is why",
+          "It is when"
+        ],
+        "answer": 0,
+        "explain": "HERE is close to the speaker."
+      },
+      "transfer": {
+        "prompt": "Come ___ and sit with me.",
+        "options": [
+          "there",
+          "here",
+          "above",
+          "behind"
+        ],
+        "answer": 1,
+        "explain": "HERE means near me."
+      },
+      "sentence": "My book is here.",
+      "hint": "Put the words in order to make: My book …"
+    },
+    {
+      "id": "there",
+      "group": "pointing",
+      "title": "There",
+      "visual": "there",
+      "teach": "THERE means that place, away from me.",
+      "example": "The kite is over there.",
+      "challenge": {
+        "prompt": "You point to a kite far away. What do you say?",
+        "options": [
+          "The kite is here",
+          "The kite is when",
+          "The kite is there",
+          "The kite is why"
+        ],
+        "answer": 2,
+        "explain": "THERE is away from the speaker."
+      },
+      "transfer": {
+        "prompt": "Look! The bus is over ___ .",
+        "options": [
+          "what",
+          "there",
+          "here",
+          "who"
+        ],
+        "answer": 1,
+        "explain": "THERE points to a far place."
+      },
+      "sentence": "The kite is over there.",
+      "hint": "Put the words in order to make: The kite …"
+    },
+    {
+      "id": "this",
+      "group": "pointing",
+      "title": "This",
+      "visual": "this",
+      "teach": "THIS points to one thing close to you.",
+      "example": "This is my red ball.",
+      "challenge": {
+        "prompt": "You hold a ball in your hands. Which word fits?",
+        "options": [
+          "That",
+          "These",
+          "This",
+          "Those"
+        ],
+        "answer": 2,
+        "explain": "THIS is one thing near you."
+      },
+      "transfer": {
+        "prompt": "___ apple in my hand is red.",
+        "options": [
+          "Those",
+          "This",
+          "That",
+          "They"
+        ],
+        "answer": 1,
+        "explain": "THIS points to one nearby thing."
+      },
+      "sentence": "This is my red ball.",
+      "hint": "Put the words in order to make: This is …"
+    },
+    {
+      "id": "that",
+      "group": "pointing",
+      "title": "That",
+      "visual": "that",
+      "teach": "THAT points to one thing far away.",
+      "example": "That is a tall tree.",
+      "challenge": {
+        "prompt": "You point to a tree far away. Which word fits?",
+        "options": [
+          "That",
+          "This",
+          "These",
+          "Here"
+        ],
+        "answer": 0,
+        "explain": "THAT is one thing farther away."
+      },
+      "transfer": {
+        "prompt": "___ kite in the sky is blue.",
+        "options": [
+          "This",
+          "These",
+          "Those",
+          "That"
+        ],
+        "answer": 3,
+        "explain": "THAT points to one faraway thing."
+      },
+      "sentence": "That is a tall tree.",
+      "hint": "Put the words in order to make: That is …"
+    },
+    {
+      "id": "at",
+      "group": "time_places",
+      "title": "At",
+      "visual": "at",
+      "teach": "AT tells an exact place or a time.",
+      "example": "We are at school.",
+      "challenge": {
+        "prompt": "You are sitting in your classroom. What can you say?",
+        "options": [
+          "I am at school",
+          "I am above school",
+          "I am below school",
+          "I am why school"
+        ],
+        "answer": 0,
+        "explain": "AT can name your location."
+      },
+      "transfer": {
+        "prompt": "We meet ___ five o'clock.",
+        "options": [
+          "below",
+          "at",
+          "here",
+          "behind"
+        ],
+        "answer": 1,
+        "explain": "AT is used with a clock time."
+      },
+      "sentence": "We are at school.",
+      "hint": "Put the words in order to make: We are …"
+    },
+    {
+      "id": "before",
+      "group": "time_places",
+      "title": "Before",
+      "visual": "before",
+      "teach": "BEFORE means earlier than something.",
+      "example": "We wash hands before lunch.",
+      "challenge": {
+        "prompt": "What should you do first?",
+        "options": [
+          "Eat, then wash hands",
+          "Wash hands before eating",
+          "Sleep while eating",
+          "Run after eating"
+        ],
+        "answer": 1,
+        "explain": "BEFORE means earlier."
+      },
+      "transfer": {
+        "prompt": "Brush your teeth ___ bed.",
+        "options": [
+          "after",
+          "here",
+          "before",
+          "above"
+        ],
+        "answer": 2,
+        "explain": "We brush before bed."
+      },
+      "sentence": "We wash hands before lunch.",
+      "hint": "Put the words in order to make: We wash …"
+    },
+    {
+      "id": "after",
+      "group": "time_places",
+      "title": "After",
+      "visual": "after",
+      "teach": "AFTER means later than something.",
+      "example": "We play after lunch.",
+      "challenge": {
+        "prompt": "You eat lunch and then go outside. When do you play?",
+        "options": [
+          "Before lunch",
+          "After lunch",
+          "Above lunch",
+          "Inside lunch"
+        ],
+        "answer": 1,
+        "explain": "AFTER means later."
+      },
+      "transfer": {
+        "prompt": "I put away my toys ___ playing.",
+        "options": [
+          "before",
+          "after",
+          "in",
+          "on"
+        ],
+        "answer": 1,
+        "explain": "AFTER is later."
+      },
+      "sentence": "We play after lunch.",
+      "hint": "Put the words in order to make: We play …"
+    },
+    {
+      "id": "now",
+      "group": "time_places",
+      "title": "Now",
+      "visual": "now",
+      "teach": "NOW means at this moment.",
+      "example": "I am reading now.",
+      "challenge": {
+        "prompt": "You are reading right this moment. What time word fits?",
+        "options": [
+          "Yesterday",
+          "Tomorrow",
+          "Now",
+          "Before"
+        ],
+        "answer": 2,
+        "explain": "NOW means at this very moment."
+      },
+      "transfer": {
+        "prompt": "Please listen ___ .",
+        "options": [
+          "after",
+          "then",
+          "now",
+          "yesterday"
+        ],
+        "answer": 2,
+        "explain": "NOW means this moment."
+      },
+      "sentence": "I am reading now.",
+      "hint": "Put the words in order to make: I am …"
+    },
+    {
+      "id": "a",
+      "group": "little_words",
+      "title": "A",
+      "visual": "apple",
+      "teach": "We put A before one thing that starts with a consonant sound.",
+      "example": "I see a ball.",
+      "challenge": {
+        "prompt": "Which is the correct phrase?",
+        "options": [
+          "a ball",
+          "an ball",
+          "the an ball",
+          "ball a"
+        ],
+        "answer": 0,
+        "explain": "BALL starts with a /b/ sound, so we say a ball."
+      },
+      "transfer": {
+        "prompt": "She has ___ pet cat.",
+        "options": [
+          "an",
+          "a",
+          "at",
+          "in"
+        ],
+        "answer": 1,
+        "explain": "A comes before the /p/ sound in pet."
+      },
+      "sentence": "I see a ball.",
+      "hint": "Put the words in order to make: I see …"
+    },
+    {
+      "id": "an",
+      "group": "little_words",
+      "title": "An",
+      "visual": "apple",
+      "teach": "We put AN before one thing that starts with a vowel sound.",
+      "example": "I see an apple.",
+      "challenge": {
+        "prompt": "Which is the correct phrase?",
+        "options": [
+          "a apple",
+          "an apple",
+          "apple a",
+          "apple an"
+        ],
+        "answer": 1,
+        "explain": "APPLE starts with a vowel sound, so we say an apple."
+      },
+      "transfer": {
+        "prompt": "He eats ___ egg.",
+        "options": [
+          "a",
+          "an",
+          "on",
+          "at"
+        ],
+        "answer": 1,
+        "explain": "EGG starts with a vowel sound."
+      },
+      "sentence": "I see an apple.",
+      "hint": "Put the words in order to make: I see …"
+    }
+  ]
+}
