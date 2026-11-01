@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'friends_api.dart';
+import '../family_settings.dart';
 import 'rewards.dart';
 
 const darkInk=Color(0xFF263F3F);
@@ -135,6 +136,7 @@ class _FriendsLeagueState extends State<_FriendsLeague> {
   final code=TextEditingController();
   LeagueBoard? board;
   bool connected=false;
+  bool enabled=true;
   bool busy=false;
   String? error;
 
@@ -144,7 +146,10 @@ class _FriendsLeagueState extends State<_FriendsLeague> {
   void dispose(){code.dispose();super.dispose();}
 
   Future<void> _refresh() async {
-    if(!api.configured)return;
+    final allowed=await FamilySettings.leagueEnabled();
+    if(!mounted)return;
+    setState(()=>enabled=allowed);
+    if(!allowed||!api.configured)return;
     setState((){busy=true;error=null;});
     try {
       final paired=await api.paired;
@@ -217,7 +222,11 @@ class _FriendsLeagueState extends State<_FriendsLeague> {
         child:Text(error!,style:const TextStyle(
           color:Color(0xFF9B5D44),fontSize:13))),
       const SizedBox(height:10),
-      if(!api.configured)_notice(
+      if(!enabled)_notice(
+        icon:Icons.shield_rounded,
+        title:'Friends League is switched off',
+        message:'Family Settings has disabled friend rankings and online scoring on this device. Grammar and story lessons still work offline.')
+      else if(!api.configured)_notice(
         icon:Icons.cloud_off_rounded,
         title:'Parent setup required',
         message:'The private league server has not been connected to this app build. Your badges and XP still work offline. No imaginary friends or scores are shown.')
@@ -261,6 +270,13 @@ class _FriendsLeagueState extends State<_FriendsLeague> {
           icon:const Icon(Icons.logout_rounded,size:17),
           label:const Text('Unlink this device')),
       ],
+      const SizedBox(height:12),
+      OutlinedButton.icon(
+        onPressed:()=>Navigator.push(context,MaterialPageRoute(
+          builder:(context)=>const FamilySettings())).then((_)=>_refresh()),
+        icon:const Icon(Icons.settings_rounded,size:18),
+        label:const Text('Family Settings'),
+        style:OutlinedButton.styleFrom(foregroundColor:darkInk)),
       const SizedBox(height:20),
       const Text('Fair-play rules',style:TextStyle(
         color:darkInk,fontSize:17,fontWeight:FontWeight.w900)),
