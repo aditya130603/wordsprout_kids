@@ -45,6 +45,8 @@ jobs:
         run: flutter test --update-goldens test/grammar_screenshot_test.dart
       - name: Render Picture Race screens
         run: flutter test --update-goldens test/picture_race_screenshot_test.dart
+      - name: Render random alphabet learning screens
+        run: flutter test --update-goldens test/real_random_alphabet_screenshot_test.dart
       - name: Run all tests
         run: flutter test
       - uses: actions/upload-artifact@v4
