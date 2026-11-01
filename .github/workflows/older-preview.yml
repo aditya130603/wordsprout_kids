@@ -40,7 +40,7 @@ jobs:
           path: test/screenshots/0[5-9]-*.png
           if-no-files-found: warn
       - name: Build installable older-track APK
-        run: flutter build apk --release
+        run: flutter build apk --release --dart-define=WORDSPROUT_CONTENT_URL="${{ vars.WORDSPROUT_CONTENT_URL }}"
       - uses: actions/upload-artifact@v4
         with:
           name: wordsprout-ages-6-12-preview-apk
