@@ -110,6 +110,21 @@ class FriendsApi {
   /// The server independently checks each answer against the authored
   /// curriculum and calculates points. Unverified offline XP never becomes
   /// public leaderboard XP; network failure never blocks a child from playing.
+  Future<Map<String,dynamic>> raceGet(String code) async {
+    if(!await FamilySettings.leagueEnabled()) {
+      throw StateError('Friends League is off in Family Settings');
+    }
+    return _request('GET','/v1/race/rooms/'+code);
+  }
+
+  Future<Map<String,dynamic>> racePost(String path,
+      Map<String,dynamic> payload) async {
+    if(!await FamilySettings.leagueEnabled()) {
+      throw StateError('Friends League is off in Family Settings');
+    }
+    return _request('POST','/v1/race/'+path,payload:payload);
+  }
+
   Future<void> submitAnswer({
     required String missionId,required String stage,
     required int index,required String response,
