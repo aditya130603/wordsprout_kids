@@ -103,6 +103,9 @@ void main(){
     await tester.pumpAndSettle();
     expect(find.text('Which word fits this situation?'),findsOneWidget);
     expect(find.text('curious'),findsOneWidget);
+    await tester.drag(find.byType(SingleChildScrollView).last,
+      const Offset(0,-240));
+    await tester.pumpAndSettle();
     await tester.tap(find.text('curious'));
     await tester.pumpAndSettle();
     expect(find.text('Continue'),findsOneWidget);
