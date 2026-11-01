@@ -1,0 +1,1699 @@
+{
+  "schema_version": 1,
+  "content_version": "2026.11.01.a-z-starter.1",
+  "scope": "Ages 4–6, A–Z starter, 5 per letter, X uses words containing X after two X-initial words",
+  "editorial_status": "candidate_for_human_review",
+  "word_count": 130,
+  "words": [
+    {
+      "id": "en_a_ant_001",
+      "letter": "A",
+      "word": "ANT",
+      "emoji": "custom",
+      "image": "assets/words/ant.svg",
+      "facts": [
+        "An ant is tiny.",
+        "Some ants can bite.",
+        "Ants live together in colonies."
+      ],
+      "pronunciation": "ANT"
+    },
+    {
+      "id": "en_a_apple_001",
+      "letter": "A",
+      "word": "APPLE",
+      "emoji": "custom",
+      "image": "assets/words/apple.svg",
+      "facts": [
+        "Apples grow on trees.",
+        "Apples can be red, green, or yellow.",
+        "You can eat an apple's skin."
+      ],
+      "pronunciation": "APPLE"
+    },
+    {
+      "id": "en_a_arm_001",
+      "letter": "A",
+      "word": "ARM",
+      "emoji": "custom",
+      "image": "assets/words/arm.svg",
+      "facts": [
+        "Most people have two arms.",
+        "Arms help you lift things.",
+        "Your elbow helps your arm bend."
+      ],
+      "pronunciation": "ARM"
+    },
+    {
+      "id": "en_a_axe_001",
+      "letter": "A",
+      "word": "AXE",
+      "emoji": "custom",
+      "image": "assets/words/axe.svg",
+      "facts": [
+        "An axe is a tool.",
+        "People use axes to chop wood.",
+        "An axe has a sharp blade."
+      ],
+      "pronunciation": "AXE"
+    },
+    {
+      "id": "en_a_arrow_001",
+      "letter": "A",
+      "word": "ARROW",
+      "emoji": "custom",
+      "image": "assets/words/arrow.svg",
+      "facts": [
+        "An arrow has a pointed tip.",
+        "An arrow can be shot from a bow.",
+        "Arrows on signs can show directions."
+      ],
+      "pronunciation": "ARROW"
+    },
+    {
+      "id": "en_b_ball_001",
+      "letter": "B",
+      "word": "BALL",
+      "emoji": "⚽",
+      "image": "assets/words/ball.svg",
+      "facts": [
+        "A ball can roll.",
+        "Some balls bounce.",
+        "People play games with balls."
+      ],
+      "pronunciation": "BALL"
+    },
+    {
+      "id": "en_b_bee_001",
+      "letter": "B",
+      "word": "BEE",
+      "emoji": "🐝",
+      "image": "assets/words/bee.svg",
+      "facts": [
+        "Bees have six legs.",
+        "Many bees visit flowers.",
+        "Some bees make honey."
+      ],
+      "pronunciation": "BEE"
+    },
+    {
+      "id": "en_b_bird_001",
+      "letter": "B",
+      "word": "BIRD",
+      "emoji": "🐦",
+      "image": "assets/words/bird.svg",
+      "facts": [
+        "Birds have feathers.",
+        "Birds have beaks.",
+        "Many birds can fly."
+      ],
+      "pronunciation": "BIRD"
+    },
+    {
+      "id": "en_b_book_001",
+      "letter": "B",
+      "word": "BOOK",
+      "emoji": "📖",
+      "image": "assets/words/book.svg",
+      "facts": [
+        "Books have pages.",
+        "Books can tell stories.",
+        "We can learn from books."
+      ],
+      "pronunciation": "BOOK"
+    },
+    {
+      "id": "en_b_boat_001",
+      "letter": "B",
+      "word": "BOAT",
+      "emoji": "🚤",
+      "image": "assets/words/boat.svg",
+      "facts": [
+        "Boats float on water.",
+        "People ride in boats.",
+        "Some boats have motors."
+      ],
+      "pronunciation": "BOAT"
+    },
+    {
+      "id": "en_c_cat_001",
+      "letter": "C",
+      "word": "CAT",
+      "emoji": "🐈",
+      "image": "assets/words/cat.svg",
+      "facts": [
+        "Cats have whiskers.",
+        "Cats use their paws to walk.",
+        "Cats often purr when relaxed."
+      ],
+      "pronunciation": "CAT"
+    },
+    {
+      "id": "en_c_car_001",
+      "letter": "C",
+      "word": "CAR",
+      "emoji": "🚗",
+      "image": "assets/words/car.svg",
+      "facts": [
+        "Cars have wheels.",
+        "Cars take people places.",
+        "Cars travel on roads."
+      ],
+      "pronunciation": "CAR"
+    },
+    {
+      "id": "en_c_cake_001",
+      "letter": "C",
+      "word": "CAKE",
+      "emoji": "🎂",
+      "image": "assets/words/cake.svg",
+      "facts": [
+        "Cake is a baked treat.",
+        "Some cakes have candles.",
+        "People often share cake at parties."
+      ],
+      "pronunciation": "CAKE"
+    },
+    {
+      "id": "en_c_cow_001",
+      "letter": "C",
+      "word": "COW",
+      "emoji": "🐄",
+      "image": "assets/words/cow.svg",
+      "facts": [
+        "Cows are large farm animals.",
+        "Cows eat grass.",
+        "Cows give milk."
+      ],
+      "pronunciation": "COW"
+    },
+    {
+      "id": "en_c_cup_001",
+      "letter": "C",
+      "word": "CUP",
+      "emoji": "🥤",
+      "image": "assets/words/cup.svg",
+      "facts": [
+        "A cup holds a drink.",
+        "Cups come in many sizes.",
+        "Some cups have handles."
+      ],
+      "pronunciation": "CUP"
+    },
+    {
+      "id": "en_d_dog_001",
+      "letter": "D",
+      "word": "DOG",
+      "emoji": "🐕",
+      "image": "assets/words/dog.svg",
+      "facts": [
+        "Dogs have a strong sense of smell.",
+        "Dogs can wag their tails.",
+        "Many dogs enjoy playing."
+      ],
+      "pronunciation": "DOG"
+    },
+    {
+      "id": "en_d_duck_001",
+      "letter": "D",
+      "word": "DUCK",
+      "emoji": "🦆",
+      "image": "assets/words/duck.svg",
+      "facts": [
+        "Ducks have webbed feet.",
+        "Ducks can swim.",
+        "Many ducks have flat bills."
+      ],
+      "pronunciation": "DUCK"
+    },
+    {
+      "id": "en_d_door_001",
+      "letter": "D",
+      "word": "DOOR",
+      "emoji": "🚪",
+      "image": "assets/words/door.svg",
+      "facts": [
+        "A door can open and close.",
+        "Doors help us enter rooms.",
+        "Some doors have handles."
+      ],
+      "pronunciation": "DOOR"
+    },
+    {
+      "id": "en_d_drum_001",
+      "letter": "D",
+      "word": "DRUM",
+      "emoji": "🥁",
+      "image": "assets/words/drum.svg",
+      "facts": [
+        "A drum is a musical instrument.",
+        "You tap a drum to make sounds.",
+        "Drums can make a beat."
+      ],
+      "pronunciation": "DRUM"
+    },
+    {
+      "id": "en_d_dolphin_001",
+      "letter": "D",
+      "word": "DOLPHIN",
+      "emoji": "🐬",
+      "image": "assets/words/dolphin.svg",
+      "facts": [
+        "Dolphins live in water.",
+        "Dolphins breathe air.",
+        "Dolphins can swim fast."
+      ],
+      "pronunciation": "DOLPHIN"
+    },
+    {
+      "id": "en_e_egg_001",
+      "letter": "E",
+      "word": "EGG",
+      "emoji": "🥚",
+      "image": "assets/words/egg.svg",
+      "facts": [
+        "Many birds lay eggs.",
+        "An eggshell protects what is inside.",
+        "Eggs can come in different sizes."
+      ],
+      "pronunciation": "EGG"
+    },
+    {
+      "id": "en_e_ear_001",
+      "letter": "E",
+      "word": "EAR",
+      "emoji": "👂",
+      "image": "assets/words/ear.svg",
+      "facts": [
+        "Your ears help you hear.",
+        "Most people have two ears.",
+        "Your ears help with balance."
+      ],
+      "pronunciation": "EAR"
+    },
+    {
+      "id": "en_e_eye_001",
+      "letter": "E",
+      "word": "EYE",
+      "emoji": "👁️",
+      "image": "assets/words/eye.svg",
+      "facts": [
+        "Your eyes help you see.",
+        "You blink to protect your eyes.",
+        "Most people have two eyes."
+      ],
+      "pronunciation": "EYE"
+    },
+    {
+      "id": "en_e_elephant_001",
+      "letter": "E",
+      "word": "ELEPHANT",
+      "emoji": "🐘",
+      "image": "assets/words/elephant.svg",
+      "facts": [
+        "Elephants have long trunks.",
+        "Elephants have big ears.",
+        "Elephants eat plants."
+      ],
+      "pronunciation": "ELEPHANT"
+    },
+    {
+      "id": "en_e_envelope_001",
+      "letter": "E",
+      "word": "ENVELOPE",
+      "emoji": "✉️",
+      "image": "assets/words/envelope.svg",
+      "facts": [
+        "An envelope can hold a letter.",
+        "You can seal an envelope.",
+        "Some envelopes carry mail."
+      ],
+      "pronunciation": "ENVELOPE"
+    },
+    {
+      "id": "en_f_fish_001",
+      "letter": "F",
+      "word": "FISH",
+      "emoji": "🐟",
+      "image": "assets/words/fish.svg",
+      "facts": [
+        "Fish live in water.",
+        "Most fish breathe with gills.",
+        "Many fish have fins."
+      ],
+      "pronunciation": "FISH"
+    },
+    {
+      "id": "en_f_frog_001",
+      "letter": "F",
+      "word": "FROG",
+      "emoji": "🐸",
+      "image": "assets/words/frog.svg",
+      "facts": [
+        "Frogs can jump.",
+        "Many frogs live near water.",
+        "Adult frogs usually have four legs."
+      ],
+      "pronunciation": "FROG"
+    },
+    {
+      "id": "en_f_flower_001",
+      "letter": "F",
+      "word": "FLOWER",
+      "emoji": "🌻",
+      "image": "assets/words/flower.svg",
+      "facts": [
+        "Flowers grow on many plants.",
+        "Some flowers have petals.",
+        "Bees visit some flowers."
+      ],
+      "pronunciation": "FLOWER"
+    },
+    {
+      "id": "en_f_fire_001",
+      "letter": "F",
+      "word": "FIRE",
+      "emoji": "🔥",
+      "image": "assets/words/fire.svg",
+      "facts": [
+        "Fire gives off heat.",
+        "Fire can burn things.",
+        "Only adults should handle fire."
+      ],
+      "pronunciation": "FIRE"
+    },
+    {
+      "id": "en_f_flag_001",
+      "letter": "F",
+      "word": "FLAG",
+      "emoji": "🚩",
+      "image": "assets/words/flag.svg",
+      "facts": [
+        "A flag is made from cloth or another material.",
+        "Many flags have colours or symbols.",
+        "Flags can wave in the wind."
+      ],
+      "pronunciation": "FLAG"
+    },
+    {
+      "id": "en_g_goat_001",
+      "letter": "G",
+      "word": "GOAT",
+      "emoji": "🐐",
+      "image": "assets/words/goat.svg",
+      "facts": [
+        "Goats have hooves.",
+        "Goats eat plants.",
+        "Some goats have horns."
+      ],
+      "pronunciation": "GOAT"
+    },
+    {
+      "id": "en_g_grapes_001",
+      "letter": "G",
+      "word": "GRAPES",
+      "emoji": "🍇",
+      "image": "assets/words/grapes.svg",
+      "facts": [
+        "Grapes grow in bunches.",
+        "Grapes can be green or purple.",
+        "Grapes are fruits."
+      ],
+      "pronunciation": "GRAPES"
+    },
+    {
+      "id": "en_g_gift_001",
+      "letter": "G",
+      "word": "GIFT",
+      "emoji": "🎁",
+      "image": "assets/words/gift.svg",
+      "facts": [
+        "A gift is something you give.",
+        "Gifts can be wrapped.",
+        "People give gifts to show kindness."
+      ],
+      "pronunciation": "GIFT"
+    },
+    {
+      "id": "en_g_guitar_001",
+      "letter": "G",
+      "word": "GUITAR",
+      "emoji": "🎸",
+      "image": "assets/words/guitar.svg",
+      "facts": [
+        "A guitar has strings.",
+        "You can strum a guitar.",
+        "A guitar makes music."
+      ],
+      "pronunciation": "GUITAR"
+    },
+    {
+      "id": "en_g_gorilla_001",
+      "letter": "G",
+      "word": "GORILLA",
+      "emoji": "🦍",
+      "image": "assets/words/gorilla.svg",
+      "facts": [
+        "Gorillas are large apes.",
+        "Gorillas eat mostly plants.",
+        "Gorillas live in family groups."
+      ],
+      "pronunciation": "GORILLA"
+    },
+    {
+      "id": "en_h_hat_001",
+      "letter": "H",
+      "word": "HAT",
+      "emoji": "🎩",
+      "image": "assets/words/hat.svg",
+      "facts": [
+        "A hat is worn on your head.",
+        "Some hats keep the sun off.",
+        "Hats come in different shapes."
+      ],
+      "pronunciation": "HAT"
+    },
+    {
+      "id": "en_h_horse_001",
+      "letter": "H",
+      "word": "HORSE",
+      "emoji": "🐎",
+      "image": "assets/words/horse.svg",
+      "facts": [
+        "Horses have hooves.",
+        "Horses can run.",
+        "Horses eat grass and hay."
+      ],
+      "pronunciation": "HORSE"
+    },
+    {
+      "id": "en_h_house_001",
+      "letter": "H",
+      "word": "HOUSE",
+      "emoji": "🏠",
+      "image": "assets/words/house.svg",
+      "facts": [
+        "A house is a place to live.",
+        "Many houses have windows.",
+        "Houses can have more than one room."
+      ],
+      "pronunciation": "HOUSE"
+    },
+    {
+      "id": "en_h_hand_001",
+      "letter": "H",
+      "word": "HAND",
+      "emoji": "✋",
+      "image": "assets/words/hand.svg",
+      "facts": [
+        "Your hand has fingers.",
+        "Hands help you hold things.",
+        "You use hands to clap."
+      ],
+      "pronunciation": "HAND"
+    },
+    {
+      "id": "en_h_heart_001",
+      "letter": "H",
+      "word": "HEART",
+      "emoji": "❤️",
+      "image": "assets/words/heart.svg",
+      "facts": [
+        "Your heart beats inside your chest.",
+        "Your heart pumps blood.",
+        "Your heart works when you sleep."
+      ],
+      "pronunciation": "HEART"
+    },
+    {
+      "id": "en_i_ice_001",
+      "letter": "I",
+      "word": "ICE",
+      "emoji": "🧊",
+      "image": "assets/words/ice.svg",
+      "facts": [
+        "Ice is frozen water.",
+        "Ice feels cold.",
+        "Ice melts when it gets warm."
+      ],
+      "pronunciation": "ICE"
+    },
+    {
+      "id": "en_i_igloo_001",
+      "letter": "I",
+      "word": "IGLOO",
+      "emoji": "custom",
+      "image": "assets/words/igloo.svg",
+      "facts": [
+        "An igloo can be built from snow blocks.",
+        "An igloo has an entrance.",
+        "Its snow walls can help keep out wind."
+      ],
+      "pronunciation": "IGLOO"
+    },
+    {
+      "id": "en_i_insect_001",
+      "letter": "I",
+      "word": "INSECT",
+      "emoji": "🐞",
+      "image": "assets/words/insect.svg",
+      "facts": [
+        "Insects have six legs.",
+        "Many insects have antennae.",
+        "Ants and bees are insects."
+      ],
+      "pronunciation": "INSECT"
+    },
+    {
+      "id": "en_i_island_001",
+      "letter": "I",
+      "word": "ISLAND",
+      "emoji": "🏝️",
+      "image": "assets/words/island.svg",
+      "facts": [
+        "An island has water all around it.",
+        "Some islands have trees.",
+        "People can live on islands."
+      ],
+      "pronunciation": "ISLAND"
+    },
+    {
+      "id": "en_i_iron_001",
+      "letter": "I",
+      "word": "IRON",
+      "emoji": "custom",
+      "image": "assets/words/iron.svg",
+      "facts": [
+        "A clothes iron smooths wrinkles.",
+        "An iron can get very hot.",
+        "Only an adult should use a hot iron."
+      ],
+      "pronunciation": "IRON"
+    },
+    {
+      "id": "en_j_jar_001",
+      "letter": "J",
+      "word": "JAR",
+      "emoji": "🫙",
+      "image": "assets/words/jar.svg",
+      "facts": [
+        "A jar is a container.",
+        "Many jars have lids.",
+        "You can keep food in clean jars."
+      ],
+      "pronunciation": "JAR"
+    },
+    {
+      "id": "en_j_juice_001",
+      "letter": "J",
+      "word": "JUICE",
+      "emoji": "🧃",
+      "image": "assets/words/juice.svg",
+      "facts": [
+        "Juice is a drink.",
+        "Some juice comes from fruit.",
+        "Juice can be sweet or sour."
+      ],
+      "pronunciation": "JUICE"
+    },
+    {
+      "id": "en_j_jacket_001",
+      "letter": "J",
+      "word": "JACKET",
+      "emoji": "🧥",
+      "image": "assets/words/jacket.svg",
+      "facts": [
+        "A jacket is worn over clothes.",
+        "Some jackets have zips.",
+        "A jacket can help keep you warm."
+      ],
+      "pronunciation": "JACKET"
+    },
+    {
+      "id": "en_j_jellyfish_001",
+      "letter": "J",
+      "word": "JELLYFISH",
+      "emoji": "🪼",
+      "image": "assets/words/jellyfish.svg",
+      "facts": [
+        "Jellyfish live in the sea.",
+        "Jellyfish have soft bodies.",
+        "Some jellyfish can sting."
+      ],
+      "pronunciation": "JELLYFISH"
+    },
+    {
+      "id": "en_j_jet_001",
+      "letter": "J",
+      "word": "JET",
+      "emoji": "🛩️",
+      "image": "assets/words/jet.svg",
+      "facts": [
+        "A jet is a kind of aircraft.",
+        "Jet engines push it forward.",
+        "Many jets fly high in the sky."
+      ],
+      "pronunciation": "JET"
+    },
+    {
+      "id": "en_k_kite_001",
+      "letter": "K",
+      "word": "KITE",
+      "emoji": "🪁",
+      "image": "assets/words/kite.svg",
+      "facts": [
+        "A kite flies in the wind.",
+        "Many kites have a string.",
+        "Some kites have long tails."
+      ],
+      "pronunciation": "KITE"
+    },
+    {
+      "id": "en_k_key_001",
+      "letter": "K",
+      "word": "KEY",
+      "emoji": "🔑",
+      "image": "assets/words/key.svg",
+      "facts": [
+        "A key can open a lock.",
+        "Keys come in different shapes.",
+        "Keep your house key safe."
+      ],
+      "pronunciation": "KEY"
+    },
+    {
+      "id": "en_k_koala_001",
+      "letter": "K",
+      "word": "KOALA",
+      "emoji": "🐨",
+      "image": "assets/words/koala.svg",
+      "facts": [
+        "Koalas live in Australia.",
+        "Koalas eat eucalyptus leaves.",
+        "Koalas spend lots of time in trees."
+      ],
+      "pronunciation": "KOALA"
+    },
+    {
+      "id": "en_k_kangaroo_001",
+      "letter": "K",
+      "word": "KANGAROO",
+      "emoji": "🦘",
+      "image": "assets/words/kangaroo.svg",
+      "facts": [
+        "Kangaroos can hop.",
+        "A mother kangaroo has a pouch.",
+        "Kangaroos live in Australia."
+      ],
+      "pronunciation": "KANGAROO"
+    },
+    {
+      "id": "en_k_kiwi_001",
+      "letter": "K",
+      "word": "KIWI",
+      "emoji": "🥝",
+      "image": "assets/words/kiwi.svg",
+      "facts": [
+        "Kiwi fruit has fuzzy brown skin.",
+        "A kiwi is green inside.",
+        "Kiwi fruit has tiny black seeds."
+      ],
+      "pronunciation": "KIWI"
+    },
+    {
+      "id": "en_l_lion_001",
+      "letter": "L",
+      "word": "LION",
+      "emoji": "🦁",
+      "image": "assets/words/lion.svg",
+      "facts": [
+        "Lions are big cats.",
+        "Many male lions have manes.",
+        "Lions live in groups called prides."
+      ],
+      "pronunciation": "LION"
+    },
+    {
+      "id": "en_l_leaf_001",
+      "letter": "L",
+      "word": "LEAF",
+      "emoji": "🍃",
+      "image": "assets/words/leaf.svg",
+      "facts": [
+        "Leaves grow on plants.",
+        "Many leaves are green.",
+        "Leaves help plants make food."
+      ],
+      "pronunciation": "LEAF"
+    },
+    {
+      "id": "en_l_lemon_001",
+      "letter": "L",
+      "word": "LEMON",
+      "emoji": "🍋",
+      "image": "assets/words/lemon.svg",
+      "facts": [
+        "A lemon is a fruit.",
+        "Lemons are usually yellow when ripe.",
+        "Lemons taste sour."
+      ],
+      "pronunciation": "LEMON"
+    },
+    {
+      "id": "en_l_ladder_001",
+      "letter": "L",
+      "word": "LADDER",
+      "emoji": "🪜",
+      "image": "assets/words/ladder.svg",
+      "facts": [
+        "A ladder has steps called rungs.",
+        "Ladders help people reach high places.",
+        "Only grown-ups should climb tall ladders."
+      ],
+      "pronunciation": "LADDER"
+    },
+    {
+      "id": "en_l_lobster_001",
+      "letter": "L",
+      "word": "LOBSTER",
+      "emoji": "🦞",
+      "image": "assets/words/lobster.svg",
+      "facts": [
+        "Lobsters live in the sea.",
+        "Lobsters have hard shells.",
+        "Many lobsters have large claws."
+      ],
+      "pronunciation": "LOBSTER"
+    },
+    {
+      "id": "en_m_moon_001",
+      "letter": "M",
+      "word": "MOON",
+      "emoji": "🌙",
+      "image": "assets/words/moon.svg",
+      "facts": [
+        "The Moon moves around Earth.",
+        "The Moon shines by reflecting sunlight.",
+        "The Moon looks different across the month."
+      ],
+      "pronunciation": "MOON"
+    },
+    {
+      "id": "en_m_mouse_001",
+      "letter": "M",
+      "word": "MOUSE",
+      "emoji": "🐁",
+      "image": "assets/words/mouse.svg",
+      "facts": [
+        "A mouse is a small mammal.",
+        "Mice have long tails.",
+        "Mice use whiskers to feel nearby things."
+      ],
+      "pronunciation": "MOUSE"
+    },
+    {
+      "id": "en_m_monkey_001",
+      "letter": "M",
+      "word": "MONKEY",
+      "emoji": "🐒",
+      "image": "assets/words/monkey.svg",
+      "facts": [
+        "Many monkeys climb trees.",
+        "Monkeys use their hands to hold food.",
+        "Monkeys live in different places around the world."
+      ],
+      "pronunciation": "MONKEY"
+    },
+    {
+      "id": "en_m_mango_001",
+      "letter": "M",
+      "word": "MANGO",
+      "emoji": "🥭",
+      "image": "assets/words/mango.svg",
+      "facts": [
+        "A mango is a fruit.",
+        "Mangoes have one large seed.",
+        "Ripe mangoes can taste sweet."
+      ],
+      "pronunciation": "MANGO"
+    },
+    {
+      "id": "en_m_milk_001",
+      "letter": "M",
+      "word": "MILK",
+      "emoji": "🥛",
+      "image": "assets/words/milk.svg",
+      "facts": [
+        "Milk is a drink.",
+        "Milk contains calcium.",
+        "Some milk comes from cows."
+      ],
+      "pronunciation": "MILK"
+    },
+    {
+      "id": "en_n_nest_001",
+      "letter": "N",
+      "word": "NEST",
+      "emoji": "🪺",
+      "image": "assets/words/nest.svg",
+      "facts": [
+        "Many birds build nests.",
+        "Some nests are made from twigs.",
+        "Birds may lay eggs in nests."
+      ],
+      "pronunciation": "NEST"
+    },
+    {
+      "id": "en_n_nose_001",
+      "letter": "N",
+      "word": "NOSE",
+      "emoji": "👃",
+      "image": "assets/words/nose.svg",
+      "facts": [
+        "Your nose helps you smell.",
+        "Your nose helps you breathe.",
+        "You have two nostrils."
+      ],
+      "pronunciation": "NOSE"
+    },
+    {
+      "id": "en_n_net_001",
+      "letter": "N",
+      "word": "NET",
+      "emoji": "🥅",
+      "image": "assets/words/net.svg",
+      "facts": [
+        "A net has holes in it.",
+        "Nets are made from connected strands.",
+        "Some sports use nets."
+      ],
+      "pronunciation": "NET"
+    },
+    {
+      "id": "en_n_needle_001",
+      "letter": "N",
+      "word": "NEEDLE",
+      "emoji": "🪡",
+      "image": "assets/words/needle.svg",
+      "facts": [
+        "A sewing needle is thin.",
+        "A needle has a small hole for thread.",
+        "Sharp needles are for grown-ups."
+      ],
+      "pronunciation": "NEEDLE"
+    },
+    {
+      "id": "en_n_note_001",
+      "letter": "N",
+      "word": "NOTE",
+      "emoji": "🎵",
+      "image": "assets/words/note.svg",
+      "facts": [
+        "A musical note shows a sound.",
+        "Notes can be high or low.",
+        "Music is made from notes."
+      ],
+      "pronunciation": "NOTE"
+    },
+    {
+      "id": "en_o_owl_001",
+      "letter": "O",
+      "word": "OWL",
+      "emoji": "🦉",
+      "image": "assets/words/owl.svg",
+      "facts": [
+        "Owls are birds.",
+        "Many owls hunt at night.",
+        "Owls can turn their heads far around."
+      ],
+      "pronunciation": "OWL"
+    },
+    {
+      "id": "en_o_orange_001",
+      "letter": "O",
+      "word": "ORANGE",
+      "emoji": "🍊",
+      "image": "assets/words/orange.svg",
+      "facts": [
+        "An orange is a fruit.",
+        "Oranges have peels.",
+        "Oranges are often juicy."
+      ],
+      "pronunciation": "ORANGE"
+    },
+    {
+      "id": "en_o_octopus_001",
+      "letter": "O",
+      "word": "OCTOPUS",
+      "emoji": "🐙",
+      "image": "assets/words/octopus.svg",
+      "facts": [
+        "An octopus has eight arms.",
+        "Octopuses live in the sea.",
+        "An octopus can change colour."
+      ],
+      "pronunciation": "OCTOPUS"
+    },
+    {
+      "id": "en_o_ox_001",
+      "letter": "O",
+      "word": "OX",
+      "emoji": "🐂",
+      "image": "assets/words/ox.svg",
+      "facts": [
+        "An ox is a large working cattle animal.",
+        "Oxen can help pull carts.",
+        "Oxen eat plants."
+      ],
+      "pronunciation": "OX"
+    },
+    {
+      "id": "en_o_onion_001",
+      "letter": "O",
+      "word": "ONION",
+      "emoji": "🧅",
+      "image": "assets/words/onion.svg",
+      "facts": [
+        "Onions grow underground.",
+        "Onions have layers.",
+        "Cut onions can make eyes water."
+      ],
+      "pronunciation": "ONION"
+    },
+    {
+      "id": "en_p_pig_001",
+      "letter": "P",
+      "word": "PIG",
+      "emoji": "🐖",
+      "image": "assets/words/pig.svg",
+      "facts": [
+        "Pigs have snouts.",
+        "Pigs can make oinking sounds.",
+        "Pigs are smart animals."
+      ],
+      "pronunciation": "PIG"
+    },
+    {
+      "id": "en_p_pear_001",
+      "letter": "P",
+      "word": "PEAR",
+      "emoji": "🍐",
+      "image": "assets/words/pear.svg",
+      "facts": [
+        "A pear is a fruit.",
+        "Many pears are green or yellow.",
+        "Pears grow on trees."
+      ],
+      "pronunciation": "PEAR"
+    },
+    {
+      "id": "en_p_pizza_001",
+      "letter": "P",
+      "word": "PIZZA",
+      "emoji": "🍕",
+      "image": "assets/words/pizza.svg",
+      "facts": [
+        "Pizza is baked in an oven.",
+        "Pizza often has a bread base.",
+        "Pizza can have many toppings."
+      ],
+      "pronunciation": "PIZZA"
+    },
+    {
+      "id": "en_p_pencil_001",
+      "letter": "P",
+      "word": "PENCIL",
+      "emoji": "✏️",
+      "image": "assets/words/pencil.svg",
+      "facts": [
+        "A pencil is used for writing.",
+        "Many pencils have graphite inside.",
+        "You can erase some pencil marks."
+      ],
+      "pronunciation": "PENCIL"
+    },
+    {
+      "id": "en_p_penguin_001",
+      "letter": "P",
+      "word": "PENGUIN",
+      "emoji": "🐧",
+      "image": "assets/words/penguin.svg",
+      "facts": [
+        "Penguins are birds.",
+        "Penguins cannot fly.",
+        "Penguins are good swimmers."
+      ],
+      "pronunciation": "PENGUIN"
+    },
+    {
+      "id": "en_q_queen_001",
+      "letter": "Q",
+      "word": "QUEEN",
+      "emoji": "custom",
+      "image": "assets/words/queen.svg",
+      "facts": [
+        "A queen is a female ruler.",
+        "Some queens wear crowns.",
+        "Queens can lead kingdoms."
+      ],
+      "pronunciation": "QUEEN"
+    },
+    {
+      "id": "en_q_quilt_001",
+      "letter": "Q",
+      "word": "QUILT",
+      "emoji": "custom",
+      "image": "assets/words/quilt.svg",
+      "facts": [
+        "A quilt is a warm bed cover.",
+        "Some quilts are made of fabric patches.",
+        "Quilts can have colourful patterns."
+      ],
+      "pronunciation": "QUILT"
+    },
+    {
+      "id": "en_q_quail_001",
+      "letter": "Q",
+      "word": "QUAIL",
+      "emoji": "custom",
+      "image": "assets/words/quail.svg",
+      "facts": [
+        "A quail is a small bird.",
+        "Quails lay eggs.",
+        "Many quails live close to the ground."
+      ],
+      "pronunciation": "QUAIL"
+    },
+    {
+      "id": "en_q_quill_001",
+      "letter": "Q",
+      "word": "QUILL",
+      "emoji": "custom",
+      "image": "assets/words/quill.svg",
+      "facts": [
+        "A quill can be made from a feather.",
+        "People once wrote with quill pens.",
+        "A quill is dipped in ink."
+      ],
+      "pronunciation": "QUILL"
+    },
+    {
+      "id": "en_q_question_001",
+      "letter": "Q",
+      "word": "QUESTION",
+      "emoji": "❓",
+      "image": "assets/words/question.svg",
+      "facts": [
+        "A question asks something.",
+        "A question mark goes at the end of many questions.",
+        "Questions can help us learn."
+      ],
+      "pronunciation": "QUESTION"
+    },
+    {
+      "id": "en_r_rabbit_001",
+      "letter": "R",
+      "word": "RABBIT",
+      "emoji": "🐇",
+      "image": "assets/words/rabbit.svg",
+      "facts": [
+        "Rabbits have long ears.",
+        "Rabbits can hop.",
+        "Rabbits eat plants."
+      ],
+      "pronunciation": "RABBIT"
+    },
+    {
+      "id": "en_r_rain_001",
+      "letter": "R",
+      "word": "RAIN",
+      "emoji": "🌧️",
+      "image": "assets/words/rain.svg",
+      "facts": [
+        "Rain is water falling from clouds.",
+        "Rain makes the ground wet.",
+        "Plants need water from rain."
+      ],
+      "pronunciation": "RAIN"
+    },
+    {
+      "id": "en_r_rocket_001",
+      "letter": "R",
+      "word": "ROCKET",
+      "emoji": "🚀",
+      "image": "assets/words/rocket.svg",
+      "facts": [
+        "Rockets travel through the sky or space.",
+        "Rockets use powerful engines.",
+        "Some rockets carry satellites."
+      ],
+      "pronunciation": "ROCKET"
+    },
+    {
+      "id": "en_r_ring_001",
+      "letter": "R",
+      "word": "RING",
+      "emoji": "💍",
+      "image": "assets/words/ring.svg",
+      "facts": [
+        "A ring is worn on a finger.",
+        "Rings can be made from metal.",
+        "Some rings have shiny stones."
+      ],
+      "pronunciation": "RING"
+    },
+    {
+      "id": "en_r_rainbow_001",
+      "letter": "R",
+      "word": "RAINBOW",
+      "emoji": "🌈",
+      "image": "assets/words/rainbow.svg",
+      "facts": [
+        "A rainbow has many colours.",
+        "Rainbows can appear when sunlight shines through rain.",
+        "A rainbow makes an arc in the sky."
+      ],
+      "pronunciation": "RAINBOW"
+    },
+    {
+      "id": "en_s_sun_001",
+      "letter": "S",
+      "word": "SUN",
+      "emoji": "☀️",
+      "image": "assets/words/sun.svg",
+      "facts": [
+        "The Sun is a star.",
+        "The Sun gives Earth light.",
+        "Sunlight helps keep Earth warm."
+      ],
+      "pronunciation": "SUN"
+    },
+    {
+      "id": "en_s_star_001",
+      "letter": "S",
+      "word": "STAR",
+      "emoji": "⭐",
+      "image": "assets/words/star.svg",
+      "facts": [
+        "Stars shine in the night sky.",
+        "The Sun is our closest star.",
+        "Stars are very far away."
+      ],
+      "pronunciation": "STAR"
+    },
+    {
+      "id": "en_s_snake_001",
+      "letter": "S",
+      "word": "SNAKE",
+      "emoji": "🐍",
+      "image": "assets/words/snake.svg",
+      "facts": [
+        "Snakes have no legs.",
+        "Snakes move by slithering.",
+        "Some snakes lay eggs."
+      ],
+      "pronunciation": "SNAKE"
+    },
+    {
+      "id": "en_s_shoe_001",
+      "letter": "S",
+      "word": "SHOE",
+      "emoji": "👟",
+      "image": "assets/words/shoe.svg",
+      "facts": [
+        "A shoe goes on your foot.",
+        "Shoes help protect your feet.",
+        "Some shoes have laces."
+      ],
+      "pronunciation": "SHOE"
+    },
+    {
+      "id": "en_s_sheep_001",
+      "letter": "S",
+      "word": "SHEEP",
+      "emoji": "🐑",
+      "image": "assets/words/sheep.svg",
+      "facts": [
+        "Sheep have woolly coats.",
+        "Sheep eat grass.",
+        "A baby sheep is called a lamb."
+      ],
+      "pronunciation": "SHEEP"
+    },
+    {
+      "id": "en_t_tree_001",
+      "letter": "T",
+      "word": "TREE",
+      "emoji": "🌳",
+      "image": "assets/words/tree.svg",
+      "facts": [
+        "Trees have roots.",
+        "Many trees have leaves.",
+        "Trees can give shade."
+      ],
+      "pronunciation": "TREE"
+    },
+    {
+      "id": "en_t_tiger_001",
+      "letter": "T",
+      "word": "TIGER",
+      "emoji": "🐅",
+      "image": "assets/words/tiger.svg",
+      "facts": [
+        "Tigers have stripes.",
+        "Tigers are big cats.",
+        "Tigers can swim."
+      ],
+      "pronunciation": "TIGER"
+    },
+    {
+      "id": "en_t_train_001",
+      "letter": "T",
+      "word": "TRAIN",
+      "emoji": "🚂",
+      "image": "assets/words/train.svg",
+      "facts": [
+        "Trains travel on tracks.",
+        "Trains can carry people.",
+        "Some trains carry goods."
+      ],
+      "pronunciation": "TRAIN"
+    },
+    {
+      "id": "en_t_turtle_001",
+      "letter": "T",
+      "word": "TURTLE",
+      "emoji": "🐢",
+      "image": "assets/words/turtle.svg",
+      "facts": [
+        "Turtles have shells.",
+        "Many turtles can swim.",
+        "Turtles lay eggs."
+      ],
+      "pronunciation": "TURTLE"
+    },
+    {
+      "id": "en_t_tomato_001",
+      "letter": "T",
+      "word": "TOMATO",
+      "emoji": "🍅",
+      "image": "assets/words/tomato.svg",
+      "facts": [
+        "Tomatoes grow on plants.",
+        "Ripe tomatoes are often red.",
+        "Tomatoes contain seeds."
+      ],
+      "pronunciation": "TOMATO"
+    },
+    {
+      "id": "en_u_umbrella_001",
+      "letter": "U",
+      "word": "UMBRELLA",
+      "emoji": "☂️",
+      "image": "assets/words/umbrella.svg",
+      "facts": [
+        "An umbrella helps keep rain off you.",
+        "Many umbrellas can fold up.",
+        "Umbrellas have handles."
+      ],
+      "pronunciation": "UMBRELLA"
+    },
+    {
+      "id": "en_u_unicorn_001",
+      "letter": "U",
+      "word": "UNICORN",
+      "emoji": "🦄",
+      "image": "assets/words/unicorn.svg",
+      "facts": [
+        "A unicorn is a make-believe animal.",
+        "Unicorns are often shown with one horn.",
+        "You can find unicorns in stories."
+      ],
+      "pronunciation": "UNICORN"
+    },
+    {
+      "id": "en_u_up_001",
+      "letter": "U",
+      "word": "UP",
+      "emoji": "⬆️",
+      "image": "assets/words/up.svg",
+      "facts": [
+        "Up means toward a higher place.",
+        "An up arrow points upward.",
+        "A balloon can float up."
+      ],
+      "pronunciation": "UP"
+    },
+    {
+      "id": "en_u_ufo_001",
+      "letter": "U",
+      "word": "UFO",
+      "emoji": "🛸",
+      "image": "assets/words/ufo.svg",
+      "facts": [
+        "UFO means an unidentified flying object.",
+        "A UFO is something seen in the sky that has not been identified.",
+        "Stories often show UFOs as flying saucers."
+      ],
+      "pronunciation": "UFO"
+    },
+    {
+      "id": "en_u_ukulele_001",
+      "letter": "U",
+      "word": "UKULELE",
+      "emoji": "custom",
+      "image": "assets/words/ukulele.svg",
+      "facts": [
+        "A ukulele is a small string instrument.",
+        "Many ukuleles have four strings.",
+        "You strum a ukulele to make music."
+      ],
+      "pronunciation": "UKULELE"
+    },
+    {
+      "id": "en_v_van_001",
+      "letter": "V",
+      "word": "VAN",
+      "emoji": "🚐",
+      "image": "assets/words/van.svg",
+      "facts": [
+        "A van is a vehicle.",
+        "Vans can carry people or goods.",
+        "Most vans have four wheels."
+      ],
+      "pronunciation": "VAN"
+    },
+    {
+      "id": "en_v_violin_001",
+      "letter": "V",
+      "word": "VIOLIN",
+      "emoji": "🎻",
+      "image": "assets/words/violin.svg",
+      "facts": [
+        "A violin has four strings.",
+        "You can play it with a bow.",
+        "A violin makes music."
+      ],
+      "pronunciation": "VIOLIN"
+    },
+    {
+      "id": "en_v_volcano_001",
+      "letter": "V",
+      "word": "VOLCANO",
+      "emoji": "🌋",
+      "image": "assets/words/volcano.svg",
+      "facts": [
+        "A volcano is an opening in Earth's crust.",
+        "Some volcanoes release hot lava.",
+        "Volcanoes can make mountains."
+      ],
+      "pronunciation": "VOLCANO"
+    },
+    {
+      "id": "en_v_vest_001",
+      "letter": "V",
+      "word": "VEST",
+      "emoji": "🦺",
+      "image": "assets/words/vest.svg",
+      "facts": [
+        "A vest is a piece of clothing.",
+        "Some safety vests are bright.",
+        "A vest is worn on your body."
+      ],
+      "pronunciation": "VEST"
+    },
+    {
+      "id": "en_v_vase_001",
+      "letter": "V",
+      "word": "VASE",
+      "emoji": "🏺",
+      "image": "assets/words/vase.svg",
+      "facts": [
+        "A vase can hold flowers.",
+        "Some vases are made of clay.",
+        "Vases have many shapes."
+      ],
+      "pronunciation": "VASE"
+    },
+    {
+      "id": "en_w_whale_001",
+      "letter": "W",
+      "word": "WHALE",
+      "emoji": "🐋",
+      "image": "assets/words/whale.svg",
+      "facts": [
+        "Whales live in the sea.",
+        "Whales breathe air.",
+        "Whales are mammals."
+      ],
+      "pronunciation": "WHALE"
+    },
+    {
+      "id": "en_w_water_001",
+      "letter": "W",
+      "word": "WATER",
+      "emoji": "💧",
+      "image": "assets/words/water.svg",
+      "facts": [
+        "Water is a liquid.",
+        "People need water to live.",
+        "Water can freeze into ice."
+      ],
+      "pronunciation": "WATER"
+    },
+    {
+      "id": "en_w_window_001",
+      "letter": "W",
+      "word": "WINDOW",
+      "emoji": "🪟",
+      "image": "assets/words/window.svg",
+      "facts": [
+        "A window lets light into a room.",
+        "Many windows have glass.",
+        "Some windows can open."
+      ],
+      "pronunciation": "WINDOW"
+    },
+    {
+      "id": "en_w_watch_001",
+      "letter": "W",
+      "word": "WATCH",
+      "emoji": "⌚",
+      "image": "assets/words/watch.svg",
+      "facts": [
+        "A watch shows the time.",
+        "People wear watches on wrists.",
+        "Some watches have hands."
+      ],
+      "pronunciation": "WATCH"
+    },
+    {
+      "id": "en_w_watermelon_001",
+      "letter": "W",
+      "word": "WATERMELON",
+      "emoji": "🍉",
+      "image": "assets/words/watermelon.svg",
+      "facts": [
+        "Watermelon is a fruit.",
+        "Many watermelons are green outside.",
+        "Watermelon is juicy inside."
+      ],
+      "pronunciation": "WATERMELON"
+    },
+    {
+      "id": "en_x_xray_001",
+      "letter": "X",
+      "word": "XRAY",
+      "emoji": "🩻",
+      "image": "assets/words/xray.svg",
+      "facts": [
+        "An X-ray can show bones inside your body.",
+        "Doctors can use X-rays to look for injuries.",
+        "An X-ray picture uses special radiation."
+      ],
+      "pronunciation": "X ray"
+    },
+    {
+      "id": "en_x_xylophone_001",
+      "letter": "X",
+      "word": "XYLOPHONE",
+      "emoji": "custom",
+      "image": "assets/words/xylophone.svg",
+      "facts": [
+        "A xylophone is a musical instrument.",
+        "You tap its bars with mallets.",
+        "Different bars make different notes."
+      ],
+      "pronunciation": "XYLOPHONE"
+    },
+    {
+      "id": "en_x_fox_001",
+      "letter": "X",
+      "word": "FOX",
+      "emoji": "🦊",
+      "image": "assets/words/fox.svg",
+      "facts": [
+        "A fox is a wild animal.",
+        "Foxes have bushy tails.",
+        "Many foxes are most active at night."
+      ],
+      "pronunciation": "FOX"
+    },
+    {
+      "id": "en_x_box_001",
+      "letter": "X",
+      "word": "BOX",
+      "emoji": "📦",
+      "image": "assets/words/box.svg",
+      "facts": [
+        "A box can hold things.",
+        "Boxes have sides.",
+        "Many boxes are made from cardboard."
+      ],
+      "pronunciation": "BOX"
+    },
+    {
+      "id": "en_x_taxi_001",
+      "letter": "X",
+      "word": "TAXI",
+      "emoji": "🚕",
+      "image": "assets/words/taxi.svg",
+      "facts": [
+        "A taxi is a car for passengers.",
+        "People pay for a taxi ride.",
+        "A taxi can take you to a place."
+      ],
+      "pronunciation": "TAXI"
+    },
+    {
+      "id": "en_y_yak_001",
+      "letter": "Y",
+      "word": "YAK",
+      "emoji": "custom",
+      "image": "assets/words/yak.svg",
+      "facts": [
+        "Yaks have thick coats.",
+        "Yaks live in cold mountain regions.",
+        "Yaks eat grass and other plants."
+      ],
+      "pronunciation": "YAK"
+    },
+    {
+      "id": "en_y_yoyo_001",
+      "letter": "Y",
+      "word": "YOYO",
+      "emoji": "🪀",
+      "image": "assets/words/yoyo.svg",
+      "facts": [
+        "A yo-yo is a toy.",
+        "A yo-yo moves on a string.",
+        "A yo-yo can go down and up."
+      ],
+      "pronunciation": "yo-yo"
+    },
+    {
+      "id": "en_y_yarn_001",
+      "letter": "Y",
+      "word": "YARN",
+      "emoji": "🧶",
+      "image": "assets/words/yarn.svg",
+      "facts": [
+        "Yarn is a long strand of fibre.",
+        "People knit with yarn.",
+        "Yarn comes in many colours."
+      ],
+      "pronunciation": "YARN"
+    },
+    {
+      "id": "en_y_yellow_001",
+      "letter": "Y",
+      "word": "YELLOW",
+      "emoji": "🟡",
+      "image": "assets/words/yellow.svg",
+      "facts": [
+        "Yellow is a colour.",
+        "Bananas can be yellow.",
+        "Yellow is bright and easy to spot."
+      ],
+      "pronunciation": "YELLOW"
+    },
+    {
+      "id": "en_y_yawn_001",
+      "letter": "Y",
+      "word": "YAWN",
+      "emoji": "🥱",
+      "image": "assets/words/yawn.svg",
+      "facts": [
+        "People yawn when tired or sleepy.",
+        "A yawn opens your mouth wide.",
+        "People sometimes yawn after seeing someone else yawn."
+      ],
+      "pronunciation": "YAWN"
+    },
+    {
+      "id": "en_z_zebra_001",
+      "letter": "Z",
+      "word": "ZEBRA",
+      "emoji": "🦓",
+      "image": "assets/words/zebra.svg",
+      "facts": [
+        "Zebras have black and white stripes.",
+        "Zebras eat grass.",
+        "Zebras live in Africa."
+      ],
+      "pronunciation": "ZEBRA"
+    },
+    {
+      "id": "en_z_zipper_001",
+      "letter": "Z",
+      "word": "ZIPPER",
+      "emoji": "custom",
+      "image": "assets/words/zipper.svg",
+      "facts": [
+        "A zipper opens and closes clothing or bags.",
+        "A zipper has two rows of teeth.",
+        "A small slider moves the zipper."
+      ],
+      "pronunciation": "ZIPPER"
+    },
+    {
+      "id": "en_z_zero_001",
+      "letter": "Z",
+      "word": "ZERO",
+      "emoji": "0️⃣",
+      "image": "assets/words/zero.svg",
+      "facts": [
+        "Zero means none.",
+        "Zero is written as 0.",
+        "Zero comes before one when counting up."
+      ],
+      "pronunciation": "ZERO"
+    },
+    {
+      "id": "en_z_zoo_001",
+      "letter": "Z",
+      "word": "ZOO",
+      "emoji": "custom",
+      "image": "assets/words/zoo.svg",
+      "facts": [
+        "A zoo is a place people visit to see animals.",
+        "Some zoos care for endangered animals.",
+        "Animals at zoos need proper food and care."
+      ],
+      "pronunciation": "ZOO"
+    },
+    {
+      "id": "en_z_zigzag_001",
+      "letter": "Z",
+      "word": "ZIGZAG",
+      "emoji": "custom",
+      "image": "assets/words/zigzag.svg",
+      "facts": [
+        "A zigzag line goes left and right.",
+        "A zigzag has sharp turns.",
+        "Lightning can look like a zigzag."
+      ],
+      "pronunciation": "ZIGZAG"
+    }
+  ]
+}
