@@ -45,7 +45,8 @@ void main(){
   testWidgets('capture first mission story', (tester) async {
     await openHome(tester);
     final mission=find.byKey(const ValueKey('older_mission_ex_lantern'));
-    await tester.ensureVisible(mission);
+    await tester.scrollUntilVisible(mission, 180,
+      scrollable:find.byType(Scrollable).first, maxScrolls:20);
     await tester.pumpAndSettle();
     await tester.tap(mission);
     await tester.pumpAndSettle();
@@ -55,7 +56,8 @@ void main(){
   testWidgets('capture word detective challenge', (tester) async {
     await openHome(tester);
     final mission=find.byKey(const ValueKey('older_mission_ex_lantern'));
-    await tester.ensureVisible(mission);
+    await tester.scrollUntilVisible(mission, 180,
+      scrollable:find.byType(Scrollable).first, maxScrolls:20);
     await tester.pumpAndSettle();
     await tester.tap(mission);
     await tester.pumpAndSettle();
