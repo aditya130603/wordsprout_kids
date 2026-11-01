@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'curriculum.dart';
 import 'content_store.dart';
 import 'older/older_home.dart';
+import 'grammar/tiny_grammar_home.dart';
 
 const forest = Color(0xFF24582E);
 const leaf = Color(0xFF77B932);
@@ -513,15 +514,19 @@ class _HomeState extends State<Home> {
         dueCheckpoint>=0?'Play checkpoint ➜':'Continue Learning  ➜',
         continueLearning,color:coral),
       const SizedBox(height:11),
-      card(InkWell(onTap:()=>setState(()=>tab=2),
+      card(InkWell(
+        key:const ValueKey('grammar_entry'),
+        onTap:()=>Navigator.push(context,MaterialPageRoute(
+          builder:(context)=>const TinyGrammarHome())),
         child:const Row(children:[
-          Icon(Icons.sports_esports_rounded,size:41,color:Color(0xFFED9B35)),
+          Icon(Icons.auto_stories_rounded,size:41,color:Color(0xFFED9B35)),
           SizedBox(width:11),
           Expanded(child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
-            Text('Games & Friends',style:TextStyle(
+            Text('Grammar Garden',style:TextStyle(
               fontSize:17,fontWeight:FontWeight.w900,color:forest)),
-            Text('Play with words you know!',style:TextStyle(
-              fontSize:12,color:Color(0xFF65715B))),
+            Text('26 little lessons: what, why, where, above, below and more!',
+              maxLines:2,overflow:TextOverflow.ellipsis,
+              style:TextStyle(fontSize:12,color:Color(0xFF65715B))),
           ])),
           Icon(Icons.chevron_right_rounded,color:forest),
         ]))),
@@ -600,6 +605,16 @@ class _HomeState extends State<Home> {
   }
   Widget gamesPage()=>ListView(children:[
     title('Games & Friends'),const SizedBox(height:17),
+    card(InkWell(onTap:()=>Navigator.push(context,MaterialPageRoute(
+      builder:(context)=>const TinyGrammarHome())),
+      child:const ListTile(
+        key:ValueKey('grammar_games_entry'),
+        leading:Icon(Icons.auto_stories_rounded,color:leaf,size:31),
+        title:Text('Grammar Garden',style:TextStyle(
+          fontSize:18,color:forest,fontWeight:FontWeight.w900)),
+        subtitle:Text('26 offline mini lessons • Ages 4–6'),
+        trailing:Icon(Icons.chevron_right_rounded,color:forest)))),
+    const SizedBox(height:12),
     for(final game in ['Spelling Race','Guess in 5','Word Detective','WordMayhem'])
       Padding(padding:const EdgeInsets.only(bottom:12),
         child:card(ListTile(
