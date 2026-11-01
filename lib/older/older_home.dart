@@ -345,7 +345,7 @@ class _PlacementQuestState extends State<PlacementQuest>{
 Widget _option(String text,{required bool selected,required VoidCallback onTap}){
   return InkWell(onTap:onTap,borderRadius:BorderRadius.circular(17),
     child:Container(width:double.infinity,
-      padding:const EdgeInsets.symmetric(horizontal:16,vertical:17),
+      padding:const EdgeInsets.symmetric(horizontal:16,vertical:15),
       decoration:BoxDecoration(color:selected?const Color(0xFFDFF1E7):Colors.white,
         borderRadius:BorderRadius.circular(17),
         border:Border.all(color:selected?jade:const Color(0xFFE1E9E3),
@@ -623,7 +623,7 @@ class _OlderMissionScreenState extends State<OlderMissionScreen>{
       Text('Which word fits this situation?',style:const TextStyle(
         color:midnight,fontSize:25,fontWeight:FontWeight.w900,height:1.13)),
       const SizedBox(height:16),
-      StoryScene(scene:m.scene,height:145),
+      StoryScene(scene:m.scene,height:108),
       const SizedBox(height:14),
       _panel(Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
         Row(children:[
