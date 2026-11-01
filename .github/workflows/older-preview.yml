@@ -1,8 +1,9 @@
-name: Ages 6-12 playable preview APK
+name: WordSprout 4-12 APK with Picture Race
 on:
   push:
     branches: [main]
     paths:
+      - 'pubspec.yaml'
       - 'lib/older/**'
       - 'lib/grammar/**'
       - 'lib/games/**'
@@ -55,10 +56,10 @@ jobs:
           name: older-adventure-preview-screenshots
           path: test/screenshots/*.png
           if-no-files-found: warn
-      - name: Build installable older-track APK
+      - name: Build installable 4-12 Picture Race APK
         run: flutter build apk --release --dart-define=WORDSPROUT_CONTENT_URL="${{ vars.WORDSPROUT_CONTENT_URL }}" --dart-define=WORDSPROUT_FRIENDS_API_URL="${{ vars.WORDSPROUT_FRIENDS_API_URL }}"
       - uses: actions/upload-artifact@v4
         with:
-          name: wordsprout-ages-6-12-preview-apk
+          name: wordsprout-4-12-picture-race-v0.5-apk
           path: build/app/outputs/flutter-apk/app-release.apk
           retention-days: 14
