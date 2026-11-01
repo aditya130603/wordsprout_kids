@@ -37,7 +37,7 @@ class Curriculum {
 
   static Future<Curriculum> load() async {
     final raw = await rootBundle.loadString('assets/content/words_v1.json');
-    return fromJson(jsonDecode(raw) as Map<String, dynamic>);
+    return Curriculum.fromJson(jsonDecode(raw) as Map<String, dynamic>);
   }
 
   factory Curriculum.fromJson(Map<String, dynamic> json) {
