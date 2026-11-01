@@ -13,7 +13,8 @@ const sun = Color(0xFFFFDF7C);
 const coral = Color(0xFFEF856C);
 
 class WordSprout extends StatelessWidget {
-  const WordSprout({super.key});
+  const WordSprout({super.key, this.initialCatalog});
+  final Curriculum? initialCatalog;
   @override
   Widget build(BuildContext context) => MaterialApp(
     title: 'WordSprout Kids',
@@ -23,12 +24,13 @@ class WordSprout extends StatelessWidget {
       scaffoldBackgroundColor: cream,
       colorScheme: ColorScheme.fromSeed(seedColor: leaf),
     ),
-    home: const Home(),
+    home: Home(initialCatalog: initialCatalog),
   );
 }
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  const Home({super.key, this.initialCatalog});
+  final Curriculum? initialCatalog;
   @override
   State<Home> createState() => _HomeState();
 }
@@ -81,7 +83,11 @@ class _HomeState extends State<Home> {
     super.initState();
     tts.setLanguage('en-US');
     tts.setSpeechRate(.44);
-    _restore();
+    if (widget.initialCatalog != null) {
+      catalog = widget.initialCatalog;
+    } else {
+      _restore();
+    }
   }
   @override
   void dispose() {
