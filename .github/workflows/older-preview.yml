@@ -5,6 +5,7 @@ on:
     paths:
       - 'lib/older/**'
       - 'lib/grammar/**'
+      - 'lib/games/**'
       - 'lib/family_settings.dart'
       - 'assets/content/grammar_4_6_v1.json'
       - 'test/grammar_*'
@@ -12,6 +13,7 @@ on:
       - 'lib/app_v2.dart'
       - 'assets/content/older_missions_v1.json'
       - 'test/older_*'
+      - 'test/picture_race_*'
       - '.github/workflows/older-preview.yml'
   workflow_dispatch:
 concurrency:
@@ -41,6 +43,8 @@ jobs:
         run: flutter test --update-goldens test/older_screenshot_test.dart
       - name: Render ages 4-6 grammar lessons
         run: flutter test --update-goldens test/grammar_screenshot_test.dart
+      - name: Render Picture Race screens
+        run: flutter test --update-goldens test/picture_race_screenshot_test.dart
       - name: Run all tests
         run: flutter test
       - uses: actions/upload-artifact@v4
