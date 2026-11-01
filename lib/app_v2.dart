@@ -1,10 +1,13 @@
 import 'dart:math' as math;
+import 'dart:async';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'curriculum.dart';
+import 'content_store.dart';
 
 const forest = Color(0xFF24582E);
 const leaf = Color(0xFF77B932);
@@ -37,6 +40,10 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final tts = FlutterTts();
+  final contentStore = const ContentStore();
+  Directory? imageDirectory;
+  bool contentBusy = false;
+  bool bonusMode = false;
   Curriculum? catalog;
   String? loadError;
   Set<int> completed = {}, tested = {}, checkpoints = {};
@@ -111,19 +118,23 @@ class _HomeState extends State<Home> {
   }
   Future<void> _restore() async {
     try {
-      final loaded = await Curriculum.load();
+      final loaded = await contentStore.load();
       final prefs = await SharedPreferences.getInstance();
       if (!mounted) return;
       setState(() {
-        catalog = loaded;
+        catalog = loaded.catalog;
+        imageDirectory = loaded.directory;
         completed = (prefs.getStringList('done') ?? []).map(int.parse)
-            .where((i) => i >= 0 && i < 130).toSet();
+            .where((i) => i >= 0 && i < loaded.catalog.words.length).toSet();
         tested = (prefs.getStringList('letter_tests') ?? []).map(int.parse).toSet();
         checkpoints = (prefs.getStringList('checkpoints') ?? []).map(int.parse).toSet();
         reviewDates = decodePairs(prefs.getStringList('review_dates') ?? []);
         reviewStages = decodePairs(prefs.getStringList('review_stages') ?? []);
       });
       selectedLetter = activeLetter;
+      if (contentStore.manifestUrl.isNotEmpty) {
+        WidgetsBinding.instance.addPostFrameCallback((_) => checkForContent());
+      }
     } catch (error) {
       if (mounted) setState(() => loadError = error.toString());
     }
@@ -139,16 +150,58 @@ class _HomeState extends State<Home> {
         .map((e) => e.key.toString()+':'+e.value.toString()).toList());
   }
 
-  void openWord(int index, {bool review = false}) {
+  Future<void> checkForContent() async {
+    if (!mounted || contentBusy || step>=0 || contentStore.manifestUrl.isEmpty) return;
+    setState(() => contentBusy = true);
+    try {
+      final offer = await contentStore.checkForUpdate(catalog!.version);
+      if (offer == null || !mounted) return;
+      final confirmed = await showDialog<bool>(
+        context: context,
+        builder:(context)=>AlertDialog(
+          title:const Text('New words and pictures!'),
+          content:Text('A grown-up can download a '+offer.megabytes.toStringAsFixed(1)+
+             ' MB learning pack. It will work offline after downloading.'),
+          actions:[
+            TextButton(onPressed:()=>Navigator.pop(context,false),child:const Text('Not now')),
+            FilledButton(onPressed:()=>Navigator.pop(context,true),child:const Text('Download')),
+          ],
+        ),
+      );
+      if (confirmed!=true || !mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content:Text('Downloading learning content…')));
+      final loaded = await contentStore.install(offer);
+      if (!mounted) return;
+      setState(() {
+        catalog=loaded.catalog;
+        imageDirectory=loaded.directory;
+        selectedLetter=activeLetter;
+        step=-1;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content:Text('New learning content is ready offline!')));
+    } catch (_) {
+      if (mounted) ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content:Text('Content update unavailable. Your offline words still work.')));
+    } finally {
+      if(mounted) setState(()=>contentBusy=false);
+    }
+  }
+
+  void openWord(int index, {bool review = false, bool bonus = false}) {
     if (catalog == null || index < 0 || index >= entries.length) return;
     final l = index ~/ 5;
     if (review) {
       if (!completed.contains(index)) return;
-    } else {
+    } else if (!bonus) {
       if (dueCheckpoint >= 0 || l != activeLetter) return;
       if (index % 5 >= accessibleWords) return;
+    } else if (index < 130) {
+      return;
     }
     setState(() {
+      bonusMode = bonus;
       wordIndex = index;
       reviewMode = review;
       assessmentMode = false;
@@ -158,6 +211,10 @@ class _HomeState extends State<Home> {
     say(current.pronunciation);
   }
   void continueLearning() {
+    if (bonusMode) {
+      setState(() { step = -1; tab = 1; bonusMode = false; });
+      return;
+    }
     if (graduated) {
       setState(() { step = -1; tab = 3; });
       return;
@@ -238,7 +295,7 @@ class _HomeState extends State<Home> {
   }
   void next() {
     if (reviewMode) {
-      setState(() { step=-1; reviewMode=false; tab=3; });
+      setState(() { step=-1; reviewMode=false; bonusMode=false; tab=3; });
     } else {
       continueLearning();
     }
@@ -310,9 +367,24 @@ class _HomeState extends State<Home> {
         onPressed:onTap, style:FilledButton.styleFrom(backgroundColor:color,
           shape:RoundedRectangleBorder(borderRadius:BorderRadius.circular(30))),
         child:Text(text,style:const TextStyle(fontSize:18,fontWeight:FontWeight.w900))));
-  Widget illustration(int index,{double size=140}) =>
-      SvgPicture.asset(entries[index].image,width:size,height:size,fit:BoxFit.contain,
-        semanticsLabel:entries[index].name);
+  Widget illustration(int index,{double size=140, bool animate=false}) {
+    final word = entries[index];
+    if (imageDirectory != null && word.isDownloadedImage) {
+      if (animate && word.animationFrames.isNotEmpty) {
+        return _WordSequence(
+          key: ValueKey(word.id + catalog!.version),
+          root: imageDirectory!, frames: word.animationFrames,
+          size: size, label: word.name);
+      }
+      return Image.file(File(imageDirectory!.path + '/' + word.image),
+          width:size,height:size,fit:BoxFit.contain,
+          semanticLabel:word.name,
+          errorBuilder:(context,error,stack) =>
+            Icon(Icons.image_not_supported_outlined,size:size*.55,color:forest));
+    }
+    return SvgPicture.asset(word.image,width:size,height:size,fit:BoxFit.contain,
+      semanticsLabel:word.name);
+  }
   Widget title(String value) => Text(value,textAlign:TextAlign.center,
     style:const TextStyle(fontSize:25,fontWeight:FontWeight.w900,color:forest));
   Widget audio(String value) => IconButton.filled(
@@ -379,7 +451,7 @@ class _HomeState extends State<Home> {
           Text('Hello, explorer!',style:TextStyle(fontSize:21,fontWeight:FontWeight.w900,color:forest)),
           Text('Ready for a word adventure?',style:TextStyle(fontSize:12,color:Color(0xFF65715B))),
         ])),
-        Text(completed.length.toString()+'/130',
+        Text(completed.length.toString()+'/'+entries.length.toString(),
           style:const TextStyle(color:forest,fontSize:12,fontWeight:FontWeight.w900)),
       ])),
       const SizedBox(height:11),
@@ -491,6 +563,23 @@ class _HomeState extends State<Home> {
          && !tested.contains(selectedLetter))
         Padding(padding:const EdgeInsets.all(8),
           child:button('Take Letter '+nameOf(selectedLetter)+' Test',continueLearning)),
+      if(entries.length>130)...[
+        const SizedBox(height:20),
+        title('Extra Words • '+(entries.length-130).toString()),
+        const SizedBox(height:9),
+        ...List.generate(entries.length-130,(i){
+          final idx=130+i;
+          return Padding(padding:const EdgeInsets.only(bottom:9),
+            child:card(InkWell(onTap:()=>openWord(idx,bonus:true),
+              child:Row(children:[
+                illustration(idx,size:55),const SizedBox(width:10),
+                Expanded(child:Text(entries[idx].name,style:const TextStyle(
+                  fontSize:17,fontWeight:FontWeight.w800,color:forest))),
+                Icon(completed.contains(idx)?Icons.check_circle:Icons.play_arrow,
+                  color:leaf),
+              ]))));
+        }),
+      ],
     ]);
   }
   Widget gamesPage()=>ListView(children:[
@@ -509,11 +598,11 @@ class _HomeState extends State<Home> {
   Widget progressPage()=>ListView(children:[
     title('My Growing Garden'),const SizedBox(height:15),
     card(Column(children:[
-      Text(completed.length.toString()+'/130',style:const TextStyle(
+      Text(completed.length.toString()+'/'+entries.length.toString(),style:const TextStyle(
         fontSize:42,fontWeight:FontWeight.w900,color:forest)),
       const Text('Words discovered'),
       const SizedBox(height:12),
-      LinearProgressIndicator(value:completed.length/130,minHeight:15,
+      LinearProgressIndicator(value:completed.length/entries.length,minHeight:15,
         borderRadius:BorderRadius.circular(18),color:leaf,
         backgroundColor:const Color(0xFFE8F2D8)),
       const SizedBox(height:13),
@@ -521,6 +610,11 @@ class _HomeState extends State<Home> {
         checkpoints.length.toString()+'/6 checkpoints',
         style:const TextStyle(color:forest)),
     ])),
+    if (contentStore.manifestUrl.isNotEmpty) ...[
+      const SizedBox(height:13),
+      button(contentBusy?'Checking for updates…':'Check for New Words',
+        contentBusy?(){}:checkForContent),
+    ],
     const SizedBox(height:19),title('Words to Review'),
     const SizedBox(height:10),
     if(revisions.isEmpty) card(const Text('Nothing due right now. Keep growing!',
@@ -550,7 +644,7 @@ class _HomeState extends State<Home> {
   Widget discover()=>Column(children:[
     subtitle(),
     Expanded(flex:5,child:card(Column(children:[
-      Expanded(child:Center(child:illustration(wordIndex,size:183))),
+      Expanded(child:Center(child:illustration(wordIndex,size:183,animate:true))),
       Row(mainAxisAlignment:MainAxisAlignment.center,children:[
         title(current.name),const SizedBox(width:13),audio(current.pronunciation),
       ]),
@@ -612,8 +706,10 @@ class _HomeState extends State<Home> {
   ]);
   Widget recognitionScreen() {
     final first=wordIndex~/5*5;
-    final choices=[wordIndex,first+(wordIndex%5+1)%5,
-      first+(wordIndex%5+2)%5,first+(wordIndex%5+3)%5];
+    final choices=wordIndex<130
+      ? [wordIndex,first+(wordIndex%5+1)%5,
+         first+(wordIndex%5+2)%5,first+(wordIndex%5+3)%5]
+      : [wordIndex,0,1,2];
     return Column(children:[
       subtitle(),title('Tap the '+current.name+'!'),
       audio('Find the '+current.pronunciation),const SizedBox(height:15),
@@ -655,4 +751,40 @@ class _HomeState extends State<Home> {
       fontWeight:FontWeight.w700),textAlign:TextAlign.center),
     const SizedBox(height:35),button('Continue ➜',next),
   ]);
+}
+
+
+/// Plays the supplied PNG appearance sequence once and holds frame 00007.
+/// Recognition and spelling always use the clear final still instead.
+class _WordSequence extends StatefulWidget {
+  const _WordSequence({super.key,required this.root,required this.frames,
+    required this.size,required this.label});
+  final Directory root;
+  final List<String> frames;
+  final double size;
+  final String label;
+  @override
+  State<_WordSequence> createState()=>_WordSequenceState();
+}
+class _WordSequenceState extends State<_WordSequence> {
+  int position=0;
+  Timer? clock;
+  @override
+  void initState(){
+    super.initState();
+    clock=Timer.periodic(const Duration(milliseconds:130),(timer){
+      if(!mounted || position>=widget.frames.length-1){timer.cancel();return;}
+      setState(()=>position++);
+    });
+  }
+  @override
+  void dispose(){clock?.cancel();super.dispose();}
+  @override
+  Widget build(BuildContext context) => Image.file(
+    File(widget.root.path+'/'+widget.frames[position]),
+    width:widget.size,height:widget.size,fit:BoxFit.contain,
+    semanticLabel:widget.label,
+    gaplessPlayback:true,
+    errorBuilder:(context,error,stack) =>
+      Icon(Icons.image_not_supported_outlined,size:widget.size*.55,color:forest));
 }
