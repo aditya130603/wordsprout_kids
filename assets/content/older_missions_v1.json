@@ -1,0 +1,870 @@
+{
+  "schema_version": 1,
+  "content_version": "2026.11.02.older.missions.1",
+  "age_range": "6-12",
+  "tracks": [
+    {
+      "id": "explorer",
+      "age_hint": "6–8",
+      "title": "Explorer",
+      "description": "First clues, short stories, and sentence patterns",
+      "color": "#79B8AF"
+    },
+    {
+      "id": "adventurer",
+      "age_hint": "9–10",
+      "title": "Adventurer",
+      "description": "Inference, word relationships, and mysteries",
+      "color": "#DDA25B"
+    },
+    {
+      "id": "master",
+      "age_hint": "11–12",
+      "title": "Word Master",
+      "description": "Reasoning, precise language, and real choices",
+      "color": "#8C94D9"
+    }
+  ],
+  "missions": [
+    {
+      "id": "ex_lantern",
+      "level": "explorer",
+      "title": "The Lantern Trail",
+      "scene": "forest",
+      "subtitle": "Follow the light, find the truth",
+      "goal": "Help Maya explore safely without disturbing the forest.",
+      "story": "At dusk, Maya sees a light beyond the garden. She is curious, but her friend reminds her to be cautious. They whisper so the resting birds will not wake. Behind a tree, they discover a tiny lantern hanging beside a lost hiking map.",
+      "words": [
+        {
+          "term": "CURIOUS",
+          "meaning": "Wanting to learn or know more.",
+          "context": "Maya keeps asking questions about the unusual light.",
+          "synonym": "interested",
+          "antonym": "uninterested"
+        },
+        {
+          "term": "CAUTIOUS",
+          "meaning": "Careful to avoid danger or mistakes.",
+          "context": "Maya checks the path before taking a step.",
+          "synonym": "careful",
+          "antonym": "careless"
+        },
+        {
+          "term": "WHISPER",
+          "meaning": "To speak very softly.",
+          "context": "The children speak quietly beside the sleeping birds.",
+          "synonym": "murmur",
+          "antonym": "shout"
+        },
+        {
+          "term": "DISCOVER",
+          "meaning": "To find something you did not know about before.",
+          "context": "They find the hidden lantern near a tree.",
+          "synonym": "find",
+          "antonym": "lose"
+        }
+      ],
+      "sentence": "Maya was cautious near the dark path.",
+      "sentencePrompt": "Build a sentence showing Maya acted carefully.",
+      "sentenceAlternatives": [
+        "Near the dark path Maya was cautious."
+      ],
+      "consequence": "Maya checks each stepping stone and reaches the lantern safely.",
+      "wrongConsequence": "Maya rushes ahead and loses sight of the marked path.",
+      "pattern": {
+        "question": "Which spelling has the same /sh/ sound as whisper?",
+        "options": [
+          "shell",
+          "sugar",
+          "circle",
+          "chef"
+        ],
+        "answer": 0,
+        "explain": "The letters 'sh' make the /sh/ sound in shell and whisper."
+      },
+      "transfer": {
+        "question": "A boy asks why the moon changes shape. He is ___ .",
+        "options": [
+          "curious",
+          "careless",
+          "sleepy",
+          "noisy"
+        ],
+        "answer": 0,
+        "explain": "Curious means wanting to learn or understand something."
+      },
+      "order": 1,
+      "trackOrder": 1
+    },
+    {
+      "id": "ex_rain",
+      "level": "explorer",
+      "title": "Rainy Day Rescue",
+      "scene": "river",
+      "subtitle": "A rescue in the rain",
+      "goal": "Help two friends bring a puppy home safely.",
+      "story": "Heavy rain makes the lane slippery. Tara finds a small puppy shivering beneath a bench. She asks an adult to help rescue it. They carry it to a dry shelter. The puppy's owner is grateful when they return it.",
+      "words": [
+        {
+          "term": "SLIPPERY",
+          "meaning": "Easy to slide on and fall.",
+          "context": "Rainwater makes the stone steps hard to grip.",
+          "synonym": "slick",
+          "antonym": "rough"
+        },
+        {
+          "term": "RESCUE",
+          "meaning": "To save someone from danger.",
+          "context": "Tara helps an adult save the puppy.",
+          "synonym": "save",
+          "antonym": "abandon"
+        },
+        {
+          "term": "SHELTER",
+          "meaning": "A place that protects you from weather or danger.",
+          "context": "They wait under a roof while the rain falls.",
+          "synonym": "refuge",
+          "antonym": "exposure"
+        },
+        {
+          "term": "GRATEFUL",
+          "meaning": "Feeling thankful for someone's kindness.",
+          "context": "The owner says thank you with a big smile.",
+          "synonym": "thankful",
+          "antonym": "unthankful"
+        }
+      ],
+      "sentence": "The puppy found shelter from the rain.",
+      "sentencePrompt": "Build a sentence showing the puppy found protection from rain.",
+      "sentenceAlternatives": [
+        "From the rain the puppy found shelter."
+      ],
+      "consequence": "The puppy curls up safely under the dry roof.",
+      "wrongConsequence": "The puppy is still cold and needs a dry place.",
+      "pattern": {
+        "question": "Which word contains the same 'sh' spelling as shelter?",
+        "options": [
+          "shine",
+          "circle",
+          "whale",
+          "phone"
+        ],
+        "answer": 0,
+        "explain": "Shelter and shine both begin with the /sh/ sound written 'sh'."
+      },
+      "transfer": {
+        "question": "You thank someone who returned your lost bag. You feel ___ .",
+        "options": [
+          "grateful",
+          "slippery",
+          "ancient",
+          "distant"
+        ],
+        "answer": 0,
+        "explain": "Grateful describes the feeling of thankfulness."
+      },
+      "order": 2,
+      "trackOrder": 2
+    },
+    {
+      "id": "ex_garden",
+      "level": "explorer",
+      "title": "The Garden Puzzle",
+      "scene": "garden",
+      "subtitle": "Small seeds, big discoveries",
+      "goal": "Save the new seedlings before the weather changes.",
+      "story": "In the school garden, the children gather dry leaves. They notice a new sprout beside the path. They protect it with a small fence and stay patient while it grows. A week later, two green leaves appear.",
+      "words": [
+        {
+          "term": "GATHER",
+          "meaning": "To bring things together in one place.",
+          "context": "The children collect fallen leaves into one pile.",
+          "synonym": "collect",
+          "antonym": "scatter"
+        },
+        {
+          "term": "SPROUT",
+          "meaning": "A young shoot that has just started to grow.",
+          "context": "A tiny green shoot rises from the soil.",
+          "synonym": "shoot",
+          "antonym": "mature plant"
+        },
+        {
+          "term": "PROTECT",
+          "meaning": "To keep someone or something safe.",
+          "context": "The fence keeps feet away from the new plant.",
+          "synonym": "guard",
+          "antonym": "harm"
+        },
+        {
+          "term": "PATIENT",
+          "meaning": "Able to wait calmly without becoming upset.",
+          "context": "They wait several days for the first leaves.",
+          "synonym": "calm",
+          "antonym": "impatient"
+        }
+      ],
+      "sentence": "We protect the tiny sprout with a fence.",
+      "sentencePrompt": "Build a sentence showing how the children keep the plant safe.",
+      "sentenceAlternatives": [
+        "With a fence we protect the tiny sprout."
+      ],
+      "consequence": "The young sprout grows safely behind its little fence.",
+      "wrongConsequence": "The sprout remains exposed beside the busy path.",
+      "pattern": {
+        "question": "Which word has the same 'ou' sound as sprout?",
+        "options": [
+          "cloud",
+          "soup",
+          "should",
+          "group"
+        ],
+        "answer": 0,
+        "explain": "Sprout and cloud share the /ow/ sound spelled 'ou'."
+      },
+      "transfer": {
+        "question": "Your little sister waits quietly for her turn. She is ___ .",
+        "options": [
+          "patient",
+          "slippery",
+          "distant",
+          "fragile"
+        ],
+        "answer": 0,
+        "explain": "Patient means being able to wait calmly."
+      },
+      "order": 3,
+      "trackOrder": 3
+    },
+    {
+      "id": "ex_parcel",
+      "level": "explorer",
+      "title": "The Lost Parcel",
+      "scene": "town",
+      "subtitle": "A delivery with a mystery",
+      "goal": "Follow clues to find who owns a missing package.",
+      "story": "A parcel has been left near the library door. Dev begins to search for its owner. A little blue ribbon is the first clue. When the owner arrives and sees the parcel, she looks relieved.",
+      "words": [
+        {
+          "term": "PARCEL",
+          "meaning": "A package wrapped or boxed for delivery.",
+          "context": "A square box has a name written on it.",
+          "synonym": "package",
+          "antonym": "loose item"
+        },
+        {
+          "term": "SEARCH",
+          "meaning": "To look carefully for something.",
+          "context": "Dev checks the library desk for the owner.",
+          "synonym": "look for",
+          "antonym": "ignore"
+        },
+        {
+          "term": "CLUE",
+          "meaning": "A piece of information that helps solve a puzzle.",
+          "context": "The ribbon shows who might own the parcel.",
+          "synonym": "hint",
+          "antonym": "mystery"
+        },
+        {
+          "term": "RELIEVED",
+          "meaning": "Happy because something worrying has ended.",
+          "context": "The owner relaxes when her package is returned.",
+          "synonym": "reassured",
+          "antonym": "worried"
+        }
+      ],
+      "sentence": "Dev used a clue to find the parcel.",
+      "sentencePrompt": "Build a sentence showing Dev used information to locate the package.",
+      "sentenceAlternatives": [
+        "To find the parcel Dev used a clue."
+      ],
+      "consequence": "The ribbon clue leads Dev straight to the grateful owner.",
+      "wrongConsequence": "Dev needs to inspect the package for another clue.",
+      "pattern": {
+        "question": "Which word uses the 'ch' sound as in search?",
+        "options": [
+          "chair",
+          "school",
+          "ache",
+          "chorus"
+        ],
+        "answer": 0,
+        "explain": "Chair has the /ch/ sound; 'ch' can sound different in other words."
+      },
+      "transfer": {
+        "question": "You find your missing homework after worrying all morning. You feel ___ .",
+        "options": [
+          "relieved",
+          "curious",
+          "slippery",
+          "ancient"
+        ],
+        "answer": 0,
+        "explain": "Relieved means your worry has eased."
+      },
+      "order": 4,
+      "trackOrder": 4
+    },
+    {
+      "id": "ad_bridge",
+      "level": "adventurer",
+      "title": "The Crystal Bridge",
+      "scene": "cave",
+      "subtitle": "Choose the safe way forward",
+      "goal": "Help Maya cross without breaking the old bridge.",
+      "story": "The bridge looks fragile because its boards are cracked. A sturdy rope supports the railing. Maya hesitates before stepping onto it. Her friend suggests they inspect the boards and choose the safest route.",
+      "words": [
+        {
+          "term": "FRAGILE",
+          "meaning": "Easy to break or damage.",
+          "context": "The cracked boards could break if stepped on.",
+          "synonym": "delicate",
+          "antonym": "sturdy"
+        },
+        {
+          "term": "STURDY",
+          "meaning": "Strongly built and not likely to break.",
+          "context": "The thick rope holds the railing firmly.",
+          "synonym": "strong",
+          "antonym": "fragile"
+        },
+        {
+          "term": "HESITATE",
+          "meaning": "To pause because you are uncertain.",
+          "context": "Maya stops for a moment before deciding.",
+          "synonym": "pause",
+          "antonym": "rush"
+        },
+        {
+          "term": "INSPECT",
+          "meaning": "To look at something closely to check its condition.",
+          "context": "They examine each board before crossing.",
+          "synonym": "examine",
+          "antonym": "overlook"
+        }
+      ],
+      "sentence": "We inspect the fragile bridge before crossing.",
+      "sentencePrompt": "Build a warning that includes careful examination.",
+      "sentenceAlternatives": [
+        "Before crossing we inspect the fragile bridge."
+      ],
+      "consequence": "After inspecting the bridge, the group finds a safer crossing.",
+      "wrongConsequence": "A loose board snaps; the friends need a better plan.",
+      "pattern": {
+        "question": "Which word begins with the same 'fr' blend as fragile?",
+        "options": [
+          "frame",
+          "phase",
+          "grain",
+          "friendship"
+        ],
+        "answer": 0,
+        "explain": "Fragile and frame both start with the /fr/ consonant blend."
+      },
+      "transfer": {
+        "question": "A glass ornament might break if dropped. It is ___ .",
+        "options": [
+          "fragile",
+          "sturdy",
+          "generous",
+          "distant"
+        ],
+        "answer": 0,
+        "explain": "Fragile means easily broken or damaged."
+      },
+      "order": 5,
+      "trackOrder": 1
+    },
+    {
+      "id": "ad_festival",
+      "level": "adventurer",
+      "title": "The Festival Mix-Up",
+      "scene": "festival",
+      "subtitle": "A festival saved by teamwork",
+      "goal": "Bring the music, decorations, and food together before sunset.",
+      "story": "The town festival is almost ready, but the decorations are scattered. Friends must cooperate to finish on time. Nisha helps arrange the lanterns while Arjun tries to persuade the drummer to perform early. A generous neighbor shares extra lights.",
+      "words": [
+        {
+          "term": "COOPERATE",
+          "meaning": "To work with others toward the same goal.",
+          "context": "Friends work together to prepare the festival.",
+          "synonym": "collaborate",
+          "antonym": "oppose"
+        },
+        {
+          "term": "ARRANGE",
+          "meaning": "To put things in a planned order or place.",
+          "context": "Nisha places the lanterns neatly in rows.",
+          "synonym": "organize",
+          "antonym": "scatter"
+        },
+        {
+          "term": "PERSUADE",
+          "meaning": "To convince someone using reasons.",
+          "context": "Arjun explains why the music should start earlier.",
+          "synonym": "convince",
+          "antonym": "discourage"
+        },
+        {
+          "term": "GENEROUS",
+          "meaning": "Willing to give or share more than expected.",
+          "context": "A neighbor gladly shares extra lanterns.",
+          "synonym": "giving",
+          "antonym": "selfish"
+        }
+      ],
+      "sentence": "We cooperate to arrange the festival lights.",
+      "sentencePrompt": "Build a sentence showing teamwork and organization.",
+      "sentenceAlternatives": [
+        "To arrange the festival lights we cooperate."
+      ],
+      "consequence": "The lights glow across the festival as everyone works together.",
+      "wrongConsequence": "Without cooperation, the decorations remain unfinished.",
+      "pattern": {
+        "question": "Which word uses the same 'tion' ending sound as celebration?",
+        "options": [
+          "station",
+          "plastic",
+          "patient",
+          "captioned"
+        ],
+        "answer": 0,
+        "explain": "Celebration and station both end with a /shun/ sound spelled -tion."
+      },
+      "transfer": {
+        "question": "A friend gives half her lunch to someone who forgot theirs. She is ___ .",
+        "options": [
+          "generous",
+          "fragile",
+          "reluctant",
+          "stagnant"
+        ],
+        "answer": 0,
+        "explain": "Generous means ready to share or give willingly."
+      },
+      "order": 6,
+      "trackOrder": 2
+    },
+    {
+      "id": "ad_library",
+      "level": "adventurer",
+      "title": "The Secret Library",
+      "scene": "library",
+      "subtitle": "Find the book that disappeared",
+      "goal": "Investigate a mystery using details in an old journal.",
+      "story": "A student finds an ancient diary inside the school library. The ink describes a remarkable discovery. When the diary seems to vanish from the table, the students investigate the room and find it beneath a loose shelf.",
+      "words": [
+        {
+          "term": "ANCIENT",
+          "meaning": "Very old, usually from a long time ago.",
+          "context": "The diary was written centuries ago.",
+          "synonym": "old",
+          "antonym": "modern"
+        },
+        {
+          "term": "REMARKABLE",
+          "meaning": "Very unusual or impressive.",
+          "context": "The diary describes an amazing invention.",
+          "synonym": "extraordinary",
+          "antonym": "ordinary"
+        },
+        {
+          "term": "VANISH",
+          "meaning": "To disappear suddenly or completely.",
+          "context": "The diary is no longer where it was left.",
+          "synonym": "disappear",
+          "antonym": "appear"
+        },
+        {
+          "term": "INVESTIGATE",
+          "meaning": "To examine facts carefully to discover the truth.",
+          "context": "The friends look for evidence around the shelves.",
+          "synonym": "inquire",
+          "antonym": "ignore"
+        }
+      ],
+      "sentence": "We investigate how the ancient diary vanished.",
+      "sentencePrompt": "Build a sentence about solving the diary mystery.",
+      "sentenceAlternatives": [
+        "How the ancient diary vanished we investigate."
+      ],
+      "consequence": "The friends examine the shelf and recover the missing diary.",
+      "wrongConsequence": "The diary remains hidden until the clues are checked.",
+      "pattern": {
+        "question": "Which word contains the silent 'c' found in science?",
+        "options": [
+          "scene",
+          "secret",
+          "sketch",
+          "school"
+        ],
+        "answer": 0,
+        "explain": "In scene and science, the 'c' does not have a separate sound."
+      },
+      "transfer": {
+        "question": "Scientists examine clues to discover why the water changed. They ___ .",
+        "options": [
+          "investigate",
+          "vanish",
+          "arrange",
+          "gather"
+        ],
+        "answer": 0,
+        "explain": "Investigate means examine evidence carefully."
+      },
+      "order": 7,
+      "trackOrder": 3
+    },
+    {
+      "id": "ad_signal",
+      "level": "adventurer",
+      "title": "The Forest Signal",
+      "scene": "mountain",
+      "subtitle": "Find the way back",
+      "goal": "Use a signal and the landscape to guide a hiking team home.",
+      "story": "The hiking group sees a distant light on a hill. They observe the moving clouds and predict that rain will arrive soon. A flashing signal points toward the campsite. They use a map to navigate through the valley.",
+      "words": [
+        {
+          "term": "DISTANT",
+          "meaning": "Far away in space or time.",
+          "context": "A light shines on a hill many kilometres away.",
+          "synonym": "faraway",
+          "antonym": "nearby"
+        },
+        {
+          "term": "OBSERVE",
+          "meaning": "To watch or notice carefully.",
+          "context": "The hikers study how the clouds move.",
+          "synonym": "notice",
+          "antonym": "ignore"
+        },
+        {
+          "term": "PREDICT",
+          "meaning": "To say what may happen using clues.",
+          "context": "Dark clouds make them expect rain soon.",
+          "synonym": "forecast",
+          "antonym": "guess blindly"
+        },
+        {
+          "term": "NAVIGATE",
+          "meaning": "To find and follow a route to a place.",
+          "context": "They use the map to travel toward camp.",
+          "synonym": "find a route",
+          "antonym": "wander aimlessly"
+        }
+      ],
+      "sentence": "We observe the clouds to predict rain.",
+      "sentencePrompt": "Build a sentence showing careful observation helps a forecast.",
+      "sentenceAlternatives": [
+        "To predict rain we observe the clouds."
+      ],
+      "consequence": "The group sees the rain coming and reaches the campsite dry.",
+      "wrongConsequence": "The group ignores the clouds and gets caught in a shower.",
+      "pattern": {
+        "question": "Which word uses the prefix 're-' meaning 'again'?",
+        "options": [
+          "recheck",
+          "receive",
+          "relic",
+          "result"
+        ],
+        "answer": 0,
+        "explain": "Recheck means check again: the prefix re- means again."
+      },
+      "transfer": {
+        "question": "A sailor follows a chart to reach the harbour. She must ___ .",
+        "options": [
+          "navigate",
+          "hesitate",
+          "arrange",
+          "vanish"
+        ],
+        "answer": 0,
+        "explain": "Navigate means find and follow a route."
+      },
+      "order": 8,
+      "trackOrder": 4
+    },
+    {
+      "id": "ma_river",
+      "level": "master",
+      "title": "The River Mystery",
+      "scene": "river",
+      "subtitle": "An environmental investigation",
+      "goal": "Identify the river problem using evidence instead of guesses.",
+      "story": "After weeks without rain, water in a small pond becomes stagnant. The students collect evidence before explaining its poor condition. They discuss ways to purify the water and predict the consequences of allowing rubbish to enter the stream.",
+      "words": [
+        {
+          "term": "STAGNANT",
+          "meaning": "Not flowing or moving, especially water or air.",
+          "context": "The pond has remained still for weeks.",
+          "synonym": "still",
+          "antonym": "flowing"
+        },
+        {
+          "term": "EVIDENCE",
+          "meaning": "Facts or observations that support a conclusion.",
+          "context": "Water samples help students explain the problem.",
+          "synonym": "proof",
+          "antonym": "unsupported claim"
+        },
+        {
+          "term": "PURIFY",
+          "meaning": "To remove unwanted substances from something.",
+          "context": "A filter can help remove dirt from water.",
+          "synonym": "clean",
+          "antonym": "pollute"
+        },
+        {
+          "term": "CONSEQUENCE",
+          "meaning": "A result of a choice or action.",
+          "context": "Leaving rubbish in the water could harm fish.",
+          "synonym": "result",
+          "antonym": "cause"
+        }
+      ],
+      "sentence": "Evidence helps us understand the consequences of pollution.",
+      "sentencePrompt": "Build a sentence explaining why observations matter.",
+      "sentenceAlternatives": [
+        "The consequences of pollution are understood through evidence."
+      ],
+      "consequence": "The students present evidence and a realistic plan to help the pond.",
+      "wrongConsequence": "Without observations, their explanation lacks support.",
+      "pattern": {
+        "question": "Which word has the prefix 'un-' meaning 'not'?",
+        "options": [
+          "unusual",
+          "under",
+          "uniform",
+          "until"
+        ],
+        "answer": 0,
+        "explain": "Unusual means not usual; in under and until, 'un' is not that prefix."
+      },
+      "transfer": {
+        "question": "A doctor checks test results before making a decision. The results are ___ .",
+        "options": [
+          "evidence",
+          "consequence",
+          "stagnant",
+          "purify"
+        ],
+        "answer": 0,
+        "explain": "Evidence supports a conclusion with observable information."
+      },
+      "order": 9,
+      "trackOrder": 1
+    },
+    {
+      "id": "ma_debate",
+      "level": "master",
+      "title": "The Council's Debate",
+      "scene": "town",
+      "subtitle": "Make a fair decision",
+      "goal": "Design a town park that addresses everyone's concerns.",
+      "story": "The student council must decide how to use an empty playground. Some members are reluctant to replace it with a parking area. Mira proposes a small community garden. After debate, they reach a compromise and justify their choice with clear reasons.",
+      "words": [
+        {
+          "term": "RELUCTANT",
+          "meaning": "Unwilling or hesitant to do something.",
+          "context": "Several students do not want to lose the playground.",
+          "synonym": "unwilling",
+          "antonym": "eager"
+        },
+        {
+          "term": "PROPOSE",
+          "meaning": "To suggest a plan for others to consider.",
+          "context": "Mira offers the idea of a community garden.",
+          "synonym": "suggest",
+          "antonym": "withdraw"
+        },
+        {
+          "term": "COMPROMISE",
+          "meaning": "An agreement where both sides give up something.",
+          "context": "They keep some play space and add garden beds.",
+          "synonym": "middle ground",
+          "antonym": "stalemate"
+        },
+        {
+          "term": "JUSTIFY",
+          "meaning": "To give good reasons for a choice or belief.",
+          "context": "The council explains why the new plan is fair.",
+          "synonym": "explain",
+          "antonym": "assert without reasons"
+        }
+      ],
+      "sentence": "We justify the compromise with clear reasons.",
+      "sentencePrompt": "Build a sentence describing a reasoned, fair decision.",
+      "sentenceAlternatives": [
+        "With clear reasons we justify the compromise."
+      ],
+      "consequence": "Both groups accept a park with space for play and plants.",
+      "wrongConsequence": "The council stays divided until everyone hears the reasons.",
+      "pattern": {
+        "question": "Which word uses the suffix '-ment' to form a noun?",
+        "options": [
+          "agreement",
+          "agree",
+          "agreeing",
+          "agreed"
+        ],
+        "answer": 0,
+        "explain": "Agreement is a noun formed from agree + -ment."
+      },
+      "transfer": {
+        "question": "Two friends each give up one preference to agree on a plan. They reach a ___ .",
+        "options": [
+          "compromise",
+          "consequence",
+          "prediction",
+          "signal"
+        ],
+        "answer": 0,
+        "explain": "A compromise is an agreement involving some give-and-take."
+      },
+      "order": 10,
+      "trackOrder": 2
+    },
+    {
+      "id": "ma_workshop",
+      "level": "master",
+      "title": "The Inventor's Workshop",
+      "scene": "workshop",
+      "subtitle": "Test an idea, improve a machine",
+      "goal": "Choose an invention that works well and reliably.",
+      "story": "In science club, Asha wants to innovate a watering device. She designs an efficient model that uses less water. The students experiment with different nozzles and check whether the machine is reliable after several tests.",
+      "words": [
+        {
+          "term": "INNOVATE",
+          "meaning": "To create or improve something using new ideas.",
+          "context": "Asha designs a better way to water plants.",
+          "synonym": "invent",
+          "antonym": "imitate"
+        },
+        {
+          "term": "EFFICIENT",
+          "meaning": "Working well without wasting time or resources.",
+          "context": "The device uses little water but still waters each plant.",
+          "synonym": "effective",
+          "antonym": "wasteful"
+        },
+        {
+          "term": "EXPERIMENT",
+          "meaning": "To test an idea to find out what happens.",
+          "context": "Students try different nozzles and record results.",
+          "synonym": "test",
+          "antonym": "assume"
+        },
+        {
+          "term": "RELIABLE",
+          "meaning": "Able to work or be trusted consistently.",
+          "context": "The device works correctly during repeated trials.",
+          "synonym": "dependable",
+          "antonym": "unreliable"
+        }
+      ],
+      "sentence": "We experiment to build a reliable machine.",
+      "sentencePrompt": "Build a sentence connecting testing to dependable inventions.",
+      "sentenceAlternatives": [
+        "To build a reliable machine we experiment."
+      ],
+      "consequence": "The new nozzle saves water and passes every test.",
+      "wrongConsequence": "The device leaks until the students run more tests.",
+      "pattern": {
+        "question": "Which word has the suffix '-able' meaning 'can be'?",
+        "options": [
+          "reliable",
+          "relief",
+          "relay",
+          "relate"
+        ],
+        "answer": 0,
+        "explain": "Reliable means able to be relied on; -able helps form describing words."
+      },
+      "transfer": {
+        "question": "A bus arrives on time every school day. It is ___ .",
+        "options": [
+          "reliable",
+          "fragile",
+          "ancient",
+          "reluctant"
+        ],
+        "answer": 0,
+        "explain": "Reliable describes something you can consistently depend on."
+      },
+      "order": 11,
+      "trackOrder": 3
+    },
+    {
+      "id": "ma_storm",
+      "level": "master",
+      "title": "The Storm Warning",
+      "scene": "mountain",
+      "subtitle": "Plan wisely before the weather changes",
+      "goal": "Keep a mountain community safe as clouds gather.",
+      "story": "The weather station reports a significant storm. The team must anticipate strong winds and evaluate different routes. Their resilient shelters can withstand heavy rain, but everyone still needs a careful evacuation plan.",
+      "words": [
+        {
+          "term": "SIGNIFICANT",
+          "meaning": "Important or large enough to matter.",
+          "context": "The storm could seriously affect the mountain villages.",
+          "synonym": "important",
+          "antonym": "trivial"
+        },
+        {
+          "term": "ANTICIPATE",
+          "meaning": "To expect and prepare for something ahead of time.",
+          "context": "The team makes a plan before the strong wind starts.",
+          "synonym": "expect",
+          "antonym": "overlook"
+        },
+        {
+          "term": "EVALUATE",
+          "meaning": "To examine and judge different options carefully.",
+          "context": "The team compares the safety of two mountain routes.",
+          "synonym": "assess",
+          "antonym": "ignore"
+        },
+        {
+          "term": "RESILIENT",
+          "meaning": "Able to recover or withstand difficulties.",
+          "context": "The shelters remain standing through heavy rain.",
+          "synonym": "tough",
+          "antonym": "vulnerable"
+        }
+      ],
+      "sentence": "We evaluate routes before the significant storm.",
+      "sentencePrompt": "Build a sentence showing careful decisions before bad weather.",
+      "sentenceAlternatives": [
+        "Before the significant storm we evaluate routes."
+      ],
+      "consequence": "The team chooses the safer route before the storm arrives.",
+      "wrongConsequence": "The team must reconsider after finding a blocked road.",
+      "pattern": {
+        "question": "Which word uses the suffix '-ful' meaning 'full of'?",
+        "options": [
+          "careful",
+          "caring",
+          "careless",
+          "career"
+        ],
+        "answer": 0,
+        "explain": "Careful means full of care; -less means without."
+      },
+      "transfer": {
+        "question": "After a difficult setback, the team returns to work with determination. They are ___ .",
+        "options": [
+          "resilient",
+          "stagnant",
+          "fragile",
+          "reluctant"
+        ],
+        "answer": 0,
+        "explain": "Resilient means able to recover or stay strong during difficulties."
+      },
+      "order": 12,
+      "trackOrder": 4
+    }
+  ]
+}
