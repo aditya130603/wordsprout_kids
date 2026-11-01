@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -7,6 +9,9 @@ import 'package:wordsprout_kids/curriculum.dart';
 import 'package:wordsprout_kids/main.dart';
 
 void main() {
+  final fixture = Curriculum.fromJson(jsonDecode(
+    File('assets/content/words_v1.json').readAsStringSync(),
+  ) as Map<String,dynamic>);
   TestWidgetsFlutterBinding.ensureInitialized();
   setUp(() {
     SharedPreferences.setMockInitialValues({});
@@ -20,7 +25,7 @@ void main() {
       tester.view.resetPhysicalSize();
       tester.view.resetDevicePixelRatio();
     });
-    await tester.pumpWidget(const WordSprout());
+    await tester.pumpWidget(WordSprout(initialCatalog: fixture));
     await tester.pumpAndSettle();
   }
   test('130 words cover A to Z; each has three facts and unique artwork', () async {
