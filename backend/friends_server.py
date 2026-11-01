@@ -386,3 +386,7 @@ def leaderboard(authorization:str|None=Header(None)):
         result.sort(key=lambda r:(-r["weekly_xp"],r["alias"]))
     return {"week_start_utc":start.date().isoformat(),"friends":result,
             "note":"Scores are validated by the server; local offline XP is not synced."}
+
+# Parent-approved live Picture Race rooms (same verified child sessions).
+from backend.picture_race import router as picture_race_router
+app.include_router(picture_race_router)
