@@ -10,6 +10,20 @@ const raceInk=Color(0xFF234F3B);
 const raceLeaf=Color(0xFF75B63D);
 const raceCream=Color(0xFFFFF9EC);
 const raceGold=Color(0xFFE6AE50);
+const raceError=Color(0xFFCE4E49);
+
+/// A tile turns red as soon as its letter does not fit the selected position.
+/// Extra decoy letters are always red when selected; even a genuine letter
+/// placed in the wrong order is highlighted so the child can self-correct.
+bool raceSelectedLetterIsWrong(String answer,List<String> bank,
+    List<int> selections,int position){
+  if(position<0||position>=selections.length||position>=answer.length){
+    return true;
+  }
+  final tileIndex=selections[position];
+  return tileIndex<0||tileIndex>=bank.length||
+    bank[tileIndex].toUpperCase()!=answer[position].toUpperCase();
+}
 
 class RaceSnapshot {
   const RaceSnapshot({required this.code,required this.state,
@@ -321,17 +335,22 @@ class _PictureRaceScreenState extends State<PictureRaceScreen> {
     else const Text('Waiting for the host to start.',
       style:TextStyle(color:raceInk)),
   ]);
-  Widget _tile(String value,{bool filled=false})=>Container(
+  Widget _tile(String value,{bool filled=false,bool incorrect=false})=>Container(
     width:45,height:47,alignment:Alignment.center,
-    decoration:BoxDecoration(color:filled?const Color(0xFFE4F3D7):Colors.white,
+    decoration:BoxDecoration(
+      color:incorrect?const Color(0xFFFFDFDB):
+        filled?const Color(0xFFE4F3D7):Colors.white,
       borderRadius:BorderRadius.circular(12),
-      border:Border.all(color:filled?raceLeaf:const Color(0xFFB9D7A4),
-        width:filled?2:1.5)),
-    child:Text(value,style:const TextStyle(color:raceInk,
+      border:Border.all(color:incorrect?raceError:
+        filled?raceLeaf:const Color(0xFFB9D7A4),width:filled?2:1.5)),
+    child:Text(value,style:TextStyle(color:incorrect?const Color(0xFFAA2C2B):raceInk,
       fontSize:21,fontWeight:FontWeight.w900)));
   Widget _playing(RaceSnapshot r){
     if(r.wordIndex==null)return const Text('Preparing picture…');
-    final done=picked.length==r.tiles.length;
+    final answerWord=widget.catalog.words[r.wordIndex!].spelling;
+    final done=picked.length==answerWord.length;
+    final hasWrong=List.generate(picked.length,(i)=>
+      raceSelectedLetterIsWrong(answerWord,r.tiles,picked,i)).contains(true);
     return Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
       Row(children:[
         const Expanded(child:Text('WHAT’S THIS PICTURE?',style:TextStyle(
@@ -345,8 +364,14 @@ class _PictureRaceScreenState extends State<PictureRaceScreen> {
       const SizedBox(height:12),
       _illustration(r.wordIndex!),
       const SizedBox(height:14),
-      const Text('Make the word',style:TextStyle(
-        color:raceInk,fontWeight:FontWeight.w900,fontSize:19)),
+      Text('Make the word • '+answerWord.length.toString()+' letters',
+        style:const TextStyle(
+          color:raceInk,fontWeight:FontWeight.w900,fontSize:19)),
+      const SizedBox(height:5),
+      Text('Choose the right letters. '+(r.tiles.length-answerWord.length)
+        .toString()+' extra letters are mixed in!',
+        style:const TextStyle(color:Color(0xFF63766A),
+          fontWeight:FontWeight.w700,fontSize:12)),
       const SizedBox(height:9),
       Container(width:double.infinity,constraints:const BoxConstraints(minHeight:63),
         padding:const EdgeInsets.all(8),
@@ -354,9 +379,14 @@ class _PictureRaceScreenState extends State<PictureRaceScreen> {
           border:Border.all(color:const Color(0xFFB5DFA1),width:2),
           borderRadius:BorderRadius.circular(17)),
         child:Wrap(spacing:7,runSpacing:7,children:[
-          for(final i in picked)InkWell(
-            onTap:submitting?null:()=>setState((){picked.remove(i);feedback='';}),
-            child:_tile(r.tiles[i],filled:true)),
+          for(var position=0;position<picked.length;position++)InkWell(
+            key:ValueKey('race_selected_'+position.toString()),
+            onTap:submitting?null:()=>setState((){
+              picked.removeAt(position);feedback='';
+            }),
+            child:_tile(r.tiles[picked[position]],filled:true,
+              incorrect:raceSelectedLetterIsWrong(
+                answerWord,r.tiles,picked,position))),
           if(picked.isEmpty)const Padding(
             padding:EdgeInsets.symmetric(vertical:12),
             child:Text('Tap the letters below!',style:TextStyle(
@@ -370,10 +400,20 @@ class _PictureRaceScreenState extends State<PictureRaceScreen> {
       Wrap(spacing:8,runSpacing:9,children:[
         for(var i=0;i<r.tiles.length;i++)if(!picked.contains(i))
           InkWell(key:ValueKey('race_tile_'+i.toString()),
-            onTap:submitting?null:()=>setState((){
+            onTap:submitting||picked.length>=answerWord.length?null:()=>setState((){
               picked.add(i);feedback='';
             }),child:_tile(r.tiles[i])),
       ]),
+      if(hasWrong)...[
+        const SizedBox(height:8),
+        const Row(children:[
+          Icon(Icons.info_outline_rounded,color:raceError,size:17),
+          SizedBox(width:6),
+          Expanded(child:Text('Red letter? It does not fit here! Tap it to change.',
+            style:TextStyle(color:raceError,fontSize:12,
+              fontWeight:FontWeight.w900))),
+        ]),
+      ],
       const SizedBox(height:11),
       Row(children:[
         TextButton.icon(onPressed:picked.isEmpty?null:()=>setState((){
@@ -384,7 +424,8 @@ class _PictureRaceScreenState extends State<PictureRaceScreen> {
           picked.clear();feedback='';
         }),child:const Text('Clear')),
       ]),
-      _button('Submit spelling',done&&!submitting&&!preview?_submit:null),
+      _button('Submit spelling',
+        done&&!hasWrong&&!submitting&&!preview?_submit:null),
       const SizedBox(height:13),
       _panel(Column(children:[
         const Text('Round scoreboard',style:TextStyle(
