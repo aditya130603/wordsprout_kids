@@ -148,9 +148,10 @@ class _OlderHomeState extends State<OlderHome> {
             ...course!.tracks.map((t)=>_trackCard(t)),
             const SizedBox(height:24),
             Row(children:[
-              const Text('Story Missions',style:TextStyle(
-                color:midnight,fontSize:22,fontWeight:FontWeight.w900)),
-              const Spacer(),
+              const Expanded(child:Text('Story Missions',maxLines:1,
+                 overflow:TextOverflow.ellipsis,style:TextStyle(
+                   color:midnight,fontSize:20,fontWeight:FontWeight.w900))),
+               const SizedBox(width:8),
               Text(course!.forTrack(selected).length.toString()+' STORIES',
                 style:const TextStyle(color:jade,fontWeight:FontWeight.bold,
                   letterSpacing:1.1,fontSize:11)),
