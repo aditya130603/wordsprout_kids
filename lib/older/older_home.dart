@@ -657,7 +657,20 @@ class _OlderMissionScreenState extends State<OlderMissionScreen>{
           const SizedBox(height:12),
         ]))),
       Padding(padding:const EdgeInsets.fromLTRB(22,5,22,18),
-        child:_bottomButton()),
+        child:Column(mainAxisSize:MainAxisSize.min,children:[
+          if(approved&&step!=OlderStep.finish)
+            Padding(padding:const EdgeInsets.only(bottom:7),
+              child:Row(mainAxisAlignment:MainAxisAlignment.center,children:[
+                const Icon(Icons.check_circle_rounded,color:jade,size:18),
+                const SizedBox(width:7),
+                Flexible(child:Text(earnedNow>0
+                  ?'Well done! +'+earnedNow.toString()+' XP earned'
+                  :'Correct! Keep building your skills',
+                  textAlign:TextAlign.center,style:const TextStyle(
+                    color:midnight,fontSize:13,fontWeight:FontWeight.w900))),
+              ])),
+          _bottomButton(),
+        ])),
     ])),
   );
 
@@ -885,6 +898,14 @@ class _OlderMissionScreenState extends State<OlderMissionScreen>{
           color:i<score.stars?const Color(0xFFE8B35E):
             const Color(0xFFD8E0D6)))),
       const SizedBox(height:12),
+      Text('+'+lessonXp.toString()+' XP earned this mission',
+        style:const TextStyle(fontSize:18,color:jade,
+          fontWeight:FontWeight.w900)),
+      if(finishBonusXp>0)Text('Congratulations! +'+
+        finishBonusXp.toString()+' XP completion reward',
+        style:const TextStyle(color:Color(0xFF9F773C),
+          fontSize:12,fontWeight:FontWeight.w800)),
+      const SizedBox(height:7),
       Text(correct.toString()+' correct / '+attempts.toString()+' attempts',
         style:const TextStyle(fontSize:15,color:midnight,
           fontWeight:FontWeight.w700)),
