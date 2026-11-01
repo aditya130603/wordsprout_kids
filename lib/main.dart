@@ -130,7 +130,7 @@ class _HomeState extends State<Home>{
       List.generate(unlocked,(i)=>i).where((i)=>!done.contains(i)).firstOrNull??0),
       color:const Color(0xFFEF856C)),
     const SizedBox(height:11),
-    card(InkWell(onTap:()=>setState(()=>tab=2),child:const Row(children:[
+    card(InkWell(onTap:()=>setState(()=>tab=2),child:Row(children:[
       Container(width:52,height:52,
         decoration:BoxDecoration(color:Color(0xFFFFE6B0),borderRadius:BorderRadius.all(Radius.circular(16))),
         child:Icon(Icons.sports_esports_rounded,size:35,color:Color(0xFFED9B35))),
