@@ -52,7 +52,7 @@ class _HomeState extends State<Home>{
  @override Widget build(BuildContext context)=>Scaffold(
   body:SafeArea(child:Column(children:[
    if(step<0)...[const SizedBox(height:17),heading('🌱 WordSprout')],
-   if(step>=0)Padding(padding:const EdgeInsets.all(12),child:Row(children:[IconButton.filledTonal(onPressed:()=>setState(()=>step=-1),icon:const Icon(Icons.arrow_back)),const Spacer(),...List.generate(5,(i)=>Container(width:30,height:10,margin:const EdgeInsets.all(3),decoration:BoxDecoration(color:i<=step?lime:const Color(0xffe2dfd5),borderRadius:BorderRadius.circular(12))),),const Spacer()]))],
+   if(step>=0)Padding(padding:const EdgeInsets.all(12),child:Row(children:[IconButton.filledTonal(onPressed:()=>setState(()=>step=-1),icon:const Icon(Icons.arrow_back)),const Spacer(),...List.generate(5,(i)=>Container(width:30,height:10,margin:const EdgeInsets.all(3),decoration:BoxDecoration(color:i<=step?lime:const Color(0xffe2dfd5),borderRadius:BorderRadius.circular(12)))),const Spacer()]))],
    Expanded(child:Padding(padding:const EdgeInsets.all(18),child:step>=0?lesson():page())),
   ])),
   bottomNavigationBar:step<0?NavigationBar(selectedIndex:tab,onDestinationSelected:(i)=>setState(()=>tab=i),destinations:const [
@@ -63,7 +63,7 @@ class _HomeState extends State<Home>{
   ]):null,
  );
  Widget page(){
-  if(tab==1)return ListView(children:[heading('Letter A adventure'),const SizedBox(height:20),...List.generate(5,(i)=>Padding(padding:const EdgeInsets.only(bottom:13),child:card(ListTile(onTap:i<unlocked?()=>start(i):null,leading:art(i,size:55),title:Text(words[i].name,style:const TextStyle(fontSize:21,fontWeight:FontWeight.bold,color:green)),subtitle:Text(done.contains(i)?'Learned ✓':i<unlocked?'Tap to learn':'🔒 Learn the first three words'),trailing:const Icon(Icons.chevron_right))))]);
+  if(tab==1)return ListView(children:[heading('Letter A adventure'),const SizedBox(height:20),...List.generate(5,(i)=>Padding(padding:const EdgeInsets.only(bottom:13),child:card(ListTile(onTap:i<unlocked?()=>start(i):null,leading:art(i,size:55),title:Text(words[i].name,style:const TextStyle(fontSize:21,fontWeight:FontWeight.bold,color:green)),subtitle:Text(done.contains(i)?'Learned ✓':i<unlocked?'Tap to learn':'🔒 Learn the first three words'),trailing:const Icon(Icons.chevron_right)))))];
   if(tab==2)return Column(children:[heading('Games & Friends'),const SizedBox(height:25),...['🏁  Spelling Race','❓  Guess in 5','🔍  Word Detective','🎭  WordMayhem'].map((s)=>Padding(padding:const EdgeInsets.only(bottom:15),child:card(ListTile(title:Text(s,style:const TextStyle(fontSize:19,fontWeight:FontWeight.bold,color:green)),trailing:const Icon(Icons.lock_outline))))),const SizedBox(height:18),const Text('Online games require parent-approved friends and a secure game server. Coming later.',textAlign:TextAlign.center)]);
   if(tab==3)return Column(children:[heading('My growing garden 🌿'),const SizedBox(height:35),card(Column(children:[Text(done.length.toString()+' / 5',style:const TextStyle(fontSize:44,fontWeight:FontWeight.w900,color:green)),const Text('Words learned'),const SizedBox(height:16),LinearProgressIndicator(value:done.length/5,minHeight:16,borderRadius:BorderRadius.circular(20))]))]);
   return Column(children:[
