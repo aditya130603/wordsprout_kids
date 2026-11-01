@@ -73,6 +73,7 @@ void main() {
       });
       await tester.pumpWidget(MaterialApp(
         theme:ThemeData(useMaterial3:true,
+          scaffoldBackgroundColor:const Color(0xFFFFF8EB),
           colorScheme:ColorScheme.fromSeed(seedColor:const Color(0xFF77B932))),
         home:Home(initialCatalog:fixture,previewWordIndex:index)));
       await tester.pumpAndSettle();
