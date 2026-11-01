@@ -12,6 +12,8 @@ jobs:
         with:
           channel: stable
           cache: true
+      - name: Generate and validate 130 offline SVG assets
+        run: python3 scripts/build_assets.py
       - name: Generate Android scaffold
         run: flutter create --platforms=android --project-name wordsprout_kids .
       - name: Install dependencies
