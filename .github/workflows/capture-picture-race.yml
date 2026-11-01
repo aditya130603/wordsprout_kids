@@ -1,0 +1,39 @@
+name: Actual Picture Race game screenshots
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'lib/games/**'
+      - 'test/picture_race_screenshot_test.dart'
+      - '.github/workflows/capture-picture-race.yml'
+  workflow_dispatch:
+jobs:
+  capture-real-game-widgets:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          cache: true
+      - name: Package the same actual WordSprout illustrations
+        run: python3 scripts/build_assets.py
+      - name: Install Dart dependencies
+        run: flutter pub get
+      - name: Render real Flutter game widgets in lobby, race and winner states
+        run: flutter test --update-goldens test/picture_race_screenshot_test.dart
+      - name: Check all three real screens exist
+        run: |
+          test -s test/screenshots/23-picture-race-lobby.png
+          test -s test/screenshots/24-picture-race-round.png
+          test -s test/screenshots/25-picture-race-winner.png
+      - uses: actions/upload-artifact@v4
+        with:
+          name: word-sprout-real-picture-race-flutter-screens
+          path: |
+            test/screenshots/23-picture-race-lobby.png
+            test/screenshots/24-picture-race-round.png
+            test/screenshots/25-picture-race-winner.png
+          if-no-files-found: error
+          retention-days: 14
