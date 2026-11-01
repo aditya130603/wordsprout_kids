@@ -61,7 +61,7 @@
           "meaning": "To find something you did not know about before.",
           "context": "They find the hidden lantern near a tree.",
           "synonym": "find",
-          "antonym": "lose"
+          "antonym": "hide"
         }
       ],
       "sentence": "Maya was cautious near the dark path.",
@@ -117,7 +117,7 @@
           "meaning": "To save someone from danger.",
           "context": "Tara helps an adult save the puppy.",
           "synonym": "save",
-          "antonym": "abandon"
+          "antonym": "leave in danger"
         },
         {
           "term": "SHELTER",
@@ -131,7 +131,7 @@
           "meaning": "Feeling thankful for someone's kindness.",
           "context": "The owner says thank you with a big smile.",
           "synonym": "thankful",
-          "antonym": "unthankful"
+          "antonym": "ungrateful"
         }
       ],
       "sentence": "The puppy found shelter from the rain.",
@@ -486,9 +486,7 @@
       ],
       "sentence": "We investigate how the ancient diary vanished.",
       "sentencePrompt": "Build a sentence about solving the diary mystery.",
-      "sentenceAlternatives": [
-        "How the ancient diary vanished we investigate."
-      ],
+      "sentenceAlternatives": [],
       "consequence": "The friends examine the shelf and recover the missing diary.",
       "wrongConsequence": "The diary remains hidden until the clues are checked.",
       "pattern": {
@@ -626,9 +624,7 @@
       ],
       "sentence": "Evidence helps us understand the consequences of pollution.",
       "sentencePrompt": "Build a sentence explaining why observations matter.",
-      "sentenceAlternatives": [
-        "The consequences of pollution are understood through evidence."
-      ],
+      "sentenceAlternatives": [],
       "consequence": "The students present evidence and a realistic plan to help the pond.",
       "wrongConsequence": "Without observations, their explanation lacks support.",
       "pattern": {
@@ -733,7 +729,7 @@
       "scene": "workshop",
       "subtitle": "Test an idea, improve a machine",
       "goal": "Choose an invention that works well and reliably.",
-      "story": "In science club, Asha wants to innovate a watering device. She designs an efficient model that uses less water. The students experiment with different nozzles and check whether the machine is reliable after several tests.",
+      "story": "In science club, Asha wants to innovate by improving a watering device. She designs an efficient model that uses less water. The students experiment with different nozzles and check whether the machine is reliable after several tests.",
       "words": [
         {
           "term": "INNOVATE",
