@@ -23,6 +23,7 @@ class FriendsApi {
   static const FlutterSecureStorage _vault=FlutterSecureStorage(
     aOptions:AndroidOptions(encryptedSharedPreferences:true));
   static const tokenKey='wordsprout_private_child_session_v1';
+  static Future<void> _answerQueue=Future<void>.value();
 
   bool get configured {
     final u=Uri.tryParse(endpoint);
@@ -105,13 +106,19 @@ class FriendsApi {
   Future<void> submitAnswer({
     required String missionId,required String stage,
     required int index,required String response,
-  }) async {
-    if(!configured)return;
-    try{
-      if(!await paired)return;
-      await _request('POST','/v1/answer',payload:{
-        'mission_id':missionId,'stage':stage,'index':index,'response':response
-      });
-    }catch(_){ /* Offline play must never be interrupted. */ }
+  }) {
+    if(!configured)return Future<void>.value();
+    // Preserve the order of wrong attempts followed by corrections. A fast
+    // child may tap again before the first HTTP request has completed.
+    _answerQueue=_answerQueue.then((_) async {
+      try {
+        if(!await paired)return;
+        await _request('POST','/v1/answer',payload:{
+          'mission_id':missionId,'stage':stage,
+          'index':index,'response':response
+        });
+      }catch(_){ /* Network outages must not stop a learning mission. */ }
+    });
+    return _answerQueue;
   }
 }
