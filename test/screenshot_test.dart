@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
@@ -5,8 +6,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wordsprout_kids/main.dart';
+import 'package:wordsprout_kids/curriculum.dart';
 
 void main() {
+  final fixture = Curriculum.fromJson(jsonDecode(
+    File('assets/content/words_v1.json').readAsStringSync(),
+  ) as Map<String,dynamic>);
   TestWidgetsFlutterBinding.ensureInitialized();
 
   setUpAll(() async {
@@ -45,7 +50,7 @@ void main() {
       tester.view.resetPhysicalSize();
       tester.view.resetDevicePixelRatio();
     });
-    await tester.pumpWidget(const WordSprout());
+    await tester.pumpWidget(WordSprout(initialCatalog: fixture));
     await tester.pumpAndSettle();
   }
 
