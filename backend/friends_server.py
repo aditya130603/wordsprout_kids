@@ -93,9 +93,14 @@ def bearer(authorization,kind):
     if len(token)>120:
         raise HTTPException(401,"Invalid session")
     with db() as c:
-        row=c.execute("SELECT subject_id FROM tokens WHERE digest=? AND kind=?",
+        row=c.execute("SELECT subject_id,created_at FROM tokens WHERE digest=? AND kind=?",
                       (digest(token),kind)).fetchone()
-    if not row:raise HTTPException(401,"Invalid session")
+        if row:
+            ttl=12*3600 if kind=="parent" else 30*86400
+            if row["created_at"]+ttl<int(time.time()):
+                c.execute("DELETE FROM tokens WHERE digest=?",(digest(token),))
+                row=None
+    if not row:raise HTTPException(401,"Invalid or expired session")
     return row["subject_id"]
 
 def issue_token(conn,subject,kind):
