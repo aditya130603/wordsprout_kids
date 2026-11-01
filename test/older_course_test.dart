@@ -92,7 +92,8 @@ void main(){
     await tester.pumpWidget(MaterialApp(home:OlderHome(initialCourse:course)));
     await tester.pumpAndSettle();
     final tile=find.byKey(const ValueKey('older_mission_ex_lantern'));
-    await tester.ensureVisible(tile);
+    await tester.scrollUntilVisible(tile, 180,
+      scrollable:find.byType(Scrollable).first, maxScrolls:20);
     await tester.pumpAndSettle();
     await tester.tap(tile);
     await tester.pumpAndSettle();
