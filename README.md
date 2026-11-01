@@ -15,6 +15,25 @@ An offline-first Flutter English-learning app for **ages 4–6**. The first comp
 
 Letter **X** includes X-RAY and XYLOPHONE and also familiar words **FOX**, **BOX**, and **TAXI** that contain the letter X. It does not misrepresent these as X-initial words.
 
+## First-install PNG artwork: one-time binary upload
+
+The app now imports `assets/content/starter_pack.zip` during first launch.
+That file contains all **52 eight-frame animations**, their `00007` final
+stills, and the **137-word** starter/bonus catalog. It needs **no internet**
+to display this content once included in the APK.
+
+**Required before the new APK can be released:** upload the supplied
+`starter_pack.zip` to GitHub at exactly
+`assets/content/starter_pack.zip`. This connected GitHub workflow currently
+cannot upload ZIP binary bytes directly, so the app code has been committed
+but the first-install binary asset still needs this one-time addition.
+CI intentionally blocks release APK builds when the ZIP is absent.
+`scripts/verify_starter_pack.py` checks the exact source before packaging.
+
+After that one-time release, the separate online system below can publish
+new fact/picture/word packs without a Play Store update, once the HTTPS
+manifest URL is configured in GitHub Actions.
+
 ## Online content packs (no store update for words)
 
 WordSprout now supports **HTTPS word/artwork packs**: corrections, extra
