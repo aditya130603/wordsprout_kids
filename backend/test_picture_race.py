@@ -22,7 +22,7 @@ def test_random_letters_keep_repeats_and_do_not_present_solution_in_order():
     assert len(letters)==8 # 5 word letters + 3 distinct distractors
     assert all(letters.count(ch)=="APPLE".count(ch) for ch in set("APPLE"))
     assert sorted(letter for letter in letters if letter not in "APPLE")==sorted(
-        letter for letter in set(letters) if letter not in word)
+        letter for letter in set(letters) if letter not in "APPLE")
     assert len([x for x in letters if x not in "APPLE"])==3
     assert letters[:5]!=list("APPLE")
     assert letters==tiles_for("ABC123",3,"left-kid","APPLE")
