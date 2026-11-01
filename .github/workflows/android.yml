@@ -14,8 +14,6 @@ jobs:
           cache: true
       - name: Generate and validate 130 offline SVG assets
         run: python3 scripts/build_assets.py
-      - name: Verify bundled user-supplied PNG sequences
-        run: python3 scripts/verify_starter_pack.py
       - name: Generate Android scaffold
         run: flutter create --platforms=android --project-name wordsprout_kids .
       - name: Install dependencies
@@ -32,6 +30,8 @@ jobs:
           if-no-files-found: warn
       - name: Test
         run: flutter test
+      - name: Verify bundled user-supplied PNG sequences
+        run: python3 scripts/verify_starter_pack.py
       - name: Build release APK
         run: flutter build apk --release --dart-define=WORDSPROUT_CONTENT_URL="${{ vars.WORDSPROUT_CONTENT_URL }}"
       - uses: actions/upload-artifact@v4
