@@ -35,8 +35,15 @@ class WordSprout extends StatelessWidget {
 }
 
 class Home extends StatefulWidget {
-  const Home({super.key, this.initialCatalog});
+  const Home({super.key, this.initialCatalog, this.previewWordIndex});
   final Curriculum? initialCatalog;
+
+  /// For deterministic golden screenshots of the *real lesson widget*.
+  /// Production app instances never set this. This does not unlock words or
+  /// alter learner progress for installed users.
+  @visibleForTesting
+  final int? previewWordIndex;
+
   @override
   State<Home> createState() => _HomeState();
 }
@@ -96,6 +103,12 @@ class _HomeState extends State<Home> {
     tts.setSpeechRate(.44);
     if (widget.initialCatalog != null) {
       catalog = widget.initialCatalog;
+      final preview = widget.previewWordIndex;
+      if (preview != null && preview >= 0 &&
+          preview < widget.initialCatalog!.words.length) {
+        wordIndex = preview;
+        step = 0; // Actual Word Discovery screen, not a simulated mockup.
+      }
     } else {
       _restore();
     }
