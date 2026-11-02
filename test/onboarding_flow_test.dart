@@ -4,7 +4,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wordsprout_kids/app_v2.dart';
 import 'package:wordsprout_kids/onboarding/learner_profile.dart';
-import 'package:wordsprout_kids/onboarding/onboarding_flow.dart';
 
 void main(){
   TestWidgetsFlutterBinding.ensureInitialized();
