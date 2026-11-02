@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'curriculum.dart';
 import 'content_store.dart';
 import 'older/older_home.dart';
+import 'older/older_course.dart';
 import 'grammar/tiny_grammar_home.dart';
 import 'family_settings.dart';
 import 'games/picture_race_screen.dart';
@@ -21,8 +22,11 @@ const sun = Color(0xFFFFDF7C);
 const coral = Color(0xFFEF856C);
 
 class WordSprout extends StatelessWidget {
-  const WordSprout({super.key, this.initialCatalog, this.quizSeed});
+  const WordSprout({super.key, this.initialCatalog, this.quizSeed,
+    this.initialOlderCourse});
   final Curriculum? initialCatalog;
+  @visibleForTesting
+  final OlderCourse? initialOlderCourse;
   /// Test-only seed to make screenshot goldens stable despite random answers.
   @visibleForTesting
   final int? quizSeed;
@@ -38,7 +42,7 @@ class WordSprout extends StatelessWidget {
     home: OnboardingGate(
       skipOnboarding:initialCatalog!=null,
       preschoolBuilder:()=>Home(initialCatalog:initialCatalog,quizSeed:quizSeed),
-      olderBuilder:()=>const OlderHome()),
+      olderBuilder:()=>OlderHome(initialCourse:initialOlderCourse)),
   );
 }
 
