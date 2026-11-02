@@ -1,6 +1,45 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><defs><linearGradient id="skin" x1=".1" x2=".85" y1=".2" y2="1"><stop stop-color="#FFCCA0"/><stop offset="1" stop-color="#E6A46B"/></linearGradient><linearGradient id="shirt" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8BD3E3"/><stop offset="1" stop-color="#4DA1BB"/></linearGradient></defs>
-<ellipse cx="129" cy="229" rx="93" ry="12" fill="#E8DBBE"/>
-<path d="M33 211q-2-33 21-55l45 16q-8 20-9 39z" fill="url(#shirt)" stroke="#3A8DA7" stroke-width="5"/>
-<path d="M77 188c13-27 36-36 62-32l26 1q14 2 19-15l3-32q-3-3-9-3-5 0-8 8l-1-33q-1-12 8-15 10-2 14 9l4 31 1-36q1-11 11-11 12 1 11 13l-1 36 2-24q2-12 12-10 12 2 10 14l-7 48q3 24-21 41-14 11-37 9l-28-2c-13-2-16 8-27 24l-16 16-48-15z" fill="url(#skin)" stroke="#A8704B" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>
-<path d="M122 162q13-11 31-12 11 0 18 12" stroke="#E1A16F" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M177 81l8 25M205 77l-3 34M229 98l-7 22" fill="none" stroke="#DB9768" stroke-width="4" stroke-linecap="round"/>
-<path d="M43 172q24-4 47 19" stroke="#D6F4F6" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M17 218h55" stroke="#64AE68" stroke-width="5" stroke-linecap="round"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+<defs>
+  <linearGradient id="armSkin" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#FFD2AA"/><stop offset="1" stop-color="#EDAA78"/></linearGradient>
+  <linearGradient id="armShirt" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#97DDEA"/><stop offset="1" stop-color="#58ACC9"/></linearGradient>
+</defs>
+<circle cx="128" cy="128" r="115" fill="#F4F9E8"/>
+<ellipse cx="130" cy="236" rx="86" ry="9" fill="#DDE4C8"/>
+<!-- Child's body: the highlighted arm visibly begins at the shoulder. -->
+<path d="M72 236L73 172Q74 144 99 139L139 138Q155 139 163 158L161 236Z"
+  fill="url(#armShirt)" stroke="#4C94AD" stroke-width="5" stroke-linejoin="round"/>
+<path d="M93 143Q113 165 134 143" fill="none" stroke="#D5F3F3" stroke-width="5" stroke-linecap="round"/>
+<path d="M96 143L96 164L125 175L147 154" fill="none" stroke="#66BDD2" stroke-width="5"/>
+<!-- Friendly face and hair. -->
+<ellipse cx="115" cy="89" rx="42" ry="49" fill="url(#armSkin)" stroke="#BB845F" stroke-width="4"/>
+<path d="M76 93Q62 42 100 31Q137 15 157 60L158 81Q150 64 143 62Q132 78 106 75Q88 83 76 93Z"
+  fill="#744A37" stroke="#654331" stroke-width="3"/>
+<path d="M84 67Q94 47 114 48M114 47Q137 42 148 60" fill="none" stroke="#98654A" stroke-width="7" stroke-linecap="round"/>
+<ellipse cx="96" cy="96" rx="5" ry="7" fill="#44352C"/><ellipse cx="133" cy="96" rx="5" ry="7" fill="#44352C"/>
+<circle cx="97" cy="94" r="1.5" fill="white"/><circle cx="134" cy="94" r="1.5" fill="white"/>
+<circle cx="82" cy="113" r="7" fill="#F0A07F" opacity=".6"/><circle cx="146" cy="113" r="7" fill="#F0A07F" opacity=".6"/>
+<path d="M103 121Q114 131 127 119" fill="none" stroke="#AA6F58" stroke-width="3.5" stroke-linecap="round"/>
+<!-- The complete raised ARM: upper arm, elbow, forearm and attached hand. -->
+<path d="M151 158Q172 172 188 172Q202 171 204 151L206 97"
+  fill="none" stroke="#A66E50" stroke-width="43" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M151 158Q172 172 188 172Q202 171 204 151L206 97"
+  fill="none" stroke="url(#armSkin)" stroke-width="35" stroke-linecap="round" stroke-linejoin="round"/>
+<!-- Open palm and four separate fingers (part of the same arm). -->
+<ellipse cx="206" cy="84" rx="19" ry="22" fill="url(#armSkin)" stroke="#AC7855" stroke-width="3.5"/>
+<g fill="none" stroke="#AC7855" stroke-width="13" stroke-linecap="round">
+  <path d="M190 80L186 47"/><path d="M201 69L199 36"/><path d="M214 68L216 37"/><path d="M225 76L230 51"/>
+</g>
+<g fill="none" stroke="#F7C396" stroke-width="8.5" stroke-linecap="round">
+  <path d="M190 80L186 47"/><path d="M201 69L199 36"/><path d="M214 68L216 37"/><path d="M225 76L230 51"/>
+</g>
+<path d="M189 99Q179 88 171 80Q164 75 160 82Q156 89 167 101L184 119"
+  fill="url(#armSkin)" stroke="#AC7855" stroke-width="3.5" stroke-linejoin="round"/>
+<path d="M190 167Q201 164 202 151" fill="none" stroke="#E9A375" stroke-width="4" stroke-linecap="round"/>
+<!-- Sleeve at shoulder connects the garment to the upper arm. -->
+<path d="M139 140Q163 136 171 165L163 179Q147 173 135 165Z"
+  fill="url(#armShirt)" stroke="#4C94AD" stroke-width="4" stroke-linejoin="round"/>
+<path d="M163 178Q165 171 171 165" fill="none" stroke="#D7F4F2" stroke-width="4" stroke-linecap="round"/>
+<!-- A subtle highlight guides the eye to the raised elbow/forearm. -->
+<path d="M226 137Q235 160 220 182" fill="none" stroke="#8CC46A" stroke-width="5" stroke-linecap="round"/>
+<path d="M211 179L219 191L230 182" fill="none" stroke="#8CC46A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
