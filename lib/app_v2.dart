@@ -12,6 +12,7 @@ import 'older/older_home.dart';
 import 'grammar/tiny_grammar_home.dart';
 import 'family_settings.dart';
 import 'games/picture_race_screen.dart';
+import 'onboarding/onboarding_gate.dart';
 
 const forest = Color(0xFF24582E);
 const leaf = Color(0xFF77B932);
@@ -34,7 +35,10 @@ class WordSprout extends StatelessWidget {
       scaffoldBackgroundColor: cream,
       colorScheme: ColorScheme.fromSeed(seedColor: leaf),
     ),
-    home: Home(initialCatalog: initialCatalog,quizSeed:quizSeed),
+    home: OnboardingGate(
+      skipOnboarding:initialCatalog!=null,
+      preschoolBuilder:()=>Home(initialCatalog:initialCatalog,quizSeed:quizSeed),
+      olderBuilder:()=>const OlderHome()),
   );
 }
 
