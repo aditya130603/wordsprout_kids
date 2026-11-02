@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'onboarding/learner_profile.dart';
+import 'onboarding/onboarding_flow.dart';
 
 /// Private friends is discoverable by default. Parents can disable access,
 /// while the actual online pairing still requires parent verification.
@@ -15,16 +17,27 @@ class FamilySettings extends StatefulWidget {
 class _FamilySettingsState extends State<FamilySettings>{
   bool league=true;
   bool loaded=false;
+  LearnerProfile? learner;
   @override
   void initState(){super.initState();_load();}
   Future<void> _load()async{
     final enabled=await FamilySettings.leagueEnabled();
-    if(mounted)setState((){league=enabled;loaded=true;});
+    final active=await LearnerProfile.load();
+    if(mounted)setState((){
+      league=enabled;loaded=true;learner=active;
+    });
   }
   Future<void> _change(bool value)async{
     final prefs=await SharedPreferences.getInstance();
     await prefs.setBool(FamilySettings.leagueKey,value);
     if(mounted)setState(()=>league=value);
+  }
+  Future<void> _editLearner()async{
+    if(learner==null)return;
+    final updated=await Navigator.of(context).push<LearnerProfile>(
+      MaterialPageRoute(builder:(context)=>WordSproutOnboarding(
+        initialProfile:learner,editMode:true,onFinished:(_){ })));
+    if(mounted&&updated!=null)setState(()=>learner=updated);
   }
   @override
   Widget build(BuildContext context)=>Scaffold(
@@ -40,6 +53,31 @@ class _FamilySettingsState extends State<FamilySettings>{
           style:TextStyle(fontSize:24,color:Color(0xFF24582E),
             fontWeight:FontWeight.w900)),
         const SizedBox(height:18),
+        if(learner!=null)...[
+          Material(color:Colors.white,
+            borderRadius:BorderRadius.circular(20),
+            clipBehavior:Clip.antiAlias,
+            child:ListTile(
+              key:const ValueKey('edit_learner_profile'),
+              contentPadding:const EdgeInsets.symmetric(
+                horizontal:15,vertical:8),
+              leading:const CircleAvatar(
+                backgroundColor:Color(0xFFE5F4D5),
+                child:Icon(Icons.emoji_nature_rounded,
+                  color:Color(0xFF4E9A48))),
+              title:Text(learner!.name,
+                style:const TextStyle(fontSize:17,
+                  fontWeight:FontWeight.w900,color:Color(0xFF24582E))),
+              subtitle:Text('Ages '+learner!.ageGroup+
+                (learner!.older?' • '+learner!.track:'')+
+                '\nEdit name or learning adventure',
+                style:const TextStyle(color:Color(0xFF60755A))),
+              isThreeLine:true,
+              trailing:const Icon(Icons.edit_rounded,
+                color:Color(0xFF649B4E)),
+              onTap:_editLearner)),
+          const SizedBox(height:14),
+        ],
         Material(color:Colors.white,
           clipBehavior:Clip.antiAlias,
           shape:RoundedRectangleBorder(
