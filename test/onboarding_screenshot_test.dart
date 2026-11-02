@@ -18,8 +18,8 @@ void main() {
     final result=(await Process.run('which',['flutter'])).stdout.toString().trim();
     if(result.isNotEmpty){
       final sdk=File(result).resolveSymbolicLinksSync();
-      final file=File(sdk).parent.parent.path+
-        '/bin/cache/artifacts/material_fonts/MaterialIcons-Regular.otf';
+      final file=File(File(sdk).parent.parent.path+
+        '/bin/cache/artifacts/material_fonts/MaterialIcons-Regular.otf');
       if(await file.exists()){
         final loader=FontLoader('MaterialIcons');
         loader.addFont(Future.value(
