@@ -44,6 +44,11 @@ void main() {
   testWidgets('capture actual illustrated name and age onboarding',(tester)async{
     await launch(tester);
     expect(find.byKey(const ValueKey('onboarding_hero')),findsOneWidget);
+    final hero=tester.widget<Image>(
+      find.byKey(const ValueKey('onboarding_hero')));
+    expect((hero.image as AssetImage).assetName,
+      'assets/scene/onboarding_explorers.webp');
+    expect(find.byType(Image),findsWidgets);
     await expectLater(find.byType(Scaffold),
       matchesGoldenFile('screenshots/28-onboarding-name-and-age.png'));
   });
