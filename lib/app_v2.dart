@@ -622,10 +622,6 @@ class _HomeState extends State<Home> {
           ),
         ));
       }),
-      if(unlocked && List.generate(5,(i)=>first+i).every(completed.contains)
-         && !tested.contains(selectedLetter))
-        Padding(padding:const EdgeInsets.all(8),
-          child:button('Take Letter '+nameOf(selectedLetter)+' Test',continueLearning)),
       if(entries.length>130)...[
         const SizedBox(height:20),
         title('Extra Words • '+(entries.length-130).toString()),
@@ -693,8 +689,8 @@ class _HomeState extends State<Home> {
         borderRadius:BorderRadius.circular(18),color:leaf,
         backgroundColor:const Color(0xFFE8F2D8)),
       const SizedBox(height:13),
-      Text(tested.length.toString()+'/26 letter tests • '+
-        checkpoints.length.toString()+'/6 checkpoints',
+      Text(tested.length.toString()+'/26 letters learned • '+
+        checkpoints.length.toString()+'/5 group checkpoints',
         style:const TextStyle(color:forest)),
     ])),
     if (contentStore.manifestUrl.isNotEmpty) ...[
@@ -724,8 +720,8 @@ class _HomeState extends State<Home> {
   }
   Widget subtitle()=>Padding(padding:const EdgeInsets.only(bottom:7),
     child:Text(assessmentMode
-      ?(checkpointMode?'Checkpoint':'Letter '+nameOf(testLetter)+' test')+
-        ' • '+(question+1).toString()+'/'+assessmentItems.length.toString()
+      ?'Mixed alphabet checkpoint • '+
+        (question+1).toString()+'/'+assessmentItems.length.toString()
       :reviewMode?'Review word':'Learn Letter '+current.letter,
       style:const TextStyle(color:forest,fontSize:13,fontWeight:FontWeight.w700)));
   Widget discover()=>Column(children:[
@@ -792,32 +788,29 @@ class _HomeState extends State<Home> {
     ]),
   ]);
   Widget recognitionScreen() {
-    final first=wordIndex~/5*5;
-    final choices=wordIndex<130
-      ? [wordIndex,first+(wordIndex%5+1)%5,
-         first+(wordIndex%5+2)%5,first+(wordIndex%5+3)%5]
-      : [wordIndex,0,1,2];
     return Column(children:[
       subtitle(),title('Tap the '+current.name+'!'),
       audio('Find the '+current.pronunciation),const SizedBox(height:15),
       Expanded(child:GridView.count(crossAxisCount:2,
         mainAxisSpacing:12,crossAxisSpacing:12,childAspectRatio:1,
         physics:const NeverScrollableScrollPhysics(),
-        children:choices.map((i)=>GestureDetector(onTap:()=>checkPicture(i),
+        children:pictureChoices.map((i)=>GestureDetector(
+          key:ValueKey('picture_option_'+i.toString()),
+          onTap:()=>checkPicture(i),
           child:card(Center(child:illustration(i,size:116))))).toList())),
       Text(feedback,style:const TextStyle(
         color:Colors.deepOrange,fontWeight:FontWeight.bold)),
     ]);
   }
   Widget factScreen(){
-    final options=[current.facts.first,entries[(wordIndex+36)%130].facts.first,
-      entries[(wordIndex+79)%130].facts.first];
     return Column(children:[
       subtitle(),title('Which fact is about '+current.name+'?'),
       Expanded(child:Center(child:illustration(wordIndex,size:158))),
-      ...options.asMap().entries.map((e)=>Padding(
+      ...factChoices.asMap().entries.map((e)=>Padding(
         padding:const EdgeInsets.only(bottom:11),
-        child:card(ListTile(onTap:()=>checkFact(e.key),
+        child:card(ListTile(
+          key:ValueKey('fact_option_'+e.key.toString()),
+          onTap:()=>checkFact(e.key),
           title:Text(e.value,style:const TextStyle(
             fontWeight:FontWeight.bold,fontSize:15,color:forest)),
           trailing:IconButton(onPressed:()=>say(e.value),
