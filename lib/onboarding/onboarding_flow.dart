@@ -151,7 +151,7 @@ class _WordSproutOnboardingState extends State<WordSproutOnboarding> {
             key:const ValueKey('onboarding_hero'),
             width:double.infinity,height:207,
             fit:BoxFit.cover,
-            filterQuality:FilterQuality.medium,
+            filterQuality:FilterQuality.high,
             semanticLabel:'Children exploring a bright mountain garden'))),
       Container(
         padding:const EdgeInsets.all(18),
