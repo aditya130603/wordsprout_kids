@@ -107,14 +107,16 @@ class _WordSproutOnboardingState extends State<WordSproutOnboarding> {
                 foregroundColor:Colors.white,
                 shape:RoundedRectangleBorder(
                   borderRadius:BorderRadius.circular(19))),
-              child:Row(mainAxisAlignment:MainAxisAlignment.center,children:[
+              child:FittedBox(fit:BoxFit.scaleDown,
+                child:Row(mainAxisSize:MainAxisSize.min,
+                  mainAxisAlignment:MainAxisAlignment.center,children:[
                 Text(saving?'Saving…':pathPage?'Start Adventure':'Continue',
                   style:const TextStyle(
                     fontSize:20,fontWeight:FontWeight.w900)),
                 const SizedBox(width:11),
                 Icon(pathPage?Icons.rocket_launch_rounded:
                   Icons.arrow_forward_rounded,size:22),
-              ])))),
+              ]))))),
       ]),
     ))),
   );
@@ -256,8 +258,9 @@ class _WordSproutOnboardingState extends State<WordSproutOnboarding> {
       const Row(mainAxisAlignment:MainAxisAlignment.center,children:[
         Icon(Icons.favorite_outline_rounded,color:_deep,size:17),
         SizedBox(width:6),
-        Text('All paths make learning fun!',
-          style:TextStyle(color:_sub,fontSize:12)),
+        Flexible(child:Text('All paths make learning fun!',
+          textAlign:TextAlign.center,
+          style:TextStyle(color:_sub,fontSize:12))),
       ]),
     ]);
 
