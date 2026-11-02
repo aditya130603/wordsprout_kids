@@ -66,13 +66,17 @@ class _HomeState extends State<Home> {
   int question = 0, testLetter = 0;
   List<String> tiles = [];
   List<int> selectedTiles = [];
+  final math.Random _quizRandom = math.Random();
+  List<int> pictureChoices = [];
+  List<String> factChoices = [];
+  int correctFactIndex = -1;
 
   List<Word> get entries => catalog!.words;
   Word get current => entries[wordIndex];
   String nameOf(int letterIndex) => String.fromCharCode(65 + letterIndex);
   bool get graduated => tested.length == 26 && checkpoints.contains(25);
   int get dueCheckpoint {
-    for (final end in [4, 9, 14, 19, 24, 25]) {
+    for (final end in [4, 9, 14, 19, 25]) {
       final begin = end == 25 ? 20 : end - 4;
       if (!checkpoints.contains(end) &&
           List.generate(end - begin + 1, (i) => begin + i).every(tested.contains)) {
@@ -143,8 +147,11 @@ class _HomeState extends State<Home> {
         imageDirectory = loaded.directory;
         completed = (prefs.getStringList('done') ?? []).map(int.parse)
             .where((i) => i >= 0 && i < loaded.catalog.words.length).toSet();
-        tested = (prefs.getStringList('letter_tests') ?? []).map(int.parse).toSet();
-        checkpoints = (prefs.getStringList('checkpoints') ?? []).map(int.parse).toSet();
+        // A letter is completed by learning its five words. Older progress is preserved.
+        tested = {for(var l=0;l<26;l++)
+          if(List.generate(5,(i)=>l*5+i).every(completed.contains)) l};
+        checkpoints = (prefs.getStringList('checkpoints') ?? []).map(int.parse)
+          .where((end)=>[4,9,14,19,25].contains(end)).toSet();
         reviewDates = decodePairs(prefs.getStringList('review_dates') ?? []);
         reviewStages = decodePairs(prefs.getStringList('review_stages') ?? []);
       });
@@ -237,7 +244,7 @@ class _HomeState extends State<Home> {
       return;
     }
     if (dueCheckpoint >= 0) {
-      beginTest(checkpoint: true);
+      beginTest();
       return;
     }
     final first = activeLetter * 5;
@@ -245,9 +252,20 @@ class _HomeState extends State<Home> {
         .where((i) => !completed.contains(i));
     if (next.isNotEmpty) {
       openWord(next.first);
-    } else if (List.generate(5, (i) => first+i).every(completed.contains)) {
-      beginTest();
     }
+  }
+  void preparePictureChoices() {
+    final first=wordIndex~/5*5;
+    pictureChoices=wordIndex<130
+      ? [wordIndex,first+(wordIndex%5+1)%5,
+         first+(wordIndex%5+2)%5,first+(wordIndex%5+3)%5]
+      : [wordIndex,0,1,2];
+    pictureChoices.shuffle(_quizRandom);
+  }
+  void prepareFactChoices() {
+    factChoices=[current.facts.first,entries[(wordIndex+36)%130].facts.first,
+      entries[(wordIndex+79)%130].facts.first]..shuffle(_quizRandom);
+    correctFactIndex=factChoices.indexOf(current.facts.first);
   }
   void prepareTiles() {
     final letters = current.spelling.split('');
@@ -267,7 +285,7 @@ class _HomeState extends State<Home> {
       if (assessmentMode) {
         advanceTest();
       } else {
-        setState(() { step=2; feedback=''; });
+        setState(() { preparePictureChoices(); step=2; feedback=''; });
         say('Great! Find the picture.');
       }
     } else {
@@ -280,7 +298,7 @@ class _HomeState extends State<Home> {
     } else if (assessmentMode) {
       advanceTest();
     } else {
-      setState(() { step=3; feedback=''; });
+      setState(() { prepareFactChoices(); step=3; feedback=''; });
       say('Great! Pick a true fact.');
     }
   }
@@ -292,7 +310,7 @@ class _HomeState extends State<Home> {
       days: days[math.min(stage-1, days.length-1)])).millisecondsSinceEpoch;
   }
   void checkFact(int answer) {
-    if (answer != 0) {
+    if (answer != correctFactIndex) {
       setState(() => feedback = 'Listen again and try!');
       return;
     }
@@ -302,6 +320,11 @@ class _HomeState extends State<Home> {
     }
     setState(() {
       completed.add(wordIndex);
+      final letter=wordIndex~/5;
+      if(wordIndex<130&&List.generate(5,(i)=>letter*5+i).every(completed.contains)) {
+        tested.add(letter);
+      }
+      selectedLetter=activeLetter;
       scheduleRevision(wordIndex, revisited: reviewMode);
       celebration = reviewMode ? 'Review complete!' : 'You learned ' + current.name + '!';
       step=4;
