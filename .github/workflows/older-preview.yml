@@ -12,6 +12,9 @@ on:
       - 'test/grammar_*'
       - 'test/family_settings_test.dart'
       - 'lib/app_v2.dart'
+      - 'lib/onboarding/**'
+      - 'assets/scene/onboarding_journey.svg'
+      - 'test/onboarding_*'
       - 'assets/content/older_missions_v1.json'
       - 'test/older_*'
       - 'test/picture_race_*'
@@ -52,6 +55,8 @@ jobs:
         run: flutter test --update-goldens test/picture_race_screenshot_test.dart
       - name: Render random alphabet learning screens
         run: flutter test --update-goldens test/real_random_alphabet_screenshot_test.dart
+      - name: Render actual onboarding screenshots
+        run: flutter test --update-goldens test/onboarding_screenshot_test.dart
       - name: Run all tests
         run: flutter test
       - uses: actions/upload-artifact@v4
@@ -64,6 +69,6 @@ jobs:
         run: flutter build apk --release --dart-define=WORDSPROUT_CONTENT_URL="${{ vars.WORDSPROUT_CONTENT_URL }}" --dart-define=WORDSPROUT_FRIENDS_API_URL="${{ vars.WORDSPROUT_FRIENDS_API_URL }}"
       - uses: actions/upload-artifact@v4
         with:
-          name: wordsprout-4-12-picture-race-v0.5-apk
+          name: wordsprout-v0.6-garden-onboarding-apk
           path: build/app/outputs/flutter-apk/app-release.apk
           retention-days: 14
