@@ -155,8 +155,12 @@ class _WordSproutOnboardingState extends State<WordSproutOnboarding> {
           boxShadow:const [BoxShadow(color:Color(0x119C996F),
             blurRadius:12,offset:Offset(0,5))]),
         child:Column(crossAxisAlignment:CrossAxisAlignment.start,children:[
-          const Text('✨  What’s your name?',style:TextStyle(
-            color:_ink,fontSize:19,fontWeight:FontWeight.w900)),
+          const Row(children:[
+            Icon(Icons.auto_awesome_rounded,color:Color(0xFFE3AD39),size:22),
+            SizedBox(width:8),
+            Flexible(child:Text('What’s your name?',style:TextStyle(
+              color:_ink,fontSize:19,fontWeight:FontWeight.w900))),
+          ]),
           const SizedBox(height:9),
           TextField(key:const ValueKey('onboarding_name'),
             controller:name,maxLength:20,
@@ -178,8 +182,12 @@ class _WordSproutOnboardingState extends State<WordSproutOnboarding> {
                 borderSide:const BorderSide(color:_green,width:2),
                 borderRadius:BorderRadius.circular(16)))),
           const SizedBox(height:16),
-          const Text('✨  How old are you?',style:TextStyle(
-            color:_ink,fontSize:19,fontWeight:FontWeight.w900)),
+          const Row(children:[
+            Icon(Icons.auto_awesome_rounded,color:Color(0xFFE3AD39),size:22),
+            SizedBox(width:8),
+            Flexible(child:Text('How old are you?',style:TextStyle(
+              color:_ink,fontSize:19,fontWeight:FontWeight.w900))),
+          ]),
           const SizedBox(height:10),
           Row(children:[
             Expanded(child:ageCard('4-6','Ages 4–6',
