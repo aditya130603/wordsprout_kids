@@ -36,8 +36,17 @@ class WordSprout extends StatelessWidget {
 }
 
 class Home extends StatefulWidget {
-  const Home({super.key, this.initialCatalog, this.previewWordIndex});
+  const Home({super.key, this.initialCatalog, this.previewWordIndex,
+    this.initialCompleted = const {}, this.initialCheckpoints = const {},
+    this.quizSeed});
   final Curriculum? initialCatalog;
+  /// Test-only progress fixture, never used by the installed app.
+  @visibleForTesting
+  final Set<int> initialCompleted;
+  @visibleForTesting
+  final Set<int> initialCheckpoints;
+  @visibleForTesting
+  final int? quizSeed;
 
   /// For deterministic golden screenshots of the *real lesson widget*.
   /// Production app instances never set this. This does not unlock words or
@@ -66,7 +75,7 @@ class _HomeState extends State<Home> {
   int question = 0, testLetter = 0;
   List<String> tiles = [];
   List<int> selectedTiles = [];
-  final math.Random _quizRandom = math.Random();
+  late final math.Random _quizRandom;
   List<int> pictureChoices = [];
   List<String> factChoices = [];
   int correctFactIndex = -1;
@@ -104,10 +113,16 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
+    _quizRandom=widget.quizSeed==null?math.Random():math.Random(widget.quizSeed);
     tts.setLanguage('en-US');
     tts.setSpeechRate(.44);
     if (widget.initialCatalog != null) {
       catalog = widget.initialCatalog;
+      completed={...widget.initialCompleted};
+      tested={for(var l=0;l<26;l++)
+        if(List.generate(5,(i)=>l*5+i).every(completed.contains)) l};
+      checkpoints={...widget.initialCheckpoints};
+      selectedLetter=activeLetter;
       final preview = widget.previewWordIndex;
       if (preview != null && preview >= 0 &&
           preview < widget.initialCatalog!.words.length) {
