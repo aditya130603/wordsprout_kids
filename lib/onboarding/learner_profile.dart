@@ -23,7 +23,7 @@ class LearnerProfile {
   static String? validateName(String value){
     final cleaned=value.trim();
     if(cleaned.isEmpty)return 'Add your name or a fun nickname to begin.';
-    if(cleaned.characters.length>20)return 'Use 20 characters or fewer.';
+    if(cleaned.runes.length>20)return 'Use 20 characters or fewer.';
     if(RegExp(r'[\u0000-\u001F\u007F]').hasMatch(cleaned)){
       return 'Please enter a short nickname without line breaks.';
     }
