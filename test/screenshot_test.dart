@@ -50,7 +50,7 @@ void main() {
       tester.view.resetPhysicalSize();
       tester.view.resetDevicePixelRatio();
     });
-    await tester.pumpWidget(WordSprout(initialCatalog: fixture));
+    await tester.pumpWidget(WordSprout(initialCatalog: fixture,quizSeed:2026));
     await tester.pumpAndSettle();
   }
 
