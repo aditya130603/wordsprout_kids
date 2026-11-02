@@ -47,6 +47,7 @@ void main() {
   });
 
   const samples=<({String letter,int position,String word,String file})>[
+    (letter:'A',position:3,word:'ARM',file:'27-A-3-ARM-fixed.png'),
     (letter:'G',position:2,word:'GRAPES',file:'17-G-2-GRAPES.png'),
     (letter:'K',position:4,word:'KANGAROO',file:'18-K-4-KANGAROO.png'),
     (letter:'L',position:5,word:'LOBSTER',file:'19-L-5-LOBSTER.png'),
