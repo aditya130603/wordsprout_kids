@@ -49,6 +49,15 @@ void main() {
     expect((hero.image as AssetImage).assetName,
       'assets/scene/onboarding_explorers.webp');
     expect(find.byType(Image),findsWidgets);
+    // Image.asset uses an asynchronous codec. Force a completed decode before
+    // capturing the golden or it can show a blank area despite a valid asset.
+    await tester.runAsync(() async {
+      await precacheImage(
+        const AssetImage('assets/scene/onboarding_explorers.webp'),
+        tester.element(find.byKey(const ValueKey('onboarding_hero'))));
+    });
+    await tester.pump();
+    await tester.pumpAndSettle();
     await expectLater(find.byType(Scaffold),
       matchesGoldenFile('screenshots/28-onboarding-name-and-age.png'));
   });
