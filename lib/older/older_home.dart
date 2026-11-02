@@ -131,8 +131,9 @@ class _OlderHomeState extends State<OlderHome> {
         SliverToBoxAdapter(child:Padding(
           padding:const EdgeInsets.fromLTRB(20,14,20,6),
           child:Row(children:[
-            IconButton(onPressed:()=>Navigator.pop(context),
-              icon:const Icon(Icons.arrow_back_ios_new_rounded,color:midnight)),
+            if(Navigator.canPop(context))
+              IconButton(onPressed:()=>Navigator.pop(context),
+                icon:const Icon(Icons.arrow_back_ios_new_rounded,color:midnight)),
             const Spacer(),
             const Column(crossAxisAlignment:CrossAxisAlignment.end,children:[
               Text('WORDSPROUT',style:TextStyle(fontWeight:FontWeight.w900,
