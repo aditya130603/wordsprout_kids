@@ -15,6 +15,9 @@ on:
       - 'assets/content/older_missions_v1.json'
       - 'test/older_*'
       - 'test/picture_race_*'
+      - 'test/preschool_quiz_flow_test.dart'
+      - 'test/real_random_alphabet_screenshot_test.dart'
+      - 'assets/words/arm.svg'
       - '.github/workflows/older-preview.yml'
   workflow_dispatch:
 concurrency:
