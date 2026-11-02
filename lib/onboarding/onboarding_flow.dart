@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import 'learner_profile.dart';
 
 const _ink=Color(0xFF173E38);
@@ -145,9 +145,14 @@ class _WordSproutOnboardingState extends State<WordSproutOnboarding> {
         style:TextStyle(color:_sub,fontSize:14,height:1.4)),
       const SizedBox(height:10),
       Semantics(label:'Two happy young explorers on a garden path',
-        child:SvgPicture.asset('assets/scene/onboarding_journey.svg',
-          key:const ValueKey('onboarding_hero'),
-          height:207,fit:BoxFit.cover)),
+        child:ClipRRect(
+          borderRadius:BorderRadius.circular(19),
+          child:Image.asset('assets/scene/onboarding_explorers.webp',
+            key:const ValueKey('onboarding_hero'),
+            width:double.infinity,height:207,
+            fit:BoxFit.cover,
+            filterQuality:FilterQuality.medium,
+            semanticLabel:'Children exploring a bright mountain garden'))),
       Container(
         padding:const EdgeInsets.all(18),
         decoration:BoxDecoration(color:Colors.white,
