@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 390 320">
+<defs>
+  <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#D1F4F4"/><stop offset="1" stop-color="#EFFFE9"/></linearGradient>
+  <linearGradient id="mount" x2="0" y2="1"><stop stop-color="#B7D98C"/><stop offset="1" stop-color="#6EA771"/></linearGradient>
+  <linearGradient id="trail" x2="0" y2="1"><stop stop-color="#FFE6A8"/><stop offset="1" stop-color="#F5C987"/></linearGradient>
+  <linearGradient id="leaf" x2="0" y2="1"><stop stop-color="#9BCB50"/><stop offset="1" stop-color="#488E57"/></linearGradient>
+  <linearGradient id="girlCoat" x2="0" y2="1"><stop stop-color="#F6AA64"/><stop offset="1" stop-color="#E87951"/></linearGradient>
+  <linearGradient id="boyCoat" x2="0" y2="1"><stop stop-color="#78C2B8"/><stop offset="1" stop-color="#318F8B"/></linearGradient>
+</defs>
+<rect width="390" height="320" fill="url(#sky)"/>
+<circle cx="338" cy="55" r="29" fill="#FFE08D"/>
+<path d="M274 91Q291 70 307 89Q319 72 333 88Q354 88 360 105L268 106Z" fill="#F4FFFA" opacity=".95"/>
+<path d="M154 70Q164 49 181 64Q199 54 209 72L227 79L149 81Z" fill="white" opacity=".7"/>
+<!-- Far landscape, green rolling mountains -->
+<path d="M0 181L67 109L130 177L187 98L253 190L302 143L390 197V320H0Z" fill="#C8E1AD"/>
+<path d="M0 225Q65 165 137 197Q205 147 266 201Q322 171 390 218V320H0Z" fill="url(#mount)"/>
+<path d="M0 265Q82 226 154 247Q215 206 295 247Q346 231 390 250V320H0Z" fill="#73A86B"/>
+<!-- Winding sunny trail with adventure flag -->
+<path d="M146 320Q90 272 166 254Q264 234 225 215Q192 202 238 190L255 191Q215 211 255 222Q311 253 198 274Q148 287 217 320Z" fill="url(#trail)"/>
+<path d="M233 206L231 156" fill="none" stroke="#77543A" stroke-width="3.5"/>
+<path d="M233 157L259 167L233 177Z" fill="#F47E5D"/>
+<!-- Big canopy on the left -->
+<path d="M31 204Q45 146 43 110L8 67L0 51V320H22L44 228Z" fill="#986443"/>
+<path d="M19 113Q43 94 52 56" fill="none" stroke="#96613C" stroke-width="15" stroke-linecap="round"/>
+<g fill="#78B24D">
+<circle cx="17" cy="11" r="48"/><circle cx="48" cy="21" r="37"/><circle cx="84" cy="5" r="43"/>
+<circle cx="6" cy="79" r="40"/><circle cx="47" cy="76" r="35"/><circle cx="88" cy="53" r="27"/>
+</g>
+<g fill="#9BCA62"><circle cx="29" cy="10" r="21"/><circle cx="104" cy="22" r="16"/><circle cx="24" cy="80" r="18"/></g>
+<path d="M3 181Q24 149 42 181Q60 166 79 189L86 234L0 229Z" fill="#5EAB79"/>
+<path d="M340 204Q351 157 370 181Q378 166 390 178V275L322 274Z" fill="#69B391"/>
+<g fill="#F9F8D4"><circle cx="47" cy="234" r="3"/><circle cx="67" cy="245" r="4"/><circle cx="318" cy="227" r="4"/></g>
+<!-- A hanging explorer lantern at left -->
+<path d="M34 110Q30 99 36 93Q44 86 49 99L48 113" fill="none" stroke="#8B603E" stroke-width="4"/>
+<path d="M37 111L57 111L60 133L36 133Z" fill="#E9C27C" stroke="#8B603E" stroke-width="3"/>
+<rect x="39" y="115" width="15" height="15" rx="6" fill="#FFF6A2"/>
+<path d="M34 135H61" stroke="#8B603E" stroke-width="4" stroke-linecap="round"/>
+<!-- Girl explorer: backpack, boots, open friendly posture -->
+<ellipse cx="115" cy="306" rx="50" ry="8" fill="#3B744E" opacity=".18"/>
+<path d="M96 267L92 306L112 308L124 268Z" fill="#677C79"/>
+<path d="M120 273L127 306L145 306L137 268Z" fill="#667A77"/>
+<path d="M91 302L111 302L115 312L91 312Z" fill="#8E664D"/><path d="M128 303L147 303L150 312L128 312Z" fill="#8E664D"/>
+<path d="M78 226Q65 244 77 284L99 289L101 240Z" fill="#BA6650" stroke="#A95646" stroke-width="3"/>
+<path d="M97 229Q122 217 145 233L154 277Q122 296 99 278Z" fill="url(#girlCoat)" stroke="#B8704D" stroke-width="3"/>
+<path d="M101 239L95 266M137 237L145 266" stroke="#FCE2B7" stroke-width="6" stroke-linecap="round"/>
+<path d="M100 239L85 260L75 267" stroke="#F3B784" stroke-width="15" stroke-linecap="round"/>
+<circle cx="74" cy="268" r="9" fill="#F8C390"/>
+<path d="M142 239L155 255" stroke="#F3B784" stroke-width="13" stroke-linecap="round"/>
+<circle cx="158" cy="257" r="8" fill="#F8C390"/>
+<!-- Hair, face and hat -->
+<path d="M83 168Q70 163 73 198Q65 216 77 233L106 230L115 196Z" fill="#745039"/>
+<path d="M132 186Q148 213 141 229L124 225Z" fill="#7D5137"/>
+<ellipse cx="112" cy="190" rx="34" ry="39" fill="#F5BE89" stroke="#C4895E" stroke-width="2.5"/>
+<path d="M82 184Q80 159 105 154Q128 149 142 179Q125 172 113 162Q99 181 82 184Z" fill="#76503B"/>
+<ellipse cx="100" cy="196" rx="3.6" ry="5.5" fill="#3C4136"/>
+<ellipse cx="123" cy="196" rx="3.6" ry="5.5" fill="#3C4136"/>
+<circle cx="92" cy="211" r="6" fill="#F3A68D" opacity=".8"/><circle cx="130" cy="210" r="6" fill="#F3A68D" opacity=".8"/>
+<path d="M103 213Q111 225 123 212Z" fill="#AC554D"/>
+<path d="M81 177Q82 137 111 138Q136 141 147 169L81 174Z" fill="#FFD27C" stroke="#C58B4D" stroke-width="3"/>
+<path d="M71 175Q111 163 156 176Q146 186 75 185Z" fill="#F9E49E" stroke="#C58B4D" stroke-width="3"/>
+<path d="M101 141Q123 139 131 161" fill="none" stroke="#FFF3C8" stroke-width="5" stroke-linecap="round"/>
+<!-- Boy explorer -->
+<ellipse cx="291" cy="304" rx="55" ry="8" fill="#3B744E" opacity=".2"/>
+<path d="M262 267L253 303L272 308L283 270Z" fill="#557A79"/>
+<path d="M295 273L302 305L321 304L312 269Z" fill="#557A79"/>
+<path d="M251 302L275 303L275 312L249 312Z" fill="#775D4B"/><path d="M301 302L326 301L327 311L302 312Z" fill="#775D4B"/>
+<path d="M252 233Q278 214 313 228L326 272Q286 295 255 278Z" fill="url(#boyCoat)" stroke="#417C79" stroke-width="3"/>
+<path d="M261 236L270 273M309 234L315 266" stroke="#B2E7DA" stroke-width="6" stroke-linecap="round"/>
+<path d="M260 240L238 261" stroke="#F4B78D" stroke-width="13" stroke-linecap="round"/>
+<circle cx="236" cy="261" r="8" fill="#F4B78D"/>
+<path d="M311 232Q328 211 337 195" fill="none" stroke="#F0B58C" stroke-width="15" stroke-linecap="round"/>
+<circle cx="340" cy="191" r="10" fill="#F4BE94"/>
+<path d="M335 191L330 179M341 186L341 172M347 189L356 178" fill="none" stroke="#D59A7B" stroke-width="5" stroke-linecap="round"/>
+<path d="M257 178Q246 157 261 146Q279 131 296 145Q320 137 320 169L318 188Q296 179 278 181Z" fill="#765039"/>
+<ellipse cx="287" cy="190" rx="33" ry="37" fill="#F1B888" stroke="#C38862" stroke-width="2.5"/>
+<path d="M254 181Q250 151 270 146Q293 129 310 154Q324 160 319 177Q301 172 295 161Q278 182 254 181Z" fill="#80523B"/>
+<ellipse cx="277" cy="195" rx="3.5" ry="5.3" fill="#3C4036"/><ellipse cx="299" cy="195" rx="3.5" ry="5.3" fill="#3C4036"/>
+<circle cx="266" cy="207" r="6" fill="#EBA086" opacity=".8"/><circle cx="309" cy="208" r="6" fill="#EBA086" opacity=".8"/>
+<path d="M278 211Q289 226 299 211Z" fill="#A8554C"/>
+<path d="M316 226Q335 240 331 271L317 279L309 241Z" fill="#CE8B64" stroke="#A26958" stroke-width="3"/>
+<!-- foreground flowers/leaves -->
+<path d="M0 297Q22 273 42 301Q72 274 88 315H0Z" fill="#5FA36C"/>
+<path d="M302 313Q330 279 351 305Q370 285 390 293V320H302Z" fill="#65B075"/>
+<g fill="#FDF4D6"><circle cx="55" cy="302" r="6"/><circle cx="60" cy="297" r="6"/><circle cx="65" cy="303" r="6"/><circle cx="59" cy="309" r="6"/></g>
+<circle cx="59" cy="303" r="3.5" fill="#E6AC48"/>
+</svg>
