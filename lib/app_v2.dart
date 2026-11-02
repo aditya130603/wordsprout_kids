@@ -340,22 +340,22 @@ class _HomeState extends State<Home> {
       continueLearning();
     }
   }
-  void beginTest({bool checkpoint = false}) {
-    final end = checkpoint ? dueCheckpoint : activeLetter;
-    if (end < 0 || end >= 26) return;
-    if (!checkpoint && !List.generate(5, (i) => end*5+i).every(completed.contains)) return;
-    final selected = <int>[];
-    if (checkpoint) {
-      final begin = end == 25 ? 20 : end-4;
-      for (var i=begin; i<=end; i++) {
-        selected.addAll([i*5, i*5+3]); // Cover every letter, twice.
-      }
-    } else {
-      selected.addAll(List.generate(5, (i) => end*5+i));
+  void beginTest() {
+    final end=dueCheckpoint;
+    if(end<0)return;
+    final begin=end==25?20:end-4;
+    // No per-letter test. Assess a mixed sample from every letter
+    // after a set of five alphabets (U–Z is the six-letter finale).
+    final items=<int>[];
+    for(var letter=begin;letter<=end;letter++){
+      final candidates=List.generate(5,(i)=>letter*5+i)
+        ..shuffle(_quizRandom);
+      items.addAll(candidates.take(3));
     }
-    setState(() {
-      assessmentItems=selected;
-      checkpointMode=checkpoint;
+    items.shuffle(_quizRandom);
+    setState((){
+      assessmentItems=items;
+      checkpointMode=true;
       testLetter=end;
       question=0;
       assessmentMode=true;
@@ -370,6 +370,8 @@ class _HomeState extends State<Home> {
       final mode = question%3;
       step = mode == 0 ? 1 : mode == 1 ? 2 : 3;
       if (mode == 0) prepareTiles();
+      if (mode == 1) preparePictureChoices();
+      if (mode == 2) prepareFactChoices();
     });
     say(current.pronunciation);
   }
@@ -382,13 +384,9 @@ class _HomeState extends State<Home> {
     setState(() {
       assessmentMode=false;
       step=4;
-      if (checkpointMode) {
-        checkpoints.add(testLetter);
-        celebration='Checkpoint complete!';
-      } else {
-        tested.add(testLetter);
-        celebration='Letter '+nameOf(testLetter)+' completed!';
-      }
+      checkpoints.add(testLetter);
+      celebration=testLetter==25?'Alphabet graduation complete!':
+        'Five-letter checkpoint complete!';
       selectedLetter=activeLetter;
     });
     _save();
