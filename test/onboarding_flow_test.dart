@@ -1,12 +1,18 @@
+import 'dart:convert';
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wordsprout_kids/app_v2.dart';
+import 'package:wordsprout_kids/older/older_course.dart';
 import 'package:wordsprout_kids/onboarding/learner_profile.dart';
 
 void main(){
   TestWidgetsFlutterBinding.ensureInitialized();
+  final olderFixture=OlderCourse.fromJson(jsonDecode(
+    File('assets/content/older_missions_v1.json').readAsStringSync())
+      as Map<String,dynamic>);
   setUp((){
     SharedPreferences.setMockInitialValues({});
     TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
@@ -44,7 +50,7 @@ void main(){
     addTearDown((){
       tester.view.resetPhysicalSize();tester.view.resetDevicePixelRatio();
     });
-    await tester.pumpWidget(const WordSprout());
+    await tester.pumpWidget(WordSprout(initialOlderCourse:olderFixture));
     await tester.pumpAndSettle();
   }
 
