@@ -20,8 +20,11 @@ const sun = Color(0xFFFFDF7C);
 const coral = Color(0xFFEF856C);
 
 class WordSprout extends StatelessWidget {
-  const WordSprout({super.key, this.initialCatalog});
+  const WordSprout({super.key, this.initialCatalog, this.quizSeed});
   final Curriculum? initialCatalog;
+  /// Test-only seed to make screenshot goldens stable despite random answers.
+  @visibleForTesting
+  final int? quizSeed;
   @override
   Widget build(BuildContext context) => MaterialApp(
     title: 'WordSprout Kids',
@@ -31,7 +34,7 @@ class WordSprout extends StatelessWidget {
       scaffoldBackgroundColor: cream,
       colorScheme: ColorScheme.fromSeed(seedColor: leaf),
     ),
-    home: Home(initialCatalog: initialCatalog),
+    home: Home(initialCatalog: initialCatalog,quizSeed:quizSeed),
   );
 }
 
@@ -823,13 +826,13 @@ class _HomeState extends State<Home> {
       Expanded(child:Center(child:illustration(wordIndex,size:158))),
       ...factChoices.asMap().entries.map((e)=>Padding(
         padding:const EdgeInsets.only(bottom:11),
-        child:card(ListTile(
+        child:card(Material(type:MaterialType.transparency,child:ListTile(
           key:ValueKey('fact_option_'+e.key.toString()),
           onTap:()=>checkFact(e.key),
           title:Text(e.value,style:const TextStyle(
             fontWeight:FontWeight.bold,fontSize:15,color:forest)),
           trailing:IconButton(onPressed:()=>say(e.value),
-            icon:const Icon(Icons.volume_up_rounded,color:leaf)))))),
+            icon:const Icon(Icons.volume_up_rounded,color:leaf))))))),
       Text(feedback,style:const TextStyle(color:Colors.deepOrange)),
     ]);
   }
